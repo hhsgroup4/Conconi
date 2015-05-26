@@ -11,9 +11,9 @@ Science
 
 Database
 
-David (UI & Statistics)
-Fernando (Math/Algorithm)
-Vince (Science & Sensor)
+David (UI & Statistics)\n
+Fernando (Math/Algorithm)\n
+Vince (Science & Sensor)\n
 Ralph (DB & Class)
 
 
