@@ -26,3 +26,9 @@ Functionality / Activities
 
 - Multi language
 
+
+Usefull links:
+- http://androidplot.com/
+
+Tutorials/guides links:
+-
