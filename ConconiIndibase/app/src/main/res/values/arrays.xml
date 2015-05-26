@@ -1,0 +1,80 @@
+<resources>
+    <string-array name="advice_recover_training">;
+        <item>@string/recover_training_name</item>
+        <item>@string/recover_training_minTime</item>
+        <item>@string/recover_training_maxTime</item>
+        <item>@string/recover_training_minPercentBPM</item>
+        <item>@string/recover_training_maxPercentBPM</item>
+        <item>@string/recover_training_goal</item>
+        <item>@string/recover_training_usage</item>
+        <item>@string/recover_training_frequency</item>
+        <item>@string/recover_training_explanation</item>
+        <item>@string/recover_training_howTo</item>
+        <item>@string/recover_training_recoverTime</item>
+    </string-array>
+
+    <string-array name="advice_slow_endurance_training">;
+        <item>@string/slow_endurance_training_name</item>
+        <item>@string/slow_endurance_training_minTime</item>
+        <item>@string/slow_endurance_training_maxTime</item>
+        <item>@string/slow_endurance_training_minPercentBPM</item>
+        <item>@string/slow_endurance_training_maxPercentBPM</item>
+        <item>@string/slow_endurance_training_goal</item>
+        <item>@string/slow_endurance_training_usage</item>
+        <item>@string/slow_endurance_training_frequency</item>
+        <item>@string/slow_endurance_training_explanation</item>
+        <item>@string/slow_endurance_training_howTo</item>
+        <item>@string/slow_endurance_training_slow_recoverTime</item>
+    </string-array>
+
+    <string-array name="advice_intensive_endurance_training">;
+        <item>@string/intensive_endurance_training_name</item>
+        <item>@string/intensive_endurance_training_minTime</item>
+        <item>@string/intensive_endurance_training_maxTime</item>
+        <item>@string/intensive_endurance_training_minPercentBPM</item>
+        <item>@string/intensive_endurance_training_maxPercentBPM</item>
+        <item>@string/intensive_endurance_training_goal</item>
+        <item>@string/intensive_endurance_training_usage</item>
+        <item>@string/intensive_endurance_training_frequency</item>
+        <item>@string/intensive_endurance_training_explanation</item>
+        <item>@string/intensive_endurance_training_howTo</item>
+        <item>@string/intensive_endurance_training_intensive_recoverTime</item>
+    </string-array>
+
+    <string-array name="advice_Mlss_training">;
+        <item>@string/Mlss_training_name</item>
+        <item>@string/Mlss_training_minTime</item>
+        <item>@string/Mlss_training_maxTime</item>
+        <item>@string/Mlss_training_minPercentBPM</item>
+        <item>@string/Mlss_training_maxPercentBPM</item>
+        <item>@string/Mlss_training_goal</item>
+        <item>@string/Mlss_training_usage</item>
+        <item>@string/Mlss_training_frequency</item>
+        <item>@string/Mlss_training_explanation</item>
+        <item>@string/Mlss_training_howTo</item>
+        <item>@string/Mlss_training_recoverTime</item>
+    </string-array>
+
+    <string-array name="advice_resistance_training">;
+        <item>@string/resistance_training_name</item>
+        <item>@string/resistance_training_minTime</item>
+        <item>@string/resistance_training_maxTime</item>
+        <item>@string/resistance_training_minPercentBPM</item>
+        <item>@string/resistance_training_maxPercentBPM</item>
+        <item>@string/resistance_training_goal</item>
+        <item>@string/resistance_training_usage</item>
+        <item>@string/resistance_training_frequency</item>
+        <item>@string/resistance_training_explanation</item>
+        <item>@string/resistance_training_howTo</item>
+        <item>@string/resistance_training_recoverTime</item>
+    </string-array>
+    <array name="advice_arrays">
+        <item>@array/advice_recover_training</item>
+        <item>@array/advice_slow_endurance_training</item>
+        <item>@array/advice_intensive_endurance_training</item>
+        <item>@array/advice_Mlss_training</item>
+        <item>@array/advice_resistance_training</item>
+    </array>
+
+
+</resources>

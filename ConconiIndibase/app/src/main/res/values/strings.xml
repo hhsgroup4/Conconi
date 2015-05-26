@@ -51,7 +51,7 @@ The duration of the training you can make very long journeys, up to 150 kilomete
     <!--
         intensive endurance training
     -->
-    <string name="intensive_endurance_training_name"></string>
+    <string name="intensive_endurance_training_name">Intensive endurance training</string>
     <string name="intensive_endurance_training_minTime"></string>
     <string name="intensive_endurance_training_maxTime"></string>
     <string name="intensive_endurance_training_minPercentBPM"></string>
@@ -66,7 +66,7 @@ The duration of the training you can make very long journeys, up to 150 kilomete
     <!--
         MLss training
     -->
-    <string name="Mlss_training_name"></string>
+    <string name="Mlss_training_name">Mlss training</string>
     <string name="Mlss_training_minTime"></string>
     <string name="Mlss_training_maxTime"></string>
     <string name="Mlss_training_minPercentBPM"></string>
@@ -81,7 +81,7 @@ The duration of the training you can make very long journeys, up to 150 kilomete
     <!--
         resistance training
     -->
-    <string name="resistance_training_name"></string>
+    <string name="resistance_training_name">Resistance training</string>
     <string name="resistance_training_minTime"></string>
     <string name="resistance_training_maxTime"></string>
     <string name="resistance_training_minPercentBPM"></string>
