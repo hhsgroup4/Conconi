@@ -16,10 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.indibase.provider.conconi"
+            android:name=".provider.ContentProvider"
+            android:exported="false">
+        </provider>
+
         <activity
             android:name=".app.AdvicesActivity"
             android:label="@string/title_activity_advices" >
         </activity>
+
     </application>
 
 </manifest>
