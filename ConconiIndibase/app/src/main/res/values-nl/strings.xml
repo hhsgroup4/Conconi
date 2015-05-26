@@ -3,4 +3,70 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+
+
+    <!--
+        recover training
+    -->
+    <string name="recover_training_name">Herstel training</string>
+    <string name="recover_training_goal">bevorderen van het herstel ("uitfietsen")</string>
+    <string name="recover_training_usage">als afsluiting van een zware trainingsperiode of fietstocht</string>
+    <string name="recover_training_frequency">soms</string>
+    <string name="recover_training_recoverTime">n.v.t.</string>
+    <string name="recover_training_explanation">Als je vermoeid bent geraakt door een training, kun je twee dingen doen: rust nemen of een hersteltraining doen. Meestal volstaat de eerste methode, maar soms is het beter het herstel te bevorderen door het doen van een hersteltraining. Met een hersteltraining bevorder je de afvoer van afvalstoffen uit je spieren en de doorbloeding van je spieren.
+
+Belangrijk is, dat je je na een hersteltraining beter voelt dan voor de training. Is dat niet het geval, dan heb je te hard gefietst.</string>
+    <string name="recover_training_howTo">Omdat het tempo laag is, maakt het niet zoveel uit op welke fiets je de training uitvoert. Dit mag dus de racefiets zijn, maar ook de gewone dagelijkse fiets volstaat prima. Zoek een parcours uit zonder al te veel hindernissen, zoals bruggen, en,  als het hard waait, met voldoende beschutting.</string>
+
+    <!--
+        slow endurance training
+    -->
+    <string name="slow_endurance_training_name">Rustige duurtraining</string>
+    <string name="slow_endurance_training_goal">opbouwen van basisconditie voor lange tochten</string>
+    <string name="slow_endurance_training_usage">op zichzelf staand of als opwarm- en herstelperiode tijdens interval- of krachttraining</string>
+    <string name="slow_endurance_training_frequency">Vrijwel altijd</string>
+    <string name="slow_endurance_training_slow_recoverTime">afhankelijk van de trainingsduur 24 tot 48 uur</string>
+    <string name="slow_endurance_training_explanation">De rustige duurtraining hoort de belangrijkste te zijn in je trainingsschema. Door veelvuldig doen van deze training bouw je een belangrijke basisconditie op, welke je later verder kunt uitbouwen. Tijdens een rustige duurtraining leer je je lichaam effectief om te gaan met de beschikbare middelen (voeding, water, zuurstof etc.), waardoor je in een later stadium, zoals tijdens een zware tocht, deze beter kunt volhouden.
+
+Een rustige duurtraining is ook écht rustig. Vooral mensen die dit niet gewend zijn, zullen het idee hebben te langzaam te fietsen. Dit is slechts een kwestie van gewenning, want na een tijdje zal de gemiddelde snelheid tijdens deze training hoger komen te liggen dan voorheen bij de hoge hartslag.
+
+De lage intensiteit van de training kent 2 grote voordelen: het herstel is kort, waardoor je snel weer kunt beginnen met trainen en de kans op blessures is erg klein.</string>
+    <string name="slow_endurance_training_howTo">In de eerste vijf minuten breng je de hartslag rustig naar je D1-zone. Daarna probeer je met een zo constant mogelijke hartslag te rijden met een beentempo van minimaal 90 omwentelingen per minuut. Tegen de wind in mag de hartslag een paar slagen hoger zijn dan met wind mee.
+
+Door de duur van de training kun je zeer lange tochten maken, tot wel 150 kilometer. Belangrijk is dus zeker om voldoende voeding en vocht mee te nemen en dit tijdig te nuttigen. Om de beweging niet te eentonig te maken, kun je zo nu en dan eens een stukje kort aanzetten, bijvoorbeeld door na een scherpe bocht staand op de pedalen naar je duurtempo te gaan.</string>
+
+    <!--
+        intensive endurance training
+    -->
+    <string name="intensive_endurance_training_name"></string>
+    <string name="intensive_endurance_training_goal"></string>
+    <string name="intensive_endurance_training_usage"></string>
+    <string name="intensive_endurance_training_frequency"></string>
+    <string name="intensive_endurance_training_explanation"></string>
+    <string name="intensive_endurance_training_howTo"></string>
+    <string name="intensive_endurance_training_intensive_recoverTime"></string>
+
+    <!--
+        MLss training
+    -->
+    <string name="Mlss_training_name"></string>
+    <string name="Mlss_training_goal"></string>
+    <string name="Mlss_training_usage"></string>
+    <string name="Mlss_training_frequency"></string>
+    <string name="Mlss_training_explanation"></string>
+    <string name="Mlss_training_howTo"></string>
+    <string name="Mlss_training_recoverTime"></string>
+
+    <!--
+        resistance training
+    -->
+    <string name="resistance_training_name"></string>
+    <string name="resistance_training_goal"></string>
+    <string name="resistance_training_usage"></string>
+    <string name="resistance_training_frequency"></string>
+    <string name="resistance_training_explanation"></string>
+    <string name="resistance_training_howTo"></string>
+    <string name="resistance_training_recoverTime"></string>
+
 </resources>
