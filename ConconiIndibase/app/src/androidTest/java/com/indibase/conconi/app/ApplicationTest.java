@@ -1,4 +1,4 @@
-package com.example.manfredinator.conconiindibase;
+package com.indibase.conconi.app;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
