@@ -4,4 +4,92 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_advices">Advices</string>
+
+
+    <string name="last_deflection">Your last deflection point was: </string>
+
+
+    <!--
+        recover training
+    -->
+    <string name="recover_training_name">Recover training</string>
+    <string name="recover_training_minTime">60</string>
+    <string name="recover_training_maxTime">90</string>
+    <string name="recover_training_minPercentBPM">60</string>
+    <string name="recover_training_maxPercentBPM">75</string>
+    <string name="recover_training_goal">Promoting recovery ("off cycle")</string>
+    <string name="recover_training_usage">To round off a hard training period or cycle</string>
+    <string name="recover_training_frequency">Sometimes</string>
+    <string name="recover_training_explanation">If you are weary from a workout, you can do two things: take rest or do recovery training. The first method is usually sufficient, but sometimes it is better to promote recovery by doing a recovery training. With a recovery training you promote the excretion of waste from your muscles and blood flow to your muscles.
+
+Its important that you feel better after a recovery training than before training. Is that not the case, then you have cycled too hard.</string>
+    <string name="recover_training_howTo">Because the pace is slow, it does not matter which bike you perform the exercise. So this may be a road bike, but also the normal daily cycle is enough fine. Find a course without too many obstacles, such as bridges, and if the wind blows hard, with adequate shelter.</string>
+    <string name="recover_training_recoverTime">nA</string>
+
+    <!--
+        slow endurance training
+    -->
+    <string name="slow_endurance_training_name">Slow endurance training</string>
+    <string name="slow_endurance_training_minTime">90</string>
+    <string name="slow_endurance_training_maxTime">300</string>
+    <string name="slow_endurance_training_minPercentBPM">75</string>
+    <string name="slow_endurance_training_maxPercentBPM">85</string>
+    <string name="slow_endurance_training_goal">Building the base condition for longer rides</string>
+    <string name="slow_endurance_training_usage">alone or as a warm-up and recovery period during interval or strength</string>
+    <string name="slow_endurance_training_frequency">Nearly always</string>
+    <string name="slow_endurance_training_slow_recoverTime">Depends on how long you train, 24 – 48 hours</string>
+    <string name="slow_endurance_training_explanation">The quiet endurance training should be the most important in your training. Frequent doing this exercise you build an important basic condition on which you can expand later on. During a quiet endurance training teaches your body to effectively deal with the available resources (food, water, oxygen, etc.), so you at a later stage, such as during an arduous journey, can sustain these better.
+
+A quiet endurance training is really quiet. Especially people who are not accustomed to the idea will have to slow cycling. This is just a matter of getting used to, because after a while the average speed during this training be higher than before at the high heart rate.
+
+The low intensity exercise has two major advantages: the recovery is short, so you can quickly start training and the risk of injury is very small.</string>
+    <string name="slow_endurance_training_howTo">
+       In the first five minutes bring the heart rate to calm your D1 zone. Then try to drive as constant as possible with a leg heartbeat rate of at least 90 revolutions per minute. Upwind allowed several strokes heart rate is higher than with a tailwind.
+
+The duration of the training you can make very long journeys, up to 150 kilometers. Is certainly important to have enough food and water to take and eat this time. To make the movement not too monotonous, you can occasionally take a bit short turn, for example, after a sharp bend to standing on the pedals to your expensive rate.</string>
+
+    <!--
+        intensive endurance training
+    -->
+    <string name="intensive_endurance_training_name"></string>
+    <string name="intensive_endurance_training_minTime"></string>
+    <string name="intensive_endurance_training_maxTime"></string>
+    <string name="intensive_endurance_training_minPercentBPM"></string>
+    <string name="intensive_endurance_training_maxPercentBPM"></string>
+    <string name="intensive_endurance_training_goal"></string>
+    <string name="intensive_endurance_training_usage"></string>
+    <string name="intensive_endurance_training_frequency"></string>
+    <string name="intensive_endurance_training_explanation"></string>
+    <string name="intensive_endurance_training_howTo"></string>
+    <string name="intensive_endurance_training_intensive_recoverTime"></string>
+
+    <!--
+        MLss training
+    -->
+    <string name="Mlss_training_name"></string>
+    <string name="Mlss_training_minTime"></string>
+    <string name="Mlss_training_maxTime"></string>
+    <string name="Mlss_training_minPercentBPM"></string>
+    <string name="Mlss_training_maxPercentBPM"></string>
+    <string name="Mlss_training_goal"></string>
+    <string name="Mlss_training_usage"></string>
+    <string name="Mlss_training_frequency"></string>
+    <string name="Mlss_training_explanation"></string>
+    <string name="Mlss_training_howTo"></string>
+    <string name="Mlss_training_recoverTime"></string>
+
+    <!--
+        resistance training
+    -->
+    <string name="resistance_training_name"></string>
+    <string name="resistance_training_minTime"></string>
+    <string name="resistance_training_maxTime"></string>
+    <string name="resistance_training_minPercentBPM"></string>
+    <string name="resistance_training_maxPercentBPM"></string>
+    <string name="resistance_training_goal"></string>
+    <string name="resistance_training_usage"></string>
+    <string name="resistance_training_frequency"></string>
+    <string name="resistance_training_explanation"></string>
+    <string name="resistance_training_howTo"></string>
+    <string name="resistance_training_recoverTime"></string>
 </resources>
