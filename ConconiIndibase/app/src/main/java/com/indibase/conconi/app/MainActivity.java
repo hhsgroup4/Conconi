@@ -1,4 +1,5 @@
 package com.indibase.conconi.app;
+
 import android.app.Activity;
 import android.content.CursorLoader;
 import android.database.Cursor;
@@ -6,7 +7,8 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-
+import android.content.Intent;
+import android.view.View;
 import com.indibase.conconi.R;
 
 
@@ -29,6 +31,19 @@ public class MainActivity extends Activity {
         c = cursorLoader.loadInBackground();
 
         Log.d("lifecycle", DatabaseUtils.dumpCursorToString(c));
+    }
+
+    public void advicesView(View view){
+        Intent intent = new Intent(this, AdvicesActivity.class);
+        startActivity(intent);
+    }
+    public void historyView(View view){
+       /* Intent intent = new Intent(this, History.class);
+        startActivity(intent);*/
+    }
+    public void beginTest(View view){
+      /*  Intent intent = new Intent(this, BeginTest.class);
+        startActivity(intent);*/
     }
 
 }

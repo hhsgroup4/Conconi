@@ -23,6 +23,11 @@
             android:exported="false">
         </provider>
 
+        <activity
+            android:name=".app.AdvicesActivity"
+            android:label="@string/title_activity_advices" >
+        </activity>
+
     </application>
 
 </manifest>
