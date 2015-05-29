@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+/*
         Uri tests = Uri.parse("content://com.indibase.provider.conconi/test/including_measurements");
         Cursor c;
         CursorLoader cursorLoader = new CursorLoader(
@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
                 null);
         c = cursorLoader.loadInBackground();
 
-        Log.d("lifecycle", DatabaseUtils.dumpCursorToString(c));
+        Log.d("lifecycle", DatabaseUtils.dumpCursorToString(c));*/
     }
 
     public void advicesView(View view){
@@ -42,8 +42,8 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
     public void testView(View view){
-      /*  Intent intent = new Intent(this, Test.class);
-        startActivity(intent);*/
+       Intent intent = new Intent(this, DeviceScanActivity.class);
+        startActivity(intent);
     }
 
 }
