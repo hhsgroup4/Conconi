@@ -18,16 +18,19 @@
         </activity>
 
         <provider
-            android:authorities="com.indibase.provider.conconi"
             android:name=".provider.ContentProvider"
-            android:exported="false">
+            android:authorities="com.indibase.provider.conconi"
+            android:exported="false" >
         </provider>
 
         <activity
             android:name=".app.AdvicesActivity"
             android:label="@string/title_activity_advices" >
         </activity>
-
+        <activity
+            android:name=".app.HistoryActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
     </application>
 
 </manifest>

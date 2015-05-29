@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Uri tests = Uri.parse("content://com.indibase.provider.conconi/test");
+        Uri tests = Uri.parse("content://com.indibase.provider.conconi/test/including_measurements");
         Cursor c;
         CursorLoader cursorLoader = new CursorLoader(
                 this,
@@ -38,11 +38,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
     public void historyView(View view){
-       /* Intent intent = new Intent(this, History.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
     }
-    public void beginTest(View view){
-      /*  Intent intent = new Intent(this, BeginTest.class);
+    public void testView(View view){
+      /*  Intent intent = new Intent(this, Test.class);
         startActivity(intent);*/
     }
 

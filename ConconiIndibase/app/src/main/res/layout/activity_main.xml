@@ -15,7 +15,7 @@
         android:layout_alignLeft="@+id/btn_history"
         android:layout_alignStart="@+id/btn_history"
         android:layout_marginBottom="79dp"
-        android:onClick="beginTest"/>
+        android:onClick="testView"/>
 
     <Button
         android:layout_width="wrap_content"

@@ -6,7 +6,8 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ralph on 5/20/2015.
@@ -15,12 +16,11 @@ public class ContentProvider extends android.content.ContentProvider
 {
     public static final String AUTHORITY = "com.indibase.provider.conconi";
     public UriMatcher uriMatcher;
+    private ArrayList<Match> matches = new ArrayList<>();
     private DbHelper dbHelper;
     private SQLiteDatabase db;
 
-    private static final int URI_PREFIX = 1000; //increase this if more than 1000 schema's exist
-
-    private int getSchemeId(String tableName){
+    private int getSchemaId(String tableName){
         for(DatabaseSchema schema : dbHelper.schemas)
             if(schema.getTableName().equals(tableName)){
                 return dbHelper.schemas.indexOf(schema);
@@ -30,23 +30,39 @@ public class ContentProvider extends android.content.ContentProvider
 
     private String getTableName(Uri uri){
         int match = uriMatcher.match(uri);
-        for(DatabaseSchema schema: dbHelper.schemas)
-            if(match == getSchemeId(schema.getTableName()))
-                return schema.getTableName();
-            else if(match == getSchemeId(schema.getTableName()) + URI_PREFIX)
-                return schema.getTableName();
+
+        int match_id = 0;
+        for(Match m : matches) {
+            if (match == match_id)
+                return m.tableName;
+            match_id++;
+        }
 
         return null;
     }
 
     private void initUriMatcher(){
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        int index = 0;
-        for(DatabaseSchema schema: dbHelper.schemas) {
-            uriMatcher.addURI(AUTHORITY, schema.getTableName(), index);
-            if(schema.canModifySingleRow())
-                uriMatcher.addURI(AUTHORITY, schema.getTableName() + "/#", index + URI_PREFIX);
-            index++;
+
+        for(DatabaseSchema schema : dbHelper.schemas) {
+            Match match = new Match(schema, schema.getTableName(), schema.getTableName());
+            matches.add(match);
+
+            if(schema.canModifySingleRow()) {
+                match = new Match(schema, schema.getTableName() + "/#", schema.getTableName());
+                matches.add(match);
+            }
+
+            for(String key : schema.getViewsHashMap().keySet()) {
+                match = new Match(schema, schema.getTableName() + "/" + key, key);
+                matches.add(match);
+            }
+        }
+
+        int match_id = 0;
+        for(Match m : matches) {
+            uriMatcher.addURI(AUTHORITY, m.uri, match_id);
+            match_id++;
         }
     }
 
@@ -70,11 +86,17 @@ public class ContentProvider extends android.content.ContentProvider
     @Override
     public String getType(Uri uri) {
         int match = uriMatcher.match(uri);
-        for(DatabaseSchema schema: dbHelper.schemas)
-            if(match == getSchemeId(schema.getTableName()))
-                return "vnd.android.cursor.dir/vnd.indibase.conconi." + schema.getTableName();
-            else if(match == getSchemeId(schema.getTableName()) + URI_PREFIX)
-                return "vnd.android.cursor.item/vnd.indibase.conconi." + schema.getTableName();
+
+        int match_id = 0;
+        for(Match m : matches) {
+            if (match == match_id) {
+                if (m.schema.canModifySingleRow())
+                    return "vnd.android.cursor.item/vnd.indibase.conconi." + m.tableName;
+                else
+                    return "vnd.android.cursor.dir/vnd.indibase.conconi." + m.tableName;
+            }
+            match_id++;
+        }
 
         return null;
     }
