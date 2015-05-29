@@ -39,7 +39,7 @@ Door de duur van de training kun je zeer lange tochten maken, tot wel 150 kilome
     <!--
         intensive endurance training
     -->
-    <string name="intensive_endurance_training_name"></string>
+    <string name="intensive_endurance_training_name">Intensieve duurtraining</string>
     <string name="intensive_endurance_training_goal"></string>
     <string name="intensive_endurance_training_usage"></string>
     <string name="intensive_endurance_training_frequency"></string>
@@ -50,7 +50,7 @@ Door de duur van de training kun je zeer lange tochten maken, tot wel 150 kilome
     <!--
         MLss training
     -->
-    <string name="Mlss_training_name"></string>
+    <string name="Mlss_training_name">Mlss training</string>
     <string name="Mlss_training_goal"></string>
     <string name="Mlss_training_usage"></string>
     <string name="Mlss_training_frequency"></string>
@@ -61,7 +61,7 @@ Door de duur van de training kun je zeer lange tochten maken, tot wel 150 kilome
     <!--
         resistance training
     -->
-    <string name="resistance_training_name"></string>
+    <string name="resistance_training_name">Weerstandtraining </string>
     <string name="resistance_training_goal"></string>
     <string name="resistance_training_usage"></string>
     <string name="resistance_training_frequency"></string>

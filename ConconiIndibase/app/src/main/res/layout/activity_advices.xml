@@ -29,8 +29,16 @@
         android:layout_height="wrap_content"
         android:text="change"
         android:id="@+id/btn_changeDeflection"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/lbl_lastDeflection"
-        android:layout_toEndOf="@+id/lbl_lastDeflection"
-        android:onClick="changeDeflectionPoint"/>
+        android:onClick="changeDeflectionPoint"
+        android:layout_alignTop="@+id/lbl_lastDeflection"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/advicesListView"
+        android:layout_below="@+id/btn_changeDeflection"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
