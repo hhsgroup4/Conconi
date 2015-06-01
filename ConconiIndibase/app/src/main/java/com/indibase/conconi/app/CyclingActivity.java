@@ -12,29 +12,23 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
 import com.indibase.conconi.bluetooth.SampleGattAttributes;
+import com.indibase.conconi.models.measurement;
 
 public class CyclingActivity extends Activity {
-
-    private final static String TAG = CyclingActivity.class.getSimpleName();
-
-    public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
-    public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
-
-    private TextView mConnectionState;
     private TextView mDataField;
-    private String mDeviceName;
     private String mDeviceAddress;
     private BluetoothLeService mBluetoothLeService;
-    private boolean mConnected = false;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
+
+    public ArrayList<measurement> measurements;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,28 +36,22 @@ public class CyclingActivity extends Activity {
         setContentView(R.layout.activity_cycling);
 
         final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
+        mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
+        measurements = new ArrayList<>();
         // Sets up UI references.
-        ((TextView) findViewById(R.id.lbl_device_address)).setText(mDeviceAddress);
-        mConnectionState = (TextView) findViewById(R.id.lbl_connection_state);
         mDataField = (TextView) findViewById(R.id.lbl_heartbeat);
 
-        //getActionBar().setTitle(mDeviceName);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
     }
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
-
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
             if (!mBluetoothLeService.initialize()) {
-                Log.e(TAG, "Unable to initialize Bluetooth");
+                Log.e(CyclingActivity.class.getSimpleName(), "Unable to initialize Bluetooth");
                 finish();
             }
             // Automatically connects to the device upon successful start-up initialization.
@@ -87,19 +75,13 @@ public class CyclingActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
-                mConnected = true;
-                updateConnectionState(R.string.connected);
-                invalidateOptionsMenu();
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                mConnected = false;
-                updateConnectionState(R.string.disconnected);
-                invalidateOptionsMenu();
                 clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Displays the heartbeat
                 startHeartBeatService(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                processData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
     };
@@ -110,22 +92,22 @@ public class CyclingActivity extends Activity {
         mDataField.setText(R.string.no_data);
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
         registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            Log.d(TAG, "Connect request result=" + result);
+            Log.d(CyclingActivity.class.getSimpleName(), "Connect request result=" + result);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(mGattUpdateReceiver);
+
+        //This stops the receiver
+        //unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
@@ -135,35 +117,7 @@ public class CyclingActivity extends Activity {
         mBluetoothLeService = null;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.gatt_services, menu);
-        if (mConnected) {
-            menu.findItem(R.id.menu_connect).setVisible(false);
-            menu.findItem(R.id.menu_disconnect).setVisible(true);
-        } else {
-            menu.findItem(R.id.menu_connect).setVisible(true);
-            menu.findItem(R.id.menu_disconnect).setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.menu_connect:
-                mBluetoothLeService.connect(mDeviceAddress);
-                return true;
-            case R.id.menu_disconnect:
-                mBluetoothLeService.disconnect();
-                return true;
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+/*
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
             @Override
@@ -171,12 +125,21 @@ public class CyclingActivity extends Activity {
                 mConnectionState.setText(resourceId);
             }
         });
-    }
+    }*/
 
-    private void displayData(String data) {
+    private void processData(String data){
         if (data != null) {
-            mDataField.setText(data);
+            displayData(data);
+            addToMeasurements(data);
         }
+    }
+    private void addToMeasurements(String bpm){
+        measurement m = new measurement(new Date(),Integer.valueOf(bpm));
+        measurements.add(m);
+        Log.w(CyclingActivity.class.getSimpleName(), m.toString());
+    }
+    private void displayData(String data) {
+        mDataField.setText(data);
     }
 
     // Demonstrates how to iterate through the supported GATT Services/Characteristics.
