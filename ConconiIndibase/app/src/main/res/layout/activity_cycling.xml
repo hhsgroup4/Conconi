@@ -16,4 +16,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End"
+        android:id="@+id/btn_end"
+        android:onClick="endTest"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="122dp" />
+
 </RelativeLayout>

@@ -5,17 +5,28 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
@@ -28,7 +39,9 @@ public class CyclingActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
-    public ArrayList<measurement> measurements;
+    public Queue<measurement> measurements;
+    public Queue<measurement> dbMeasurements;
+    private Date creation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +50,8 @@ public class CyclingActivity extends Activity {
 
         final Intent intent = getIntent();
         mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
-        measurements = new ArrayList<>();
+        creation = null;
+        measurements = new LinkedList<>();
         // Sets up UI references.
         mDataField = (TextView) findViewById(R.id.lbl_heartbeat);
 
@@ -45,6 +59,65 @@ public class CyclingActivity extends Activity {
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
     }
 
+    public void endTest(View view){
+        unregisterReceiver(mGattUpdateReceiver);
+
+        dbMeasurements = getDbMeasurements(measurements);
+        int deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
+        int testId = storeTest(new Date(), deflectionPoint);
+        storeMeasurements(dbMeasurements, testId);
+    }
+    public int calculateDeflectionPoint(Queue dbMeasurementsCopy){
+        return 0;
+    }
+    public int storeTest(Date date, int deflectionPoint){
+        ContentValues values = new ContentValues();
+        values.put("creation", String.valueOf(date));
+        values.put("deflection_point", deflectionPoint);
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),values);
+        Log.w("urilastpath", String.valueOf(uri.getLastPathSegment()));
+        return Integer.valueOf(uri.getLastPathSegment());
+    }
+
+    public void storeMeasurements(Queue<measurement> dbMeasurements, int testId){
+        while (dbMeasurements.size() != 0){
+            measurement m = dbMeasurements.poll();
+            ContentValues values = new ContentValues();
+            values.put("test_id", testId);
+            values.put("second",m.getSecond());
+            values.put("bpm",m.getBpm());
+            Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),values);
+            Log.w("uri", String.valueOf(uri));
+        }
+    }
+    public Queue<measurement> getDbMeasurements(Queue<measurement> measurements){
+        int i = 0;
+        int counter = 0;
+        int bpmTotal = 0;
+        int average = 0;
+        dbMeasurements = new LinkedList<>();
+        int second = 0;
+
+        while (measurements.size() != 0) {
+            second = measurements.peek().getSecond();
+            if (second > i){
+                average = bpmTotal/counter;
+                measurement mm = new measurement(i,average);
+                Log.w("measurement between", mm.toString());
+                dbMeasurements.add(mm);
+                bpmTotal = 0;
+                counter = 0;
+                i=i+10;
+            }
+            counter++;
+            bpmTotal = bpmTotal + measurements.poll().getBpm();
+        }
+        average = bpmTotal/counter;
+        Log.w("measurement end", new measurement(second,average).toString());
+        dbMeasurements.add(new measurement(second,average));
+
+        return dbMeasurements;
+    }
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -105,7 +178,6 @@ public class CyclingActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-
         //This stops the receiver
         //unregisterReceiver(mGattUpdateReceiver);
     }
@@ -128,15 +200,27 @@ public class CyclingActivity extends Activity {
     }*/
 
     private void processData(String data){
-        if (data != null) {
+        if (data != null && Integer.valueOf(data) > 10) {
+            if (creation == null){
+                creation = new Date();
+            }
             displayData(data);
             addToMeasurements(data);
         }
     }
+    public static int safeLongToInt(long l) {
+        if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException
+                    (l + " cannot be cast to int without changing its value.");
+        }
+        return (int) l;
+    }
     private void addToMeasurements(String bpm){
-        measurement m = new measurement(new Date(),Integer.valueOf(bpm));
-        measurements.add(m);
+        long s =  TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
+        int second = safeLongToInt(s);
+        measurement m = new measurement(second,Integer.valueOf(bpm));
         Log.w(CyclingActivity.class.getSimpleName(), m.toString());
+        measurements.add(m);
     }
     private void displayData(String data) {
         mDataField.setText(data);
