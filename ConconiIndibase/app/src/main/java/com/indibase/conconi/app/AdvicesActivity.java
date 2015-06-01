@@ -27,8 +27,6 @@ public class AdvicesActivity extends ActionBarActivity {
         advice_names = getAdviceNames(advice_arrays);
         fillListView(advice_names);
 
-
-
         lbl_deflectionPoint = (TextView) this.findViewById(R.id.lbl_lastDeflection);
     }
     private void fillListView(ArrayList<String> advice_names){

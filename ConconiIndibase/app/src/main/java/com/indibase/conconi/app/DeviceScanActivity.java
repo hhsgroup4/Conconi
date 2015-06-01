@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
+ * COMMENTED LINE 112 (SETTING LIST ADAPTER) BECAUSE IT PREVENTS THE TABHOST FROM WORKING
  */
 public class DeviceScanActivity extends ListActivity {
     private LeDeviceListAdapter mLeDeviceListAdapter;
@@ -109,7 +110,7 @@ public class DeviceScanActivity extends ListActivity {
 
         // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter();
-        setListAdapter(mLeDeviceListAdapter);
+        //setListAdapter(mLeDeviceListAdapter);
         scanLeDevice(true);
     }
 
