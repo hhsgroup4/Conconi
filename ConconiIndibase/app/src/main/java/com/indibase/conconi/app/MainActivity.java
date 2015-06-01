@@ -1,9 +1,14 @@
 package com.indibase.conconi.app;
 
 import android.app.TabActivity;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.TabHost;
 
 import com.indibase.conconi.R;
@@ -17,6 +22,19 @@ public class MainActivity extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*Uri tests = Uri.parse("content://com.indibase.provider.conconi/test/including_measurements");
+        Cursor c;
+        CursorLoader cursorLoader = new CursorLoader(
+                this,
+                tests,
+                null,
+                null,
+                null,
+                null);
+        c = cursorLoader.loadInBackground();
+
+        Log.d("lifecycle", DatabaseUtils.dumpCursorToString(c));*/
 
         // create the TabHost that will contain the Tabs
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
