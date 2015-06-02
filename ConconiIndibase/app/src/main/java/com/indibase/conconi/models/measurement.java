@@ -1,4 +1,6 @@
 package com.indibase.conconi.models;
+import android.content.ContentValues;
+
 import java.util.Date;
 
 /**
@@ -44,6 +46,13 @@ public class measurement {
         this.bpm = bpm;
     }
 
+    public ContentValues getContentValues(){
+        ContentValues values = new ContentValues();
+        values.put("test_id", this.getTestId());
+        values.put("second",this.getSecond());
+        values.put("bpm",this.getBpm());
+        return values;
+    }
     @Override
     public String toString(){
         return "BPM " + getBpm() + "; Second " + getSecond();

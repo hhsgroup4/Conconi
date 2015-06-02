@@ -32,6 +32,7 @@ import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
 import com.indibase.conconi.bluetooth.SampleGattAttributes;
 import com.indibase.conconi.models.measurement;
+import com.indibase.conconi.models.test;
 
 public class CyclingActivity extends Activity {
     private TextView mDataField;
@@ -64,17 +65,15 @@ public class CyclingActivity extends Activity {
 
         dbMeasurements = getDbMeasurements(measurements);
         int deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
-        int testId = storeTest(new Date(), deflectionPoint);
+        test t = new test(new Date(), deflectionPoint);
+        int testId = storeTest(t);
         storeMeasurements(dbMeasurements, testId);
     }
     public int calculateDeflectionPoint(Queue dbMeasurementsCopy){
         return 0;
     }
-    public int storeTest(Date date, int deflectionPoint){
-        ContentValues values = new ContentValues();
-        values.put("creation", String.valueOf(date));
-        values.put("deflection_point", deflectionPoint);
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),values);
+    public int storeTest(test t){
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),new ContentValues(t.getContentValues()));
         Log.w("urilastpath", String.valueOf(uri.getLastPathSegment()));
         return Integer.valueOf(uri.getLastPathSegment());
     }
@@ -82,13 +81,13 @@ public class CyclingActivity extends Activity {
     public void storeMeasurements(Queue<measurement> dbMeasurements, int testId){
         while (dbMeasurements.size() != 0){
             measurement m = dbMeasurements.poll();
-            ContentValues values = new ContentValues();
-            values.put("test_id", testId);
-            values.put("second",m.getSecond());
-            values.put("bpm",m.getBpm());
-            Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),values);
-            Log.w("uri", String.valueOf(uri));
+            m.setTestId(testId);
+            storeMeasurement(m);
         }
+    }
+    public void storeMeasurement(measurement m){
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),new ContentValues(m.getContentValues()));
+        Log.w("uri", String.valueOf(uri));
     }
     public Queue<measurement> getDbMeasurements(Queue<measurement> measurements){
         int i = 0;
