@@ -23,7 +23,7 @@ public class Measurement extends DatabaseSchema implements BaseColumns{
                 + ", `test_id` INTEGER"
                 + ", `second` INTEGER"
                 + ", `bpm` INTEGER"
-                + ", FOREIGN KEY(`test_id`) REFERENCES test(`_id`)"
+                + ", FOREIGN KEY(`test_id`) REFERENCES Test(`_id`)"
                 + ")";
     }
 

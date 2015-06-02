@@ -13,16 +13,11 @@ import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -31,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
 import com.indibase.conconi.bluetooth.SampleGattAttributes;
-import com.indibase.conconi.models.measurement;
-import com.indibase.conconi.models.test;
+import com.indibase.conconi.models.Measurement;
+import com.indibase.conconi.models.Test;
 
 public class CyclingActivity extends Activity {
     private TextView mDataField;
@@ -40,8 +35,8 @@ public class CyclingActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
-    public Queue<measurement> measurements;
-    public Queue<measurement> dbMeasurements;
+    public Queue<Measurement> measurements;
+    public Queue<Measurement> dbMeasurements;
     private Date creation;
 
     @Override
@@ -65,31 +60,31 @@ public class CyclingActivity extends Activity {
 
         dbMeasurements = getDbMeasurements(measurements);
         int deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
-        test t = new test(new Date(), deflectionPoint);
+        Test t = new Test(new Date(), deflectionPoint);
         int testId = storeTest(t);
         storeMeasurements(dbMeasurements, testId);
     }
     public int calculateDeflectionPoint(Queue dbMeasurementsCopy){
         return 0;
     }
-    public int storeTest(test t){
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),new ContentValues(t.getContentValues()));
+    public int storeTest(Test t){
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/Test"),new ContentValues(t.getContentValues()));
         Log.w("urilastpath", String.valueOf(uri.getLastPathSegment()));
         return Integer.valueOf(uri.getLastPathSegment());
     }
 
-    public void storeMeasurements(Queue<measurement> dbMeasurements, int testId){
+    public void storeMeasurements(Queue<Measurement> dbMeasurements, int testId){
         while (dbMeasurements.size() != 0){
-            measurement m = dbMeasurements.poll();
+            Measurement m = dbMeasurements.poll();
             m.setTestId(testId);
             storeMeasurement(m);
         }
     }
-    public void storeMeasurement(measurement m){
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),new ContentValues(m.getContentValues()));
+    public void storeMeasurement(Measurement m){
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/Measurement"),new ContentValues(m.getContentValues()));
         Log.w("uri", String.valueOf(uri));
     }
-    public Queue<measurement> getDbMeasurements(Queue<measurement> measurements){
+    public Queue<Measurement> getDbMeasurements(Queue<Measurement> measurements){
         int i = 0;
         int counter = 0;
         int bpmTotal = 0;
@@ -101,8 +96,8 @@ public class CyclingActivity extends Activity {
             second = measurements.peek().getSecond();
             if (second > i){
                 average = bpmTotal/counter;
-                measurement mm = new measurement(i,average);
-                Log.w("measurement between", mm.toString());
+                Measurement mm = new Measurement(i,average);
+                Log.w("Measurement between", mm.toString());
                 dbMeasurements.add(mm);
                 bpmTotal = 0;
                 counter = 0;
@@ -112,8 +107,8 @@ public class CyclingActivity extends Activity {
             bpmTotal = bpmTotal + measurements.poll().getBpm();
         }
         average = bpmTotal/counter;
-        Log.w("measurement end", new measurement(second,average).toString());
-        dbMeasurements.add(new measurement(second,average));
+        Log.w("Measurement end", new Measurement(second,average).toString());
+        dbMeasurements.add(new Measurement(second,average));
 
         return dbMeasurements;
     }
@@ -217,7 +212,7 @@ public class CyclingActivity extends Activity {
     private void addToMeasurements(String bpm){
         long s =  TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
         int second = safeLongToInt(s);
-        measurement m = new measurement(second,Integer.valueOf(bpm));
+        Measurement m = new Measurement(second,Integer.valueOf(bpm));
         Log.w(CyclingActivity.class.getSimpleName(), m.toString());
         measurements.add(m);
     }

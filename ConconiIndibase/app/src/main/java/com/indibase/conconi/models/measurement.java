@@ -6,17 +6,17 @@ import java.util.Date;
 /**
  * Created by Vince on 1-6-2015.
  */
-public class measurement {
+public class Measurement {
     private int testId;
     private int second;
     private int bpm;
 
-    public measurement(int second, int bpm) {
+    public Measurement(int second, int bpm) {
         this.second = second;
         this.bpm = bpm;
     }
 
-    public measurement(int testId, int second, int bpm) {
+    public Measurement(int testId, int second, int bpm) {
         this.testId = testId;
         this.second = second;
         this.bpm = bpm;

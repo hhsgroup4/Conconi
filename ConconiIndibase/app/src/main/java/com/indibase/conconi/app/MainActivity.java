@@ -23,7 +23,7 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Uri tests = Uri.parse("content://com.indibase.provider.conconi/test/including_measurements");
+        /*Uri tests = Uri.parse("content://com.indibase.provider.conconi/Test/including_measurements");
         Cursor c;
         CursorLoader cursorLoader = new CursorLoader(
                 this,

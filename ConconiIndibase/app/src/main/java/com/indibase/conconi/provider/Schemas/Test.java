@@ -40,8 +40,8 @@ public class Test extends DatabaseSchema implements BaseColumns {
     @Override
     public HashMap<String, String> getViewsHashMap() {
         HashMap<String, String> views = new HashMap<>();
-        views.put("including_measurements", "CREATE VIEW `including_measurements` AS SELECT * FROM `test`"
-            + " INNER JOIN `measurement` ON (`test`.`_id` = `measurement`.`test_id`); ");
+        views.put("including_measurements", "CREATE VIEW `including_measurements` AS SELECT * FROM `Test`"
+            + " INNER JOIN `Measurement` ON (`Test`.`_id` = `Measurement`.`test_id`); ");
         return views;
     }
 }

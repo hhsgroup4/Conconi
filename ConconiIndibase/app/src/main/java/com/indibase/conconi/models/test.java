@@ -7,18 +7,18 @@ import java.util.Date;
 /**
  * Created by Vince on 1-6-2015.
  */
-public class test {
+public class Test {
     private int id;
     private Date creation;
     private int deflection_point;
 
-    public test(int id, Date creation, int deflection_point) {
+    public Test(int id, Date creation, int deflection_point) {
         this.id = id;
         this.creation = creation;
         this.deflection_point = deflection_point;
     }
 
-    public test(Date creation, int deflection_point) {
+    public Test(Date creation, int deflection_point) {
         this.creation = creation;
         this.deflection_point = deflection_point;
     }
