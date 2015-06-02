@@ -13,16 +13,12 @@ import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -31,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
 import com.indibase.conconi.bluetooth.SampleGattAttributes;
+import com.indibase.conconi.models.Deflection;
 import com.indibase.conconi.models.measurement;
 import com.indibase.conconi.models.test;
 
@@ -69,8 +66,15 @@ public class CyclingActivity extends Activity {
         int testId = storeTest(t);
         storeMeasurements(dbMeasurements, testId);
     }
-    public int calculateDeflectionPoint(Queue dbMeasurementsCopy){
-        return 0;
+    public int calculateDeflectionPoint(Queue<measurement> dbMeasurementsCopy){
+        ArrayList<Integer> points = new ArrayList<>();
+        while (dbMeasurementsCopy.size() != 0)
+        {
+            points.add(dbMeasurementsCopy.poll().getBpm());
+        }
+        int deflectionPoint =  Deflection.getDeflectionPoint(points);
+
+        return deflectionPoint;
     }
     public int storeTest(test t){
         Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),new ContentValues(t.getContentValues()));
