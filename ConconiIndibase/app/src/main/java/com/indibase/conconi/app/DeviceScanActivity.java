@@ -64,7 +64,7 @@ public class DeviceScanActivity extends ListActivity {
             return;
         }
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_device_scan, menu);
@@ -94,7 +94,7 @@ public class DeviceScanActivity extends ListActivity {
         }
         return true;
     }
-
+*/
     @Override
     protected void onResume() {
         super.onResume();
@@ -110,7 +110,7 @@ public class DeviceScanActivity extends ListActivity {
 
         // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter();
-        //setListAdapter(mLeDeviceListAdapter);
+        setListAdapter(mLeDeviceListAdapter);
         scanLeDevice(true);
     }
 
