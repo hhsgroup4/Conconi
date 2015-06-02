@@ -16,18 +16,19 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
-
 import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
 import com.indibase.conconi.bluetooth.SampleGattAttributes;
+import com.indibase.conconi.models.Deflection;
 import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
+
 
 public class CyclingActivity extends Activity {
     private TextView mDataField;
@@ -64,11 +65,18 @@ public class CyclingActivity extends Activity {
         int testId = storeTest(t);
         storeMeasurements(dbMeasurements, testId);
     }
-    public int calculateDeflectionPoint(Queue dbMeasurementsCopy){
-        return 0;
+    public int calculateDeflectionPoint(Queue<Measurement> dbMeasurementsCopy){
+        ArrayList<Integer> points = new ArrayList<>();
+        while (dbMeasurementsCopy.size() != 0)
+        {
+            points.add(dbMeasurementsCopy.poll().getBpm());
+        }
+        int deflectionPoint =  Deflection.getDeflectionPoint(points);
+
+        return deflectionPoint;
     }
     public int storeTest(Test t){
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/Test"),new ContentValues(t.getContentValues()));
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),new ContentValues(t.getContentValues()));
         Log.w("urilastpath", String.valueOf(uri.getLastPathSegment()));
         return Integer.valueOf(uri.getLastPathSegment());
     }
@@ -81,7 +89,7 @@ public class CyclingActivity extends Activity {
         }
     }
     public void storeMeasurement(Measurement m){
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/Measurement"),new ContentValues(m.getContentValues()));
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),new ContentValues(m.getContentValues()));
         Log.w("uri", String.valueOf(uri));
     }
     public Queue<Measurement> getDbMeasurements(Queue<Measurement> measurements){
