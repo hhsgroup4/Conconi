@@ -23,7 +23,7 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Uri tests = Uri.parse("content://com.indibase.provider.conconi/Test/including_measurements");
+        Uri tests = Uri.parse("content://com.indibase.provider.conconi/test/including_measurements");
         Cursor c;
         CursorLoader cursorLoader = new CursorLoader(
                 this,
@@ -34,7 +34,7 @@ public class MainActivity extends TabActivity {
                 null);
         c = cursorLoader.loadInBackground();
 
-        Log.d("lifecycle", DatabaseUtils.dumpCursorToString(c));*/
+        Log.d("lifecycle", DatabaseUtils.dumpCursorToString(c));
 
         // create the TabHost that will contain the Tabs
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);

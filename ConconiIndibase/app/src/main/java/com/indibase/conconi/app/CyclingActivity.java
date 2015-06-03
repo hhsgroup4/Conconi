@@ -36,7 +36,7 @@ public class CyclingActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
-    public Queue<Measurement> measurements;
+    public Queue<Measurement> Measurements;
     public Queue<Measurement> dbMeasurements;
     private Date creation;
 
@@ -48,7 +48,7 @@ public class CyclingActivity extends Activity {
         final Intent intent = getIntent();
         mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
         creation = null;
-        measurements = new LinkedList<>();
+        Measurements = new LinkedList<>();
         // Sets up UI references.
         mDataField = (TextView) findViewById(R.id.lbl_heartbeat);
 
@@ -59,7 +59,7 @@ public class CyclingActivity extends Activity {
     public void endTest(View view){
         unregisterReceiver(mGattUpdateReceiver);
 
-        dbMeasurements = getDbMeasurements(measurements);
+        dbMeasurements = getDbMeasurements(Measurements);
         int deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
         Test t = new Test(new Date(), deflectionPoint);
         int testId = storeTest(t);
@@ -92,7 +92,7 @@ public class CyclingActivity extends Activity {
         Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),new ContentValues(m.getContentValues()));
         Log.w("uri", String.valueOf(uri));
     }
-    public Queue<Measurement> getDbMeasurements(Queue<Measurement> measurements){
+    public Queue<Measurement> getDbMeasurements(Queue<Measurement> Measurements){
         int i = 0;
         int counter = 0;
         int bpmTotal = 0;
@@ -100,8 +100,8 @@ public class CyclingActivity extends Activity {
         dbMeasurements = new LinkedList<>();
         int second = 0;
 
-        while (measurements.size() != 0) {
-            second = measurements.peek().getSecond();
+        while (Measurements.size() != 0) {
+            second = Measurements.peek().getSecond();
             if (second > i){
                 average = bpmTotal/counter;
                 Measurement mm = new Measurement(i,average);
@@ -112,7 +112,7 @@ public class CyclingActivity extends Activity {
                 i=i+10;
             }
             counter++;
-            bpmTotal = bpmTotal + measurements.poll().getBpm();
+            bpmTotal = bpmTotal + Measurements.poll().getBpm();
         }
         average = bpmTotal/counter;
         Log.w("Measurement end", new Measurement(second,average).toString());
@@ -151,7 +151,7 @@ public class CyclingActivity extends Activity {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                clearUI();
+               // clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Displays the heartbeat
                 startHeartBeatService(mBluetoothLeService.getSupportedGattServices());
@@ -163,9 +163,9 @@ public class CyclingActivity extends Activity {
 
 
 
-    private void clearUI() {
+    /*private void clearUI() {
         mDataField.setText(R.string.no_data);
-    }
+    }*/
 
     @Override
     protected void onResume() {
@@ -222,7 +222,7 @@ public class CyclingActivity extends Activity {
         int second = safeLongToInt(s);
         Measurement m = new Measurement(second,Integer.valueOf(bpm));
         Log.w(CyclingActivity.class.getSimpleName(), m.toString());
-        measurements.add(m);
+        Measurements.add(m);
     }
     private void displayData(String data) {
         mDataField.setText(data);
