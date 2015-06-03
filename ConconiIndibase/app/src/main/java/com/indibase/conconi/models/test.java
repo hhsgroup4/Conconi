@@ -3,6 +3,7 @@ package com.indibase.conconi.models;
 import android.content.ContentValues;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Vince on 1-6-2015.
@@ -11,6 +12,9 @@ public class Test {
     private int id;
     private Date creation;
     private int deflection_point;
+
+    // TODO Add option to populate measurement List
+    private List<Measurement> measurements;
 
     public Test(int id, Date creation, int deflection_point) {
         this.id = id;

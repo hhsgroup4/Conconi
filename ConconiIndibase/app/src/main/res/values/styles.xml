@@ -5,4 +5,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+    <color name="green01" type="color">#73be4b</color>
+    <color name="green02" type="color">#48b787</color>
+    <color name="green03" type="color">#49b9ae</color>
+    <color name="blue01" type="color">#79b6d1</color>
+    <color name="blue02" type="color">#7982ce</color>
+    <color name="yellow01" type="color">#ffe400</color>
+    <color name="orange01" type="color">#e6b520</color>
+    <color name="orange02" type="color">#f6901f</color>
+    <color name="red01" type="color">#f46a57</color>
+    <color name="inactive_gray" type="color">#8e8e8e</color>
+
 </resources>
