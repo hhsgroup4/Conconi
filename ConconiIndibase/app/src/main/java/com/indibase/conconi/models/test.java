@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Vince on 1-6-2015.
  */
-class Test {
+public class Test {
     private int id;
     private Date creation;
     private int deflection_point;
