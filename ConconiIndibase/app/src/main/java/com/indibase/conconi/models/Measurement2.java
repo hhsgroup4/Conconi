@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Created by Vince on 1-6-2015.
- */ 
+ */
 public class Measurement {
     private int testId;
     private int second;
