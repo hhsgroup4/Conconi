@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.widget.TabHost;
 
 import com.indibase.conconi.R;
+import com.indibase.conconi.models.DbTest;
+import com.indibase.conconi.models.Test;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainActivity extends TabActivity {
@@ -35,8 +40,6 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         tabHost.addTab(tab3);
-
-        tabHost.setCurrentTab(2);
     }
 
 }

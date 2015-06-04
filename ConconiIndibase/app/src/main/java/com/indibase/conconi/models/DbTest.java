@@ -74,6 +74,22 @@ public class DbTest {
         return test;
     }
 
+    public static int saveTest(Activity activity, Test t){
+        Uri turi = activity.getContentResolver().insert(
+                Uri.parse("content://com.indibase.provider.conconi/test"),
+                t.getContentValues());
+
+        int insertId = Integer.parseInt(turi.getLastPathSegment());
+
+        for(Measurement m : t.getMeasurements()){
+            Uri muri = activity.getContentResolver().insert(
+                    Uri.parse("content://com.indibase.provider.conconi/measurement"),
+                    m.getContentValues());
+        }
+
+        return insertId;
+    }
+
     private static ArrayList<Measurement> getMeasurements(Activity activity, int identifier){
         ArrayList<Measurement> measurements = new ArrayList<>();
 
@@ -128,8 +144,6 @@ public class DbTest {
         }
 
         c.close();
-
-
 
         return tests;
     }

@@ -2,6 +2,8 @@ package com.indibase.conconi.models;
 
 import android.content.ContentValues;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,7 +67,8 @@ public class Test {
 
     public ContentValues getContentValues(){
         ContentValues values = new ContentValues();
-        values.put("creation", String.valueOf(this.getCreation()));
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //always convert to this format
+        values.put("creation", df.format(getCreation()));
         values.put("deflection_point", this.getDeflection_point());
         return values;
     }
