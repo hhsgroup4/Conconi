@@ -29,7 +29,7 @@ public class DbTest {
         while (c.moveToNext()) {
             c.moveToFirst();
 
-            int id = Integer.valueOf(c.getString(0));;
+            int id = Integer.valueOf(c.getString(0));
             Date date = new Date();
             int deflection = Integer.valueOf(c.getString(2));
             try {
@@ -41,6 +41,7 @@ public class DbTest {
         }
         return test;
     }
+
     public static Test getTestWithMeasurements(Activity activity, int identifier){
         Uri oneTest = Uri.parse("content://com.indibase.provider.conconi/test/"+identifier);
         Cursor c;
@@ -92,7 +93,8 @@ public class DbTest {
 
         return measurements;
     }
-    public static ArrayList<String> getAllTestString(Activity activity){
+
+    /*public static ArrayList<String> getAllTestString(Activity activity){
         ArrayList<String> tests = getAll(activity, "testString", String.class);
         return tests;
     }
@@ -154,5 +156,5 @@ public class DbTest {
             tests.add((T) t);
         }
         return tests;
-    }
+    }*/
 }

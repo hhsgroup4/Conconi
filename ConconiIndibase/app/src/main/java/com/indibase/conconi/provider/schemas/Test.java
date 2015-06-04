@@ -33,12 +33,4 @@ public class Test extends DatabaseSchema implements BaseColumns {
         Date date = new Date();
         return "INSERT INTO `" + getTableName() + "` (`creation`, `deflection_point`) VALUES ('" + dateFormat.format(date) + "', 170)";
     }
-
-    @Override
-    public HashMap<String, String> getViewsHashMap() {
-        HashMap<String, String> views = new HashMap<>();
-        views.put("including_measurements", "CREATE VIEW `including_measurements` AS SELECT * FROM `Test`"
-            + " INNER JOIN `Measurement` ON (`Test`.`_id` = `Measurement`.`test_id`); ");
-        return views;
-    }
 }

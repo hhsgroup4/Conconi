@@ -14,12 +14,12 @@ public class Test {
     private Date creation;
     private int deflection_point;
 
-    // TODO Add option to populate measurement List
     private ArrayList<Measurement> measurements;
 
     public Test(){
 
     }
+
     public Test(int id, Date creation, int deflection_point) {
         this.id = id;
         this.creation = creation;
