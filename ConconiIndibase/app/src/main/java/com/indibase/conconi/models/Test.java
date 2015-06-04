@@ -16,6 +16,9 @@ public class Test {
     // TODO Add option to populate measurement List
     private List<Measurement> measurements;
 
+    public Test(){
+
+    }
     public Test(int id, Date creation, int deflection_point) {
         this.id = id;
         this.creation = creation;
@@ -56,5 +59,10 @@ public class Test {
         values.put("creation", String.valueOf(this.getCreation()));
         values.put("deflection_point", this.getDeflection_point());
         return values;
+    }
+
+    @Override
+    public String toString(){
+        return "ID: " + getId() + " Time: " + getCreation() + " BPM: "  + getDeflection_point();
     }
 }
