@@ -42,7 +42,7 @@ public class DbTest {
         return test;
     }
 
-    public static Test getTestWithMeasurements(Activity activity, int identifier){
+    public static Test getTest(Activity activity, int identifier, boolean include_measurements){
         Uri oneTest = Uri.parse("content://com.indibase.provider.conconi/test/"+identifier);
         Cursor c;
         CursorLoader cursorLoader = new CursorLoader(activity,oneTest,null,null,null,null);
@@ -66,8 +66,11 @@ public class DbTest {
         }
         c.close();
 
-        ArrayList<Measurement> measurements = getMeasurements(activity, test.getId());
-        test.setMeasurements(measurements);
+        if(include_measurements) {
+            ArrayList<Measurement> measurements = getMeasurements(activity, test.getId());
+            test.setMeasurements(measurements);
+        }
+
         return test;
     }
 
@@ -92,6 +95,43 @@ public class DbTest {
 
 
         return measurements;
+    }
+
+    public static ArrayList<Test> getAllTests(Activity activity, boolean include_measurements){
+        ArrayList<Test> tests = new ArrayList<>();
+
+        Uri m = Uri.parse("content://com.indibase.provider.conconi/test");
+
+        CursorLoader cursorLoader = new CursorLoader(activity,m,null,null,null,null);
+        // CursorLoader cursorLoader = new CursorLoader(activity,m,null,null,null,null);
+
+        Cursor c = cursorLoader.loadInBackground();
+
+        while (c.moveToNext()) {
+            int id = Integer.valueOf(c.getString(0));
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = null;
+            try {
+                date = dateFormat.parse(c.getString(1));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            int deflection = Integer.valueOf(c.getString(2));
+            Test t = new Test(id, date, deflection);
+
+            if(include_measurements) {
+                ArrayList<Measurement> measurements = getMeasurements(activity, t.getId());
+                t.setMeasurements(measurements);
+            }
+            tests.add(t);
+        }
+
+        c.close();
+
+
+
+        return tests;
     }
 
     /*public static ArrayList<String> getAllTestString(Activity activity){
