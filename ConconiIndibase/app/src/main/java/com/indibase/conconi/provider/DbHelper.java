@@ -20,7 +20,7 @@ public final class DbHelper extends SQLiteOpenHelper implements BaseColumns {
     public ArrayList<DatabaseSchema> schemas = new ArrayList<>();
 
     //If you modify any file in the schemes package, you must increment the database version
-    public static final int DATABASE_VERSION = 14;
+    public static final int DATABASE_VERSION = 15;
 
     public static final String DATABASE_NAME = "conconi.db";
 

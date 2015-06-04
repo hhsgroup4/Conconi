@@ -2,6 +2,7 @@ package com.indibase.conconi.models;
 
 import android.content.ContentValues;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Test {
     private int deflection_point;
 
     // TODO Add option to populate measurement List
-    private List<Measurement> measurements;
+    private ArrayList<Measurement> measurements;
 
     public Test(){
 
@@ -28,6 +29,14 @@ public class Test {
     public Test(Date creation, int deflection_point) {
         this.creation = creation;
         this.deflection_point = deflection_point;
+    }
+
+    public ArrayList<Measurement> getMeasurements() {
+        return measurements;
+    }
+
+    public void setMeasurements(ArrayList<Measurement> measurements) {
+        this.measurements = measurements;
     }
 
     public int getId() {

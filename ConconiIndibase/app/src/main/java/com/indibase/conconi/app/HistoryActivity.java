@@ -1,19 +1,12 @@
 package com.indibase.conconi.app;
 
-import android.content.CursorLoader;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.database.Cursor;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.indibase.conconi.R;
 import com.indibase.conconi.models.DbTest;
-import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
 import java.util.ArrayList;
@@ -42,6 +35,8 @@ public class HistoryActivity extends ActionBarActivity {
     }
 
     private ArrayList<String> getTests(){
+        Test Test1 = DbTest.getTestWithMeasurements(this, 1);
+
         historyItems = DbTest.getAllTestString(this);
         return historyItems;
     }

@@ -55,6 +55,6 @@ public class Measurement {
     }
     @Override
     public String toString(){
-        return "BPM " + getBpm() + "; Second " + getSecond();
+        return "Test ID " + getTestId() + "; BPM " + getBpm() + "; Second " + getSecond();
     }
 }
