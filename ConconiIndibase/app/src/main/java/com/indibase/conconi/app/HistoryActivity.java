@@ -1,6 +1,6 @@
 package com.indibase.conconi.app;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 import static com.indibase.conconi.R.layout.activity_history;
 
-public class HistoryActivity extends ActionBarActivity {
+public class HistoryActivity extends Activity {
 
-    ArrayList<String> historyItems;
+    ArrayList<String> historyItems = new ArrayList<>();
     ListView listViewHistory;
 
     @Override
@@ -35,9 +35,10 @@ public class HistoryActivity extends ActionBarActivity {
     }
 
     private ArrayList<String> getTests(){
-        Test Test1 = DbTest.getTestWithMeasurements(this, 1);
-
-        historyItems = DbTest.getAllTestString(this);
+        Test Test1 = DbTest.getTest(this, 1, true);
+        ArrayList<Test> tests = DbTest.getAllTests(this, false);
+        for(Test t : tests)
+            historyItems.add(t.toString());
         return historyItems;
     }
 }

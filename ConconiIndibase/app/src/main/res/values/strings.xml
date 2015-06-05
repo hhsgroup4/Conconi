@@ -123,5 +123,6 @@ The duration of the training you can make very long journeys, up to 150 kilomete
 
     <string name="title_activity_cycling">CyclingActivity</string>
     <string name="title_activity_device_scan">Device scan</string>
+    <string name="title_activity_database">Database</string>
 
 </resources>
