@@ -20,12 +20,6 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
-        //getTestExample(1);
-        getTestWithAllMeasurementsExample(1);
-
-=======
->>>>>>> origin/master
         // create the TabHost that will contain the Tabs
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
 
