@@ -1,9 +1,5 @@
 package com.indibase.conconi.bluetooth;
 
-/**
- * Created by Vince on 29-5-2015.
- */
-
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;

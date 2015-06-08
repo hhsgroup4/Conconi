@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.indibase.conconi.R;
@@ -30,7 +29,6 @@ public class TabBar extends FragmentActivity implements ActionBar.TabListener{
     }
 
     public void drawTabBar() {
-
         viewPager.setAdapter(adapter);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

@@ -9,13 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.indibase.conconi.R;
+import com.indibase.conconi.app.CyclingActivity;
+import com.indibase.conconi.app.DeviceScanActivity;
+import com.indibase.conconi.bluetooth.BluetoothLeService;
 
 public class TestTabFragment extends Fragment implements View.OnClickListener {
 
     private View view;
-    Button btn;
+    private Intent intent;
+    private ImageButton btnTest;
+    private ImageButton btnBluetooth;
 
 
     @Nullable
@@ -23,16 +29,40 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.test_tab_fragment, container, false);
 
-        //btn = (Button) view.findViewById(R.id.myButton);
-        //btn.setOnClickListener(this);
+        btnTest = (ImageButton) view.findViewById(R.id.btn_start_test);
+        btnBluetooth= (ImageButton) view.findViewById(R.id.btn_bluetooth);
+
+        // Check if app has connection to bluetooth device
+        if(false) {
+            btnTest.setImageResource(R.mipmap.btn_start_test_green);
+            btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_green);
+        } else {
+            Log.i("Manfredinator: ", "No bluetooth device paired!");
+        }
+
+        btnTest.setOnClickListener(this);
+        btnBluetooth.setOnClickListener(this);
 
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        Log.i("Manfredinator: ", "Clicke was registered");
-        //Intent intent = new Intent(getActivity(), NewActivity.class);
-        //startActivity(intent);
+        System.out.println(view.getLabelFor());
+
+        switch (view.getId()) {
+            case R.id.btn_start_test:
+                intent = new Intent(getActivity(), CyclingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_bluetooth:
+                intent = new Intent(getActivity(), DeviceScanActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
+
     }
 }
