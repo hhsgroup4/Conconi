@@ -10,13 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +31,11 @@ import com.indibase.conconi.models.Test;
 
 
 public class CyclingActivity extends Activity {
+
+    private TextView lbl_test_level;
+    private TextView lbl_test_heartbeat;
+    private TextView lbl_test_time;
+
     private TextView mDataField;
     private String mDeviceAddress;
     private BluetoothLeService mBluetoothLeService;
@@ -94,10 +97,14 @@ public class CyclingActivity extends Activity {
         creation = null;
         Measurements = new LinkedList<>();
         // Sets up UI references.
-        mDataField = (TextView) findViewById(R.id.lbl_heartbeat);
+        mDataField = (TextView) findViewById(R.id.lbl_test_heartbeat);
 
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        updateHeartbeatLabel(109);
+        updateLevelLabel(12);
+        updateTimeLabel("11:33:14");
     }
 
 
@@ -202,7 +209,7 @@ public class CyclingActivity extends Activity {
         return deflectionPoint;
     }
     public int storeTest(Test t){
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"),new ContentValues(t.getContentValues()));
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"), new ContentValues(t.getContentValues()));
         Log.w("urilastpath", String.valueOf(uri.getLastPathSegment()));
         return Integer.valueOf(uri.getLastPathSegment());
     }
@@ -242,7 +249,7 @@ public class CyclingActivity extends Activity {
         }
         average = bpmTotal/counter;
         Log.w("Measurement end", new Measurement(second,average).toString());
-        dbMeasurements.add(new Measurement(second,average));
+        dbMeasurements.add(new Measurement(second, average));
 
         return dbMeasurements;
     }
@@ -260,6 +267,32 @@ public class CyclingActivity extends Activity {
         Measurement m = new Measurement(second,Integer.valueOf(bpm));
         Log.w(CyclingActivity.class.getSimpleName(), m.toString());
         Measurements.add(m);
+    }
+
+    public void finishedTest(View view) {
+        Intent intent = new Intent(view.getContext(), FinishedTestActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void quitTest(View view) {
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    // Methods for updating label elements
+    private void updateHeartbeatLabel(int bpm) {
+        lbl_test_heartbeat = (TextView) findViewById(R.id.lbl_test_heartbeat);
+        lbl_test_heartbeat.setText(Integer.toString(bpm));
+    }
+    private void updateTimeLabel(String time) {
+        lbl_test_time = (TextView) findViewById(R.id.lbl_test_time);
+        lbl_test_time.setText(time);
+    }
+    private void updateLevelLabel(int lvl) {
+        lbl_test_level = (TextView) findViewById(R.id.lbl_test_level);
+        lbl_test_level.setText(Integer.toString(lvl));
     }
 
 }

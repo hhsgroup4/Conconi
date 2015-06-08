@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.indibase.conconi.R;
+import com.indibase.conconi.app.PresentationActivity;
 import com.indibase.conconi.models.DbTest;
 import com.indibase.conconi.models.Test;
 
@@ -35,6 +37,16 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
         historyItems = DbTest.getAllTests(getActivity(), false);
         listViewHistory = (ListView) view.findViewById(R.id.listview_history);
         fillListView(historyItems);
+
+        listViewHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.i("Manfedinator: ", "Men att det skall behövda vara så jävla svårt!!!!!");
+                Intent intent = new Intent(view.getContext(), PresentationActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //btn = (Button) view.findViewById(R.id.myButton);
         //btn.setOnClickListener(this);
 

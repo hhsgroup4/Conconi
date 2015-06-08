@@ -1,11 +1,12 @@
 package com.indibase.conconi.app;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,9 +28,11 @@ public class HistoryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_history);
+
         historyItems = DbTest.getAllTests(this,false);
 
         listViewHistory = (ListView) findViewById(R.id.listview_history);
+
         fillListView(historyItems);
 
 
@@ -39,6 +42,7 @@ public class HistoryActivity extends Activity {
         LeHistoryListAdapter mLeHistoryListAdapter = new LeHistoryListAdapter();
         mLeHistoryListAdapter.setTests(historyItems);
         listViewHistory.setAdapter(mLeHistoryListAdapter);
+        
         /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, historyItems);
         listViewHistory.setAdapter(adapter);*/
     }
