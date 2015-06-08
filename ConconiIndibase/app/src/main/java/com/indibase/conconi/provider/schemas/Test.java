@@ -31,6 +31,9 @@ public class Test extends DatabaseSchema implements BaseColumns {
     public String getInsertSql() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
-        return "INSERT INTO `" + getTableName() + "` (`creation`, `deflection_point`) VALUES ('" + dateFormat.format(date) + "', 170)";
+        return "INSERT INTO `" + getTableName() + "` (`creation`, `deflection_point`) " +
+                "SELECT '"+dateFormat.format(date)+"' AS `creation`, 170. AS `deflection_point` "+
+                "UNION SELECT '2011-07-08 20:05:21', 162 " +
+                "UNION SELECT '2011-07-08 20:05:21', 160";
     }
 }
