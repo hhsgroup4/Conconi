@@ -5,16 +5,10 @@
     android:orientation="vertical"
     android:background="@color/orange01" >
 
-    <TextView android:layout_width="fill_parent"
-        android:id="@+id/tabText1"
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Info tab content"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:layout_centerInParent="true"
-        />
-
+        android:id="@+id/listview_info" />
 
 
 </RelativeLayout>

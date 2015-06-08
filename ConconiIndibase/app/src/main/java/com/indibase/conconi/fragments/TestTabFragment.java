@@ -36,7 +36,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         btnBluetooth.setEnabled(true);
 
         // Check if app has connection to bluetooth device
-        if(false) {
+        if(true) {
             btnTest.setImageResource(R.mipmap.btn_start_test_green);
             btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_green);
 
@@ -75,7 +75,5 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
             default:
                 break;
         }
-
-
     }
 }

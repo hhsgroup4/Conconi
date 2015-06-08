@@ -68,13 +68,13 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
         public void setTests(ArrayList<Test> tests){
             mTests = new ArrayList<>(tests);
         }
-        public void addDevice(Test test) {
+        public void addTest(Test test) {
             if(!mTests.contains(test)) {
                 mTests.add(test);
             }
         }
 
-        public Test getDevice(int position) {
+        public Test getTest(int position) {
             return mTests.get(position);
         }
 
