@@ -3,17 +3,14 @@ package com.indibase.conconi.app;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.TabHost;
 
 import com.indibase.conconi.R;
-import com.indibase.conconi.models.DbTest;
-import com.indibase.conconi.models.Test;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
-public class MainActivity extends TabActivity {
+public class MainActivity extends FragmentActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
