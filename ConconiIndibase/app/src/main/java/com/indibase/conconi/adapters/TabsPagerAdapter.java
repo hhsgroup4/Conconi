@@ -4,6 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.indibase.conconi.fragments.HistoryTabFragment;
+import com.indibase.conconi.fragments.InfoTabFragment;
+import com.indibase.conconi.fragments.TestTabFragment;
+
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
     private static final int NO_OF_TABS = 3;
@@ -17,11 +21,11 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
         switch (index) {
             case 0:
-                return new Tab1Frag();
+                return new TestTabFragment();
             case 1:
-                return new Tab2Frag();
+                return new HistoryTabFragment();
             case 2:
-                return new Tab3Frag();
+                return new InfoTabFragment();
         }
 
         return null;

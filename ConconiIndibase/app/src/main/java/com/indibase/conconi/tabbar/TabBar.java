@@ -8,7 +8,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.indibase.conconi.R;
+import com.indibase.conconi.adapters.TabsPagerAdapter;
 
 
 public class TabBar extends FragmentActivity implements ActionBar.TabListener{
@@ -22,9 +26,6 @@ public class TabBar extends FragmentActivity implements ActionBar.TabListener{
         this.viewPager = (ViewPager) viewPager;
         this.actionBar = actionBar;
         this.adapter = new TabsPagerAdapter(fragManager);
-
-
-
 
     }
 

@@ -12,9 +12,6 @@ import android.widget.Button;
 
 import com.indibase.conconi.R;
 
-/**
- * Created by Manfredinator on 08/06/15.
- */
 public class TestTabFragment extends Fragment implements View.OnClickListener {
 
     private View view;
@@ -24,16 +21,12 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        this.view = inflater.inflate(R.layout.test_tab_fragment, container, false);
 
-        btn = (Button) view.findViewById(R.id.myButton);
-        btn.setOnClickListener(this);
+        //btn = (Button) view.findViewById(R.id.myButton);
+        //btn.setOnClickListener(this);
 
         return view;
-    }
-
-    public void yeah(View view) {
-        Log.i("manfredinator: ", "Clicked motherfucker!");
     }
 
     @Override

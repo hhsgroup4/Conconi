@@ -1,8 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
+
+
+<!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="com.indibase.conconi.app.MainActivity">
+tools:context="com.indibase.conconi.app.MainActivity">-->
 
     <!--<android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +26,7 @@ tools:context="com.indibase.conconi.app.MainActivity">
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </android.support.v4.view.ViewPager>-->
-
+<!--
     <TabHost
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -39,4 +55,4 @@ tools:context="com.indibase.conconi.app.MainActivity">
         </RelativeLayout>
     </TabHost>
 
-</RelativeLayout>
+</RelativeLayout>-->

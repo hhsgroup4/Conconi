@@ -3,24 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/green01" >
+    android:background="@color/orange01" >
 
     <TextView android:layout_width="fill_parent"
         android:id="@+id/tabText1"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Tab 1 content"
+        android:text="Info tab content"
         android:textSize="20dp"
         android:textColor="@android:color/white"
         android:layout_centerInParent="true"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click me"
-        android:id="@+id/myButton"
-        android:tag="aButton"
         />
 
 
