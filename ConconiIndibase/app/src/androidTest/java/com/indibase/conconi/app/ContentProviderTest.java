@@ -28,9 +28,18 @@ public class ContentProviderTest extends ActivityInstrumentationTestCase2<Databa
     @SmallTest
     public void testQuery(){
         Test test = activity.getTest(1);
-        System.out.println(test.toString());
         assertEquals(2, test.getId());
         assertEquals(170, test.getDeflection_point());
+    }
+
+    @SmallTest
+    public void testInsert(){
+        Test test = activity.getTest(1);
+        test.setDeflection_point(190);
+        int insertId = activity.insertTest(test);
+        assertEquals(1, insertId);
+        Test dbTest = activity.getTest(1);
+        assertEquals(test.getDeflection_point(), dbTest.getDeflection_point());
     }
 
 }

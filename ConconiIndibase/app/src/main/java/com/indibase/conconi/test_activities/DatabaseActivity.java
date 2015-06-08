@@ -18,4 +18,8 @@ public class DatabaseActivity extends Activity {
     public Test getTest(int id){
         return DbTest.getTest(this, id, false);
     }
+
+    public int insertTest(Test test){
+        return DbTest.saveTest(this, test);
+    }
 }
