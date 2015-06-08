@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.indibase.conconi.R;
 import com.indibase.conconi.app.CyclingActivity;
@@ -31,13 +32,20 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
 
         btnTest = (ImageButton) view.findViewById(R.id.btn_start_test);
         btnBluetooth= (ImageButton) view.findViewById(R.id.btn_bluetooth);
+        btnTest.setEnabled(true);
+        btnBluetooth.setEnabled(true);
 
         // Check if app has connection to bluetooth device
         if(false) {
             btnTest.setImageResource(R.mipmap.btn_start_test_green);
             btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_green);
+
+            // enable buttons if bluetooth is paired
+            btnTest.setEnabled(true);
+            btnBluetooth.setEnabled(true);
         } else {
             Log.i("Manfredinator: ", "No bluetooth device paired!");
+
         }
 
         btnTest.setOnClickListener(this);
@@ -52,8 +60,13 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btn_start_test:
-                intent = new Intent(getActivity(), CyclingActivity.class);
-                startActivity(intent);
+                if (true) {
+                    intent = new Intent(getActivity(), CyclingActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "No bluetooth device paired", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.btn_bluetooth:
                 intent = new Intent(getActivity(), DeviceScanActivity.class);

@@ -126,5 +126,6 @@ The duration of the training you can make very long journeys, up to 150 kilomete
     <string name="title_activity_database">Database</string>
     <string name="title_activity_info">InfoActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_finished_test">FinishedTestActivity</string>
 
 </resources>

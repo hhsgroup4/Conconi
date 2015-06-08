@@ -55,6 +55,10 @@
             android:name=".test_activities.DatabaseActivity"
             android:label="@string/title_activity_database" >
         </activity>
+        <activity
+            android:name=".app.FinishedTestActivity"
+            android:label="@string/title_activity_finished_test" >
+        </activity>
     </application>
 
 </manifest>
