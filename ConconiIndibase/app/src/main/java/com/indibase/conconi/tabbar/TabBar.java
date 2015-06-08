@@ -30,8 +30,6 @@ public class TabBar extends FragmentActivity implements ActionBar.TabListener{
     }
 
     public void drawTabBar() {
-        viewPager.setAdapter(adapter);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         viewPager.setAdapter(adapter);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
