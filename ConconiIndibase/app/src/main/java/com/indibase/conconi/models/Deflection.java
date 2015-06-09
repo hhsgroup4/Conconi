@@ -55,3 +55,18 @@ public class Deflection {
     }
 
 }
+/*
+Unit Test
+ArrayList<Integer> arrayRandom = new ArrayList<Integer>;
+
+Random rand = new Random();
+rand.setSeed(System.currentTimeMillis());
+for (int i=0; i<4320; i++)
+{
+    Integer r = rand.nextInt() % 256;
+    arrayRandom.add(r);
+}
+
+
+
+ */
