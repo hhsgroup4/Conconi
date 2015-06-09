@@ -2,21 +2,114 @@ package com.indibase.conconi.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
+import com.androidplot.Plot;
+import com.androidplot.ui.SizeLayoutType;
+import com.androidplot.ui.SizeMetrics;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PointLabelFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
 import com.indibase.conconi.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PresentationActivity extends Activity {
+
+    private XYPlot plot;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_data_presentation);
+
+        View view = findViewById(R.id.simpleXYPlot);
+
+        drawGraphPlot(view);
+
     }
+
+    private void drawGraphPlot(View view ) {
+        initGraphPlot();
+        insertValues(view);
+        styleGraphPlot();
+    }
+
+    private void initGraphPlot() {
+        plot = (XYPlot) findViewById(R.id.simpleXYPlot);
+    }
+
+    private void insertValues(View view) {
+        List s1 = getSeries(30, 10);
+        XYSeries series1 = new SimpleXYSeries(s1,
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series 1");
+
+        LineAndPointFormatter s1Format = new LineAndPointFormatter();
+        s1Format.setPointLabelFormatter(new PointLabelFormatter());
+        s1Format.configure(view.getContext(), R.xml.lpf1);
+
+
+        List s2 = getLinearPlot(s1, 30);
+        XYSeries series2 = new SimpleXYSeries(s2,
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series 2");
+
+        LineAndPointFormatter s2Format = new LineAndPointFormatter();
+        s2Format.setPointLabelFormatter(new PointLabelFormatter());
+        s2Format.configure(view.getContext(), R.xml.lpf2);
+
+        plot.addSeries(series2, s2Format);
+        plot.addSeries(series1, s1Format);
+    }
+
+    private void styleGraphPlot() {
+        // Place and size styling for Plot graph
+        plot.setPlotMargins(0, 0, 0, 0);
+        plot.setPlotPadding(40, 30, 40, 20);
+        plot.getGraphWidget().setGridPadding(0, 0, 0, 0);
+        plot.getGraphWidget().setMargins(-40, 0, 0, 0);
+
+        // Set plot graph to size of parent
+        float parentWidth = (float) View.MeasureSpec.getSize(plot.getMeasuredWidth());
+        float parentHeight = (float) View.MeasureSpec.getSize(plot.getMeasuredHeight());
+        plot.getGraphWidget().setSize(new SizeMetrics(parentHeight, SizeLayoutType.FILL, parentWidth, SizeLayoutType.FILL));
+
+        //plot.getGraphWidget().getRangeGridLinePaint().setAlpha(255); // sets the horizontal ruler lines
+        plot.getGraphWidget().getRangeGridLinePaint().setColor(getResources().getColor(R.color.blue01));
+        plot.getGraphWidget().getRangeGridLinePaint().setStrokeWidth(10);
+
+        // Style Plot element
+        plot.getGraphWidget().getBackgroundPaint().setColor(Color.WHITE); //Background of Plot view
+        plot.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE); // graph background
+        //plot.setBackgroundColor(Color.WHITE);
+
+        // Hide irrelevant elements in Plot grid and labels
+        plot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
+        plot.getGraphWidget().getDomainLabelPaint().setColor(Color.TRANSPARENT);
+        plot.getGraphWidget().getRangeLabelPaint().setColor(Color.TRANSPARENT);
+        plot.getGraphWidget().getDomainOriginLabelPaint().setColor(Color.TRANSPARENT);
+        plot.getGraphWidget().getDomainOriginLinePaint().setColor(Color.TRANSPARENT);
+        plot.getGraphWidget().getRangeOriginLinePaint().setColor(Color.TRANSPARENT);
+        plot.getLegendWidget().getTextPaint().setAlpha(0);
+        // Hide legend icon
+        SizeLayoutType plot_layouttype = plot.getLegendWidget().getHeightMetric().getLayoutType();
+        plot.getLegendWidget().setIconSizeMetrics(new SizeMetrics(0, plot_layouttype , 0, plot_layouttype));
+        // plot.setTicksPerRangeLabel(10); // Did nothing
+        plot.getGraphWidget().getRangeLabelPaint().setTextSize(0); //removes vertical ruler labels
+        plot.getGraphWidget().getDomainLabelPaint().setTextSize(0); //removes horizontal ruler labels
+        //plot.getGraphWidget().getCursorLabelPaint().setTextSize(0); //Nothing happened
+        //plot.getGraphWidget().getDomainSubGridLinePaint().setAlpha(0); //Nothing happened
+        plot.getGraphWidget().getDomainGridLinePaint().setAlpha(0); // sets the vertical ruler lines
+
+        plot.setTicksPerRangeLabel(1);
+        plot.getGraphWidget().setDomainLabelOrientation(-45);
+    }
+
 
     public void deleteTest(View view) {
 
@@ -30,6 +123,63 @@ public class PresentationActivity extends Activity {
     public void navigateHome(View view) {
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
+    }
+
+    private List getLinearPlot(List testResults, int count) {
+        List series = new ArrayList();
+
+        int first = (int) testResults.get(0);
+        int last = (int) testResults.get(testResults.size() - 1);
+        int linear_increase = ((last-first)/count);
+        System.out.println(linear_increase);
+
+        for (int i = 0; i < count ; i++) {
+            series.add(first+(linear_increase*i));
+        }
+        System.out.println(series);
+        return series;
+    }
+
+    private List getSeries(int count, int max) {
+        List series = new ArrayList();
+        /*Random rand = new Random();
+        for (int i = 1; i <= count; i++) {
+            int value = rand.nextInt(max);
+            series.add(value);
+        }*/
+        series.add(110);
+        series.add(112);
+        series.add(114);
+        series.add(113);
+        series.add(113);
+        series.add(115);
+        series.add(117);
+        series.add(120);
+        series.add(124);
+        series.add(122);
+        series.add(119);
+        series.add(125);
+        series.add(131);
+        series.add(133);
+        series.add(136);
+        series.add(140);
+        series.add(145);
+        series.add(151);
+        series.add(156);
+        series.add(160);
+        series.add(163);
+        series.add(166);
+        series.add(170);
+        series.add(172);
+        series.add(174);
+        series.add(176);
+        series.add(177);
+        series.add(179);
+        series.add(181);
+        series.add(183);
+        series.add(186);
+        System.out.println(series);
+        return series;
     }
 
 }

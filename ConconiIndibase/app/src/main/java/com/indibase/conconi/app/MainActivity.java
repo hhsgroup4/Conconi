@@ -32,28 +32,6 @@ public class MainActivity extends FragmentActivity {
         tabBar.setupTabListeners(inflater, R.layout.bottombar_tab2);
         tabBar.setupTabListeners(inflater, R.layout.bottombar_tab3);
 
-        // create the TabHost that will contain the Tabs
-        /*TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
-
-        TabHost.TabSpec tab1 = tabHost.newTabSpec("First Tab");
-        TabHost.TabSpec tab2 = tabHost.newTabSpec("Second Tab");
-        TabHost.TabSpec tab3 = tabHost.newTabSpec("Third tab");
-
-        tab1.setIndicator("Test");
-        tab1.setContent(new Intent(this, DeviceScanActivity.class));
-
-        tab2.setIndicator("History");
-        tab2.setContent(new Intent(this, HistoryActivity.class));
-
-        tab3.setIndicator("Info");
-        tab3.setContent(new Intent(this, AdvicesActivity.class));*/
-
-        /** Add the tabs  to the TabHost to display. */
-        /*tabHost.addTab(tab1);
-        tabHost.addTab(tab2);
-        tabHost.addTab(tab3);*/
-
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
