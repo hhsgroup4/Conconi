@@ -23,15 +23,15 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     private Intent intent;
     private ImageButton btnTest;
     private ImageButton btnBluetooth;
-    static final int PICK_BLUETOOTH_REQUEST = 1;
     private String bluetoothAddress;
+    private boolean play;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.test_tab_fragment, container, false);
-
+        play = false;
         btnTest = (ImageButton) view.findViewById(R.id.btn_start_test);
         btnBluetooth= (ImageButton) view.findViewById(R.id.btn_bluetooth);
         btnTest.setEnabled(true);
@@ -62,28 +62,31 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btn_start_test:
-                if (true) {
+                if (play) {
                     intent = new Intent(getActivity(), CyclingActivity.class);
-                    startActivityForResult(intent, PICK_BLUETOOTH_REQUEST);
+                    intent.putExtra("DEVICE_ADDRESS", bluetoothAddress);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "No bluetooth device paired", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
             case R.id.btn_bluetooth:
-                intent = new Intent(getActivity(), DeviceScanActivity.class);
-                startActivity(intent);
+                Intent i = new Intent(getActivity(), DeviceScanActivity.class);
+                startActivityForResult(i, 1);
                 break;
             default:
                 break;
         }
     }
-    public void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data.getExtras().containsKey("bAddress")){
-           bluetoothAddress = data.getStringExtra("bAddress");
+        getActivity();
+        if(requestCode == 1) {
+            bluetoothAddress = data.getStringExtra("bAddress");
+            Log.w("test", bluetoothAddress);
+            play = true;
         }
-        Log.w("test", bluetoothAddress);
     }
 }

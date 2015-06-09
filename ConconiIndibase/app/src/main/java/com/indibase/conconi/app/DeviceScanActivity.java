@@ -82,17 +82,17 @@ public class DeviceScanActivity extends Activity {
                 final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
                 if (device == null) return;
                 String s = device.getAddress();
-                Intent i = getIntent();
+                Intent i =  getIntent();
                 i.putExtra("bAddress", s);
                 setResult(RESULT_OK, i);
                 finish();
                 /*final Intent intent = new Intent(DeviceScanActivity.this, CyclingActivity.class);
                 //intent.putExtra("DEVICE_NAME", device.getName());
                 intent.putExtra("DEVICE_ADDRESS", device.getAddress());*/
-                if (mScanning) {
+               /* if (mScanning) {
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
                     mScanning = false;
-                }
+                }*/
                 //startActivity(intent);
             }
         });

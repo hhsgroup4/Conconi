@@ -3,7 +3,9 @@ package com.indibase.conconi.app;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TabHost;
 
@@ -50,6 +52,11 @@ public class MainActivity extends FragmentActivity {
         /*tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         tabHost.addTab(tab3);*/
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.w("in main", "inmain");
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }
