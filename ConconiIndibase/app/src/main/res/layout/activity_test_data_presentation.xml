@@ -7,6 +7,14 @@
     android:background="@color/blue01"
     tools:context="com.indibase.conconi.app.PresentationActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -18,25 +26,33 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@android:color/white">
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:padding="5dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/relativeLayout">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Medium Text"
+                        android:text="TIME"
+                        android:textColor="@color/blue03"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         android:id="@+id/textView6" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Medium Text"
+                        android:text="15:20:01"
+                        android:textColor="@color/blue03"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         android:id="@+id/textView7"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/textView6" />
@@ -49,17 +65,24 @@
                     android:layout_alignParentStart="true">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Medium Text"
+                        android:text="DEFLECTION POINT"
+                        android:textColor="@color/blue03"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         android:id="@+id/textView10" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Medium Text"
+                        android:text="150"
+                        android:textColor="@color/blue03"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         android:id="@+id/textView11"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/textView10" />
@@ -71,17 +94,24 @@
                         android:layout_alignParentStart="true">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Medium Text"
+                            android:text="LEVEL REACHED"
+                            android:textColor="@color/blue03"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:id="@+id/textView8" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Medium Text"
+                            android:text="17"
+                            android:textColor="@color/blue03"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:id="@+id/textView9"
                             android:layout_alignParentTop="true"
                             android:layout_toEndOf="@+id/textView8" />
@@ -165,18 +195,41 @@
                         android:src="@mipmap/btn_delete" />
                 </FrameLayout>
             </LinearLayout>
-
-            <ImageButton
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:padding="0dp"
-                android:background="@android:color/transparent"
-                android:id="@+id/imageButton3"
-                android:layout_gravity="center_horizontal"
-                android:src="@mipmap/btn_delete" />
+                android:layout_marginBottom="50dp">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:padding="0dp"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/btn_delete"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/btn_delete"
+                    android:layout_marginLeft="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="deleteTest"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:padding="0dp"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/btn_home"
+                    android:src="@mipmap/btn_home"
+                    android:layout_weight="1"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="navigateHome"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

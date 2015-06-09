@@ -10,7 +10,7 @@ import android.widget.TabHost;
 import com.indibase.conconi.R;
 import com.indibase.conconi.tabbar.TabBar;
 
-
+// TODO fix naivigation so the only returning screen is not TestTabFragment
 public class MainActivity extends FragmentActivity {
 
     private TabBar tabBar;
