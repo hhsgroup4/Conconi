@@ -270,9 +270,9 @@ public class CyclingActivity extends Activity {
     }
 
     public void finishedTest(View view) {
-        Intent intent = new Intent(view.getContext(), FinishedTestActivity.class);
+     /*   Intent intent = new Intent(view.getContext(), FinishedTestActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 
     public void quitTest(View view) {

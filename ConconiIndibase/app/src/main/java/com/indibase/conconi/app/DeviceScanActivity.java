@@ -81,14 +81,19 @@ public class DeviceScanActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
                 if (device == null) return;
-                final Intent intent = new Intent(DeviceScanActivity.this, CyclingActivity.class);
+                String s = device.getAddress();
+                Intent i = getIntent();
+                i.putExtra("bAddress", s);
+                setResult(RESULT_OK, i);
+                finish();
+                /*final Intent intent = new Intent(DeviceScanActivity.this, CyclingActivity.class);
                 //intent.putExtra("DEVICE_NAME", device.getName());
-                intent.putExtra("DEVICE_ADDRESS", device.getAddress());
+                intent.putExtra("DEVICE_ADDRESS", device.getAddress());*/
                 if (mScanning) {
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
                     mScanning = false;
                 }
-                startActivity(intent);
+                //startActivity(intent);
             }
         });
         scanLeDevice(true);
@@ -216,4 +221,5 @@ public class DeviceScanActivity extends Activity {
         TextView deviceName;
         TextView deviceAddress;
     }
+
 }

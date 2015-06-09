@@ -23,6 +23,8 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     private Intent intent;
     private ImageButton btnTest;
     private ImageButton btnBluetooth;
+    static final int PICK_BLUETOOTH_REQUEST = 1;
+    private String bluetoothAddress;
 
 
     @Nullable
@@ -62,7 +64,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_start_test:
                 if (true) {
                     intent = new Intent(getActivity(), CyclingActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, PICK_BLUETOOTH_REQUEST);
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "No bluetooth device paired", Toast.LENGTH_SHORT).show();
                 }
@@ -75,5 +77,13 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
             default:
                 break;
         }
+    }
+    public void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data.getExtras().containsKey("bAddress")){
+           bluetoothAddress = data.getStringExtra("bAddress");
+        }
+        Log.w("test", bluetoothAddress);
     }
 }
