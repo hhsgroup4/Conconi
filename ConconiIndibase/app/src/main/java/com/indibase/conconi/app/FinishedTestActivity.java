@@ -21,6 +21,9 @@ public class FinishedTestActivity extends Activity {
     private TextView lbl_fin_level;
     private TextView lbl_fin_heartbeat;
     private TextView lbl_fin_time;
+    private String time;
+    private String level;
+    private String deflectionPoint;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -37,7 +40,10 @@ public class FinishedTestActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finished_test);
-
+        final Intent intent = getIntent();
+        deflectionPoint = intent.getStringExtra("DEFLECTION_POINT");
+        level = intent.getStringExtra("LEVEL");
+        time = intent.getStringExtra("TIME");
         drawTestData();
 
     }
@@ -56,9 +62,9 @@ public class FinishedTestActivity extends Activity {
         lbl_fin_level = (TextView) findViewById(R.id.lbl_fin_level);
         lbl_fin_time = (TextView) findViewById(R.id.lbl_fin_time);
 
-        lbl_fin_heartbeat.setText("78");
-        lbl_fin_level.setText("14");
-        lbl_fin_time.setText("10:01:23");
+        lbl_fin_heartbeat.setText(deflectionPoint);
+        lbl_fin_level.setText(level);
+        lbl_fin_time.setText(time);
     }
 
 

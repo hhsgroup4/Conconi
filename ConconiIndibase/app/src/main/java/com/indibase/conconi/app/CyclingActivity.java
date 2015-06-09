@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -44,6 +45,9 @@ public class CyclingActivity extends Activity {
     public Queue<Measurement> Measurements;
     public Queue<Measurement> dbMeasurements;
     private Date creation;
+    int deflectionPoint;
+    String time;
+    int level;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -95,16 +99,14 @@ public class CyclingActivity extends Activity {
         final Intent intent = getIntent();
         mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
         creation = null;
+        level = 4;
+        deflectionPoint = 0;
         Measurements = new LinkedList<>();
         // Sets up UI references.
         mDataField = (TextView) findViewById(R.id.lbl_test_heartbeat);
 
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-
-        updateHeartbeatLabel(109);
-        updateLevelLabel(12);
-        updateTimeLabel("11:33:14");
     }
 
 
@@ -156,8 +158,6 @@ public class CyclingActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        //This stops the receiver
-        //unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
@@ -167,36 +167,20 @@ public class CyclingActivity extends Activity {
         mBluetoothLeService = null;
     }
 
-/*
-    private void updateConnectionState(final int resourceId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mConnectionState.setText(resourceId);
-            }
-        });
-    }*/
     private void processData(String data){
     if (data != null && Integer.valueOf(data) > 10) {
         if (creation == null){
             creation = new Date();
         }
-        displayData(data);
         addToMeasurements(data);
+        displayData(data);
     }
 }
 
     private void displayData(String data) {
         mDataField.setText(data);
-    }
-    public void endTest(View view){
-        unregisterReceiver(mGattUpdateReceiver);
-
-        dbMeasurements = getDbMeasurements(Measurements);
-        int deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
-        Test t = new Test(new Date(), deflectionPoint);
-        int testId = storeTest(t);
-        storeMeasurements(dbMeasurements, testId);
+        updateTimeLabel();
+        updateLevelLabel();
     }
     public int calculateDeflectionPoint(Queue<Measurement> dbMeasurementsCopy){
         ArrayList<Integer> points = new ArrayList<>();
@@ -270,9 +254,19 @@ public class CyclingActivity extends Activity {
     }
 
     public void finishedTest(View view) {
-     /*   Intent intent = new Intent(view.getContext(), FinishedTestActivity.class);
+        unregisterReceiver(mGattUpdateReceiver);
+        dbMeasurements = getDbMeasurements(Measurements);
+        deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
+        Test t = new Test(new Date(), deflectionPoint);
+        int testId = storeTest(t);
+        storeMeasurements(dbMeasurements, testId);
+
+        Intent intent = new Intent(view.getContext(), FinishedTestActivity.class);
+        intent.putExtra("DEFLECTION_POINT", String.valueOf(deflectionPoint));
+        intent.putExtra("LEVEL", String.valueOf(level));
+        intent.putExtra("TIME", time);
         startActivity(intent);
-        finish();*/
+        finish();
     }
 
     public void quitTest(View view) {
@@ -286,13 +280,27 @@ public class CyclingActivity extends Activity {
         lbl_test_heartbeat = (TextView) findViewById(R.id.lbl_test_heartbeat);
         lbl_test_heartbeat.setText(Integer.toString(bpm));
     }
-    private void updateTimeLabel(String time) {
+    private void updateTimeLabel() {
+        SimpleDateFormat df = new SimpleDateFormat("mm:ss");
+        Date date = new Date(new Date().getTime() - creation.getTime());
+        time= df.format(date);
+
+
         lbl_test_time = (TextView) findViewById(R.id.lbl_test_time);
         lbl_test_time.setText(time);
     }
-    private void updateLevelLabel(int lvl) {
+    private void updateLevelLabel() {
+        long s =  TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
+        int second = safeLongToInt(s);
+        int tmpLevel = second/60;
+        Log.w("tmplevel", String.valueOf(tmpLevel));
+        level = level + tmpLevel;
+        if (level >= 20){
+            level = 20;
+        }
+
         lbl_test_level = (TextView) findViewById(R.id.lbl_test_level);
-        lbl_test_level.setText(Integer.toString(lvl));
+        lbl_test_level.setText(String.valueOf(level));
     }
 
 }
