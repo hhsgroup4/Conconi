@@ -29,7 +29,7 @@ import com.indibase.conconi.models.Deflection;
 import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
-
+// TODO make 10-0 countdown before the test starts
 public class CyclingActivity extends Activity {
 
     private TextView lbl_test_level;
