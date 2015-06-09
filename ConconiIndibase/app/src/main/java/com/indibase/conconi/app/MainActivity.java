@@ -50,6 +50,8 @@ public class MainActivity extends FragmentActivity {
         /*tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         tabHost.addTab(tab3);*/
+
+
     }
 
 }
