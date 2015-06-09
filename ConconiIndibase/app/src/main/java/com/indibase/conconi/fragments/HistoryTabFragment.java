@@ -43,6 +43,9 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Log.i("Manfedinator: ", "Men att det skall behövda vara så jävla svårt!!!!!");
                 Intent intent = new Intent(view.getContext(), PresentationActivity.class);
+                Test t = historyItems.get(position);
+                String id = String.valueOf(t.getId());
+                intent.putExtra("ITEM_ID",id);
                 startActivity(intent);
             }
         });

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.androidplot.Plot;
@@ -22,7 +23,7 @@ import java.util.List;
 public class PresentationActivity extends Activity {
 
     private XYPlot plot;
-
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,9 @@ public class PresentationActivity extends Activity {
         setContentView(R.layout.activity_test_data_presentation);
 
         View view = findViewById(R.id.simpleXYPlot);
-
+        Intent intent = getIntent();
+        id = Integer.valueOf(intent.getStringExtra("ITEM_ID"));
+        Log.w("id", String.valueOf(id));
         drawGraphPlot(view);
 
     }
