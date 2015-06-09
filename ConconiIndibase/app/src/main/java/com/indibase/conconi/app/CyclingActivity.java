@@ -294,7 +294,7 @@ public class CyclingActivity extends Activity {
         int second = safeLongToInt(s);
         int tmpLevel = second/60;
         Log.w("tmplevel", String.valueOf(tmpLevel));
-        level = level + tmpLevel;
+        level = 4 + tmpLevel;
         if (level >= 20){
             level = 20;
         }
