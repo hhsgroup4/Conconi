@@ -15,6 +15,7 @@ import com.indibase.conconi.R;
 
 import org.w3c.dom.Text;
 
+// TODO Add homebutton to FinishedTestActivity
 public class FinishedTestActivity extends Activity {
 
     private TextView lbl_fin_level;

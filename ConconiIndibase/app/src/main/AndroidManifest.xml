@@ -17,11 +17,6 @@
         <activity
             android:name=".app.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
@@ -45,7 +40,7 @@
         <activity
             android:name=".app.DeviceScanActivity"
             android:label="@string/title_activity_device_scan"
-            android:theme="@android:style/Theme.Dialog">
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
 
         <service
@@ -63,6 +58,16 @@
         <activity
             android:name=".app.PresentationActivity"
             android:label="@string/title_activity_test_data_presentation" >
+        </activity>
+        <activity
+            android:name=".app.SplashScreen"
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
