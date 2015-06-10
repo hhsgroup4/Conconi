@@ -6,8 +6,11 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.text.Selection;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Ralph on 5/20/2015.
@@ -66,6 +69,40 @@ public class ContentProvider extends android.content.ContentProvider
         }
     }
 
+
+    private String generateSelection(Uri uri, String selection){
+        boolean isSingleRow = false;
+        try{
+            int id = Integer.valueOf(uri.getLastPathSegment());
+            isSingleRow = true;
+        }
+        catch(NumberFormatException e){}
+
+        String subQuery = (selection != null) ? "AND (" + selection + ")" : "";
+        return (isSingleRow) ? "_id = ? " + subQuery: selection;
+    }
+
+    private String[] generateSelectionArgs(Uri uri, String[] selectionArgs){
+        boolean isSingleRow = false;
+        int id = 0;
+        try{
+            id = Integer.valueOf(uri.getLastPathSegment());
+            isSingleRow = true;
+        }
+        catch(NumberFormatException e){}
+
+        if(isSingleRow){
+            String[] newSelectionArgs = (selectionArgs != null) ? new String[selectionArgs.length + 1] : new String[]{String.valueOf(id)};
+            if(selectionArgs != null)
+                for(int i = 0; i < (selectionArgs.length + 1); i++)
+                    newSelectionArgs[i] = (i == 0) ? String.valueOf(id) : selectionArgs[i-1];
+
+            return newSelectionArgs;
+        }
+        else
+            return selectionArgs;
+    }
+
     @Override
     public boolean onCreate() {
         dbHelper = new DbHelper(getContext());
@@ -76,8 +113,13 @@ public class ContentProvider extends android.content.ContentProvider
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         db = dbHelper.getWritableDatabase();
-        Cursor c = db.query( getTableName(uri), projection, selection, selectionArgs, null, null, sortOrder);
+        Cursor c = db.query( getTableName(uri),
+                projection,
+                generateSelection(uri, selection),
+                generateSelectionArgs(uri, selectionArgs),
+                null, null, sortOrder);
 
+        generateSelection(uri, selection);
         //---register to watch a content URI for changes---
         c.setNotificationUri(getContext().getContentResolver(), uri);
         return c;
@@ -117,7 +159,7 @@ public class ContentProvider extends android.content.ContentProvider
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         db = dbHelper.getWritableDatabase();
-        int count = db.delete(getTableName(uri), selection, selectionArgs);
+        int count = db.delete(getTableName(uri), generateSelection(uri, selection), generateSelectionArgs(uri, selectionArgs));
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
