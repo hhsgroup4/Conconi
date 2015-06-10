@@ -34,22 +34,13 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         play = false;
         btnTest = (ImageButton) view.findViewById(R.id.btn_start_test);
         btnBluetooth= (ImageButton) view.findViewById(R.id.btn_bluetooth);
-        btnTest.setEnabled(true);
         btnBluetooth.setEnabled(true);
 
-        // Check if app has connection to bluetooth device
-        if(true) {
-            btnTest.setImageResource(R.mipmap.btn_start_test_green);
-            btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_green);
+        btnTest.setImageResource(R.mipmap.btn_start_test_red);
+        btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_red);
 
-            // enable buttons if bluetooth is paired
-            btnTest.setEnabled(true);
-            btnBluetooth.setEnabled(true);
-        } else {
-            Log.i("Manfredinator: ", "No bluetooth device paired!");
-
-        }
-
+        // enable buttons if bluetooth is paired
+        btnTest.setEnabled(false);
         btnTest.setOnClickListener(this);
         btnBluetooth.setOnClickListener(this);
 
@@ -85,8 +76,24 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         getActivity();
         if(requestCode == 1) {
             bluetoothAddress = data.getStringExtra("bAddress");
-            Log.w("test", bluetoothAddress);
-            play = true;
+            this.play = true;
+
+        }
+        if(play) {
+            btnTest.setImageResource(R.mipmap.btn_start_test_green);
+            btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_green);
+
+            // enable buttons if bluetooth is paired
+            btnTest.setEnabled(true);
+        } else {
+            btnTest.setImageResource(R.mipmap.btn_start_test_red);
+            btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_red);
+
+            // enable buttons if bluetooth is paired
+            btnTest.setEnabled(false);
+
+            Log.i("Manfredinator: ", "No bluetooth device paired!");
+
         }
     }
 }
