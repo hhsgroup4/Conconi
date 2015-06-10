@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.util.Log;
 
@@ -13,9 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by Vince on 4-6-2015.
- */
 public class DbTest {
     public static Test getTest(Activity activity, int identifier, boolean include_measurements){
         Uri oneTest = Uri.parse("content://com.indibase.provider.conconi/test/"+identifier);
@@ -23,13 +21,16 @@ public class DbTest {
         CursorLoader cursorLoader = new CursorLoader(activity,oneTest,null,null,null,null);
         c = cursorLoader.loadInBackground();
 
+        Log.d("dump", DatabaseUtils.dumpCursorToString(c));
+
         Test test = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         while (c.moveToNext()) {
             c.moveToFirst();
 
-            int id = Integer.valueOf(c.getString(0));;
+            int id = Integer.valueOf(c.getString(0));
+
             Date date = new Date();
             int deflection = Integer.valueOf(c.getString(2));
             try {

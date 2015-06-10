@@ -62,12 +62,16 @@
         <activity
             android:name=".app.SplashScreen"
             android:label="@string/title_activity_splash_screen"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.InfoDetailActivity"
+            android:label="@string/title_activity_info_detail" >
         </activity>
     </application>
 

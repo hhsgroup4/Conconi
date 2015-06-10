@@ -27,7 +27,7 @@ public class Deflection {
         return deflectionPoint;
     }
     //Gives the angle
-    private static int getAngle(int start, int end, int length){
+    public static int getAngle(int start, int end, int length){
         return (end-start)/length;
     }
 

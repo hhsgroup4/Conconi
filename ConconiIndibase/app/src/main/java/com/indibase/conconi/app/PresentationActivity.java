@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.androidplot.Plot;
 import com.androidplot.ui.SizeLayoutType;
@@ -16,11 +17,17 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.indibase.conconi.R;
+import com.indibase.conconi.models.DbTest;
+import com.indibase.conconi.models.Deflection;
+import com.indibase.conconi.models.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PresentationActivity extends Activity {
+
+    private Test test;
 
     private XYPlot plot;
     private int id;
@@ -33,8 +40,28 @@ public class PresentationActivity extends Activity {
         View view = findViewById(R.id.simpleXYPlot);
         Intent intent = getIntent();
         id = Integer.valueOf(intent.getStringExtra("ITEM_ID"));
-        Log.w("id", String.valueOf(id));
+        //test = DbTest.getTest(this, id, true);
+        //Log.w("id", String.valueOf(id));
         drawGraphPlot(view);
+        //updateDataLabels();
+
+    }
+
+    private void updateDataLabels() {
+
+        TextView lblTime = (TextView) findViewById(R.id.lbl_pres_time);
+        TextView lblDp = (TextView) findViewById(R.id.lbl_pres_dp);
+        TextView lblLvl = (TextView) findViewById(R.id.lbl_pres_lvl);
+
+        int seconds = test.getMeasurements().size();
+
+        Date date = new Date(0,0,0,0,seconds);
+        Log.i("", "fdfs");
+
+
+
+        //lblTime.setText();
+
 
     }
 
@@ -49,7 +76,7 @@ public class PresentationActivity extends Activity {
     }
 
     private void insertValues(View view) {
-        List s1 = getSeries(30, 10);
+        List s1 = getSeries();
         XYSeries series1 = new SimpleXYSeries(s1,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series 1");
 
@@ -131,9 +158,12 @@ public class PresentationActivity extends Activity {
     private List getLinearPlot(List testResults, int count) {
         List series = new ArrayList();
 
-        int first = (int) testResults.get(0);
-        int last = (int) testResults.get(testResults.size() - 1);
-        int linear_increase = ((last-first)/count);
+        int first = (int) testResults.get(0); // remove
+        int last = (int) testResults.get(testResults.size() - 1); // remove
+        //int linear_increase = ((last-first)/count); // exchange with the following statement
+
+        int linear_increase = Deflection.getAngle(first, last, count);
+
         System.out.println(linear_increase);
 
         for (int i = 0; i < count ; i++) {
@@ -143,13 +173,13 @@ public class PresentationActivity extends Activity {
         return series;
     }
 
-    private List getSeries(int count, int max) {
+    private List getSeries() {
+        //test = DbTest.getTest(this, id, true);
+
         List series = new ArrayList();
-        /*Random rand = new Random();
-        for (int i = 1; i <= count; i++) {
-            int value = rand.nextInt(max);
-            series.add(value);
-        }*/
+
+
+
         series.add(110);
         series.add(112);
         series.add(114);
