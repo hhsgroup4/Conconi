@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -31,23 +32,24 @@ import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
 // TODO make 10-0 countdown before the test starts
-public class CyclingActivity extends Activity {
+public class CyclingActivity extends Activity{
 
-    private TextView lbl_test_level;
-    private TextView lbl_test_heartbeat;
-    private TextView lbl_test_time;
+    private TextView lbl_test_level,lbl_test_heartbeat,lbl_test_time;
 
     private TextView mDataField;
     private String mDeviceAddress;
     private BluetoothLeService mBluetoothLeService;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
-    public Queue<Measurement> Measurements;
-    public Queue<Measurement> dbMeasurements;
+    public Queue<Measurement> Measurements, dbMeasurements;
     private Date creation;
     int deflectionPoint;
-    String time;
+    int time;
     int level;
+    boolean start;
+    static int startCount = 5; // count down in seconds
+    String strTime;
+    private countTimer ct;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -80,12 +82,19 @@ public class CyclingActivity extends Activity {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                // clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
-                // Displays the heartbeat
+                // starts the heartbeat
                 startHeartBeatService(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                processData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                //displays the heartbeat
+                if(start) {
+                    if (time == 0){
+                        ct = new countTimer();
+                        ct.execute();
+                    }
+                    processData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                }
+
             }
         }
     };
@@ -96,20 +105,82 @@ public class CyclingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cycling);
 
-        final Intent intent = getIntent();
-        mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
+        lbl_test_heartbeat = (TextView) findViewById(R.id.lbl_test_heartbeat);
+        lbl_test_time = (TextView) findViewById(R.id.lbl_test_time);
+        lbl_test_level = (TextView) findViewById(R.id.lbl_test_level);
+
+        lbl_test_heartbeat.setText(String.valueOf(startCount));
+        lbl_test_time.setText(String.valueOf(startCount));
+        lbl_test_level.setText(String.valueOf(startCount));
         creation = null;
         level = 4;
+        time = 0;
         deflectionPoint = 0;
-        Measurements = new LinkedList<>();
-        // Sets up UI references.
-        mDataField = (TextView) findViewById(R.id.lbl_test_heartbeat);
+        start = false;
 
+        final Intent intent = getIntent();
+        mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
+
+        Measurements = new LinkedList<>();
+        Log.w("address", mDeviceAddress);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        new startTimer().execute(startCount);
     }
 
+    private class startTimer extends AsyncTask<Integer, String, String> {
+        int counter = 5;
+        @Override
+        protected String doInBackground(Integer... params) {
+            for (int i = 0; i < params[0]; i++) {
+                try {
+                    counter = counter - 1;
+                    Thread.sleep(1000);
+                    publishProgress(String.valueOf(counter));
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+            return "Executed";
+        }
 
+        @Override
+        protected void onPostExecute(String result) {
+            start = true;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            lbl_test_heartbeat.setText(values[0]);
+            lbl_test_level.setText(values[0]);
+            lbl_test_time.setText(values[0]);
+        }
+    }
+
+    private class countTimer extends AsyncTask<Integer, String, String> {
+        int counter = 0;
+        @Override
+        protected String doInBackground(Integer... params) {
+            while (start && !isCancelled()) {
+                try {
+                    Log.w("progress", String.valueOf(counter));
+                    counter++;
+                    Thread.sleep(1000);
+                    publishProgress(String.valueOf(counter));
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+            return "Executed";
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+
+            updateTimeLabel(counter);
+        }
+    }
 
     // Demonstrates how to iterate through the supported GATT Services/Characteristics.
     // In this sample, we populate the data structure that is bound to the ExpandableListView
@@ -129,7 +200,6 @@ public class CyclingActivity extends Activity {
             }
         }
         if (mNotifyCharacteristic == null ) return;
-
         mBluetoothLeService.connect(mDeviceAddress);
         mBluetoothLeService.readCharacteristic(mNotifyCharacteristic);
         mBluetoothLeService.setCharacteristicNotification(mNotifyCharacteristic, true);
@@ -143,6 +213,7 @@ public class CyclingActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
     }
+
 
 
     @Override
@@ -168,18 +239,16 @@ public class CyclingActivity extends Activity {
     }
 
     private void processData(String data){
-    if (data != null && Integer.valueOf(data) > 10) {
-        if (creation == null){
-            creation = new Date();
+        if (data != null && Integer.valueOf(data) > 10) {
+            if (creation == null){
+                creation = new Date();
+            }
+            addToMeasurements(data);
+            displayData(data);
         }
-        addToMeasurements(data);
-        displayData(data);
     }
-}
-
     private void displayData(String data) {
-        mDataField.setText(data);
-        updateTimeLabel();
+        lbl_test_heartbeat.setText(data);
         updateLevelLabel();
     }
     public int calculateDeflectionPoint(Queue<Measurement> dbMeasurementsCopy){
@@ -194,7 +263,6 @@ public class CyclingActivity extends Activity {
     }
     public int storeTest(Test t){
         Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"), new ContentValues(t.getContentValues()));
-        Log.w("urilastpath", String.valueOf(uri.getLastPathSegment()));
         return Integer.valueOf(uri.getLastPathSegment());
     }
 
@@ -254,7 +322,7 @@ public class CyclingActivity extends Activity {
     }
 
     public void finishedTest(View view) {
-        unregisterReceiver(mGattUpdateReceiver);
+        endActions();
         dbMeasurements = getDbMeasurements(Measurements);
         deflectionPoint = calculateDeflectionPoint(new LinkedList(dbMeasurements));
         Test t = new Test(new Date(), deflectionPoint);
@@ -264,30 +332,28 @@ public class CyclingActivity extends Activity {
         Intent intent = new Intent(view.getContext(), FinishedTestActivity.class);
         intent.putExtra("DEFLECTION_POINT", String.valueOf(deflectionPoint));
         intent.putExtra("LEVEL", String.valueOf(level));
-        intent.putExtra("TIME", time);
+        intent.putExtra("TIME", strTime);
         startActivity(intent);
         finish();
     }
+    public void endActions(){
+        unregisterReceiver(mGattUpdateReceiver);
+        ct.cancel(true);
+    }
 
     public void quitTest(View view) {
+        endActions();
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    // Methods for updating label elements
-    private void updateHeartbeatLabel(int bpm) {
-        lbl_test_heartbeat = (TextView) findViewById(R.id.lbl_test_heartbeat);
-        lbl_test_heartbeat.setText(Integer.toString(bpm));
-    }
-    private void updateTimeLabel() {
+    private void updateTimeLabel(int counter) {
+        time = counter;
         SimpleDateFormat df = new SimpleDateFormat("mm:ss");
-        Date date = new Date(new Date().getTime() - creation.getTime());
-        time= df.format(date);
-
-
-        lbl_test_time = (TextView) findViewById(R.id.lbl_test_time);
-        lbl_test_time.setText(time);
+        Date date = new Date(new Date().getTime()+(counter*1000) - new Date().getTime());
+        strTime= df.format(date);
+        lbl_test_time.setText(strTime);
     }
     private void updateLevelLabel() {
         long s =  TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
@@ -298,9 +364,6 @@ public class CyclingActivity extends Activity {
         if (level >= 20){
             level = 20;
         }
-
-        lbl_test_level = (TextView) findViewById(R.id.lbl_test_level);
         lbl_test_level.setText(String.valueOf(level));
     }
-
 }
