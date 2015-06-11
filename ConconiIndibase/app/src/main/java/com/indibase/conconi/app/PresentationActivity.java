@@ -19,6 +19,7 @@ import com.androidplot.xy.XYSeries;
 import com.indibase.conconi.R;
 import com.indibase.conconi.models.DbTest;
 import com.indibase.conconi.models.Deflection;
+import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
 import java.util.ArrayList;
@@ -40,10 +41,10 @@ public class PresentationActivity extends Activity {
         View view = findViewById(R.id.simpleXYPlot);
         Intent intent = getIntent();
         id = Integer.valueOf(intent.getStringExtra("ITEM_ID"));
-        //test = DbTest.getTest(this, id, true);
-        //Log.w("id", String.valueOf(id));
+        test = DbTest.getTest(this, id, true);
+        Log.w("id", String.valueOf(id));
         drawGraphPlot(view);
-        //updateDataLabels();
+        updateDataLabels();
 
     }
 
@@ -85,7 +86,7 @@ public class PresentationActivity extends Activity {
         s1Format.configure(view.getContext(), R.xml.lpf1);
 
 
-        List s2 = getLinearPlot(s1, 30);
+        List s2 = getLinearPlot(s1, s1.size());
         XYSeries series2 = new SimpleXYSeries(s2,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series 2");
 
@@ -162,9 +163,9 @@ public class PresentationActivity extends Activity {
         int last = (int) testResults.get(testResults.size() - 1); // remove
         //int linear_increase = ((last-first)/count); // exchange with the following statement
 
-        int linear_increase = Deflection.getAngle(first, last, count);
+        double linear_increase = Deflection.getAngle(first, last, count);
 
-        System.out.println(linear_increase);
+        Log.w("linear",String.valueOf(linear_increase));
 
         for (int i = 0; i < count ; i++) {
             series.add(first+(linear_increase*i));
@@ -172,14 +173,19 @@ public class PresentationActivity extends Activity {
         System.out.println(series);
         return series;
     }
-
+    private List<Integer> getMeasurementToInt(ArrayList<Measurement> measurements){
+        List values = new ArrayList();
+        for (Measurement m : measurements){
+            values.add(m.getBpm());
+        }
+        return values;
+     }
     private List getSeries() {
-        //test = DbTest.getTest(this, id, true);
 
-        List series = new ArrayList();
-
+        List series = new ArrayList(getMeasurementToInt(test.getMeasurements()));
 
 
+/*
         series.add(110);
         series.add(112);
         series.add(114);
@@ -210,7 +216,7 @@ public class PresentationActivity extends Activity {
         series.add(179);
         series.add(181);
         series.add(183);
-        series.add(186);
+        series.add(186);*/
         System.out.println(series);
         return series;
     }

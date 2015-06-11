@@ -10,7 +10,8 @@ public class Deflection {
 
     public static int getDeflectionPoint(ArrayList<Integer> measurements){
         //Variables
-        int angle,first,last, size;
+        int first,last, size;
+        double angle;
         size = measurements.size() -1;
 
         first = measurements.get(0);
@@ -27,15 +28,18 @@ public class Deflection {
         return deflectionPoint;
     }
     //Gives the angle
-    public static int getAngle(int start, int end, int length){
-        return (end-start)/length;
+    public static double getAngle(int start, int end, int length){
+        double angle;
+        angle = (double) (end-start)/length;
+        return angle;
     }
 
     //Compare points with function
-    private static int deflection_point(ArrayList<Integer> array, int angle)
+    private static int deflection_point(ArrayList<Integer> array, double angle)
     {
         //Local variables
-        int currentDeflection,currentAngle,difference,defPoint;
+        int defPoint;
+        double currentAngle, difference,currentDeflection;
         currentDeflection=0;
         defPoint = 0;
         for(int i=0; i < array.size();  i++)

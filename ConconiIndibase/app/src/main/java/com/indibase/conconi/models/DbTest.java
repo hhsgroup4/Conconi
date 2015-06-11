@@ -69,7 +69,7 @@ public class DbTest {
     private static ArrayList<Measurement> getMeasurements(Activity activity, int identifier){
         ArrayList<Measurement> measurements = new ArrayList<>();
 
-        Uri m = Uri.parse("content://com.indibase.provider.conconi/measurement/1");
+        Uri m = Uri.parse("content://com.indibase.provider.conconi/measurement");
         Cursor c;
         String[] projection=new String[]{"test_id", "second", "bpm"};
         String selection= "test_id = ?";
