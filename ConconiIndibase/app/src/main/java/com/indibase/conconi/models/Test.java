@@ -40,7 +40,24 @@ public class Test {
     public void setMeasurements(ArrayList<Measurement> measurements) {
         this.measurements = measurements;
     }
+    public String getTime() {
+        int seconds = measurements.get(measurements.size()-1).getSecond();
+        SimpleDateFormat df = new SimpleDateFormat("mm:ss");
+        Date date = new Date((new Date().getTime() + (seconds*1000)) - new Date().getTime());
 
+        return df.format(date);
+    }
+    public int getLevel(){
+        int seconds = measurements.get(measurements.size()-1).getSecond();
+        int level = (seconds/60) + 4;
+        if (level <= 4){
+            level = 4;
+        }
+        if (level >= 20){
+            level =20;
+        }
+        return level;
+    }
     public int getId() {
         return id;
     }

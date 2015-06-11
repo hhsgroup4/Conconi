@@ -59,6 +59,9 @@ public class PresentationActivity extends Activity {
         Date date = new Date(0,0,0,0,seconds);
         Log.i("", "fdfs");
 
+        lblDp.setText(String.valueOf(test.getDeflection_point()));
+        lblTime.setText(test.getTime());
+        lblLvl.setText(String.valueOf(test.getLevel()));
 
 
         //lblTime.setText();
