@@ -31,7 +31,4 @@ public class InfoDetailActivity extends Activity {
         lbl_text.setText(text);
 
     }
-
-
-
 }

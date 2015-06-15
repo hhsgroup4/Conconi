@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+
 
 import com.androidplot.Plot;
 import com.androidplot.ui.SizeLayoutType;
@@ -26,12 +32,7 @@ import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
 import java.text.DecimalFormat;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PresentationActivity extends Activity {
@@ -66,6 +67,38 @@ public class PresentationActivity extends Activity {
             updateDataLabels();
         }
         drawGraphPlot(view);
+
+
+        final ImageView btnOpenPopup = (ImageView) findViewById(R.id.btn_advice_1);
+        btnOpenPopup.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                LayoutInflater layoutInflater
+                        = (LayoutInflater) getBaseContext()
+                        .getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = layoutInflater.inflate(R.layout.popup_advice_detailes, null);
+                final PopupWindow popupWindow = new PopupWindow(
+                        popupView,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                ImageButton btnDismiss = (ImageButton) popupView.findViewById(R.id.dismiss_popup);
+                btnDismiss.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        popupWindow.dismiss();
+                    }
+                });
+
+                popupWindow.showAsDropDown(btnOpenPopup, 50, -30);
+
+            }
+        });
+
+
 
     }
 
@@ -265,6 +298,30 @@ public class PresentationActivity extends Activity {
 
         System.out.println(series);
         return series;
+    }
+    private void drawAdvice(int id){
+        switch (id) {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+            default:
+
+                break;
+        }
+
+
     }
 
 }

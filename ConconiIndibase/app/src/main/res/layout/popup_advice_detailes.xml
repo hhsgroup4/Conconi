@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/adviceContainer"
+        android:padding="5dp"
+        android:background="@color/red01">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Header"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:id="@+id/lbl_advice_name" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:background="@android:color/white">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Min time"
+                android:textSize="16sp"
+                android:textColor="@color/red01"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:textSize="16sp"
+                android:textColor="@color/red01"
+                android:layout_weight="1"
+                android:id="@+id/lbl_advice_mintime" />
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/dismiss_popup"
+            android:layout_marginTop="20dp"
+            android:padding="0dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/btn_delete" />
+
+    </LinearLayout>
+</LinearLayout>
