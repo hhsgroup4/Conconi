@@ -18,12 +18,17 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.XYStepMode;
 import com.indibase.conconi.R;
 import com.indibase.conconi.models.DbTest;
 import com.indibase.conconi.models.Deflection;
 import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
+import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -105,7 +110,7 @@ public class PresentationActivity extends Activity {
 
 
         List s2 = getLinearPlot(s1, s1.size());
-        XYSeries series2 = new SimpleXYSeries(s2,
+        final XYSeries series2 = new SimpleXYSeries(s2,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series 2");
 
         LineAndPointFormatter s2Format = new LineAndPointFormatter();
@@ -114,6 +119,13 @@ public class PresentationActivity extends Activity {
 
         plot.addSeries(series2, s2Format);
         plot.addSeries(series1, s1Format);
+
+        //plot.setDomainStep(XYStepMode.SUBDIVIDE, 5);
+        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 10);
+        //plot.setDomainStepValue(33);
+
+        plot.setRangeValueFormat(new DecimalFormat("0"));
+        plot.setDomainValueFormat(new DecimalFormat("0"));
     }
 
     private void styleGraphPlotLandscape() {
@@ -137,18 +149,18 @@ public class PresentationActivity extends Activity {
         plot.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE); // graph background
         //plot.setBackgroundColor(Color.WHITE);
 
-        // Hide irrelevant elements in Plot grid and labels
+        // Hide and style irrelevant elements in Plot grid and labels
         plot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
         plot.getGraphWidget().getDomainLabelPaint().setColor(getResources().getColor(R.color.blue01));
         plot.getGraphWidget().getDomainLabelPaint().setFakeBoldText(true);
         plot.getGraphWidget().getRangeLabelPaint().setColor(getResources().getColor(R.color.blue01));
         plot.getGraphWidget().getRangeLabelPaint().setFakeBoldText(true);
-        //plot.getGraphWidget().getRange;
         plot.getGraphWidget().getDomainOriginLabelPaint().setColor(Color.TRANSPARENT);
+        plot.getGraphWidget().getRangeOriginLabelPaint().setColor(Color.TRANSPARENT);
         plot.getGraphWidget().getDomainOriginLinePaint().setColor(Color.TRANSPARENT);
         plot.getGraphWidget().getRangeOriginLinePaint().setColor(Color.TRANSPARENT);
         plot.getLegendWidget().getTextPaint().setAlpha(0);
-        // Hide legend icon
+
         SizeLayoutType plot_layouttype = plot.getLegendWidget().getHeightMetric().getLayoutType();
         plot.getLegendWidget().setIconSizeMetrics(new SizeMetrics(0, plot_layouttype, 0, plot_layouttype));
         // plot.setTicksPerRangeLabel(10); // Did nothing
@@ -159,7 +171,7 @@ public class PresentationActivity extends Activity {
         plot.getGraphWidget().getDomainGridLinePaint().setAlpha(0); // sets the vertical ruler lines
 
         plot.setTicksPerRangeLabel(1);
-        //plot.getGraphWidget().setDomainLabelOrientation(45);
+        //plot.getGraphWidget().setDomainLabelOrientation(-45);
     }
 
     // Customization of AndroidPlot API
@@ -233,7 +245,7 @@ public class PresentationActivity extends Activity {
         Log.w("linear",String.valueOf(linear_increase));
 
         for (int i = 0; i < count ; i++) {
-            series.add(first+(linear_increase*i));
+            series.add( first+(linear_increase*i));
         }
         System.out.println(series);
         return series;

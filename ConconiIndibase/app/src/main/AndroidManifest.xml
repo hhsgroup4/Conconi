@@ -58,6 +58,7 @@
         <activity
             android:name=".app.PresentationActivity"
             android:label="@string/title_activity_test_data_presentation"
+            android:theme="@android:style/Theme.NoTitleBar">
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity
@@ -71,6 +72,7 @@
         </activity>
         <activity
             android:name=".app.InfoDetailActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
             android:label="@string/title_activity_info_detail" >
         </activity>
     </application>

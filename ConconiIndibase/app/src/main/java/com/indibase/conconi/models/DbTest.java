@@ -16,6 +16,7 @@ import java.util.Date;
 
 public class DbTest {
     public static Test getTest(Activity activity, int identifier, boolean include_measurements){
+
         Uri oneTest = Uri.parse("content://com.indibase.provider.conconi/test/"+identifier);
         Cursor c;
         CursorLoader cursorLoader = new CursorLoader(activity,oneTest,null,null,null,null);
