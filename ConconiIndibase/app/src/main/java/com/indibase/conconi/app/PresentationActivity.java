@@ -221,7 +221,7 @@ public class PresentationActivity extends Activity {
 
     public void deleteTest(View view) {
 
-        /* code for removing the finished test */
+        /* TODO code for removing the finished test */
 
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
