@@ -20,7 +20,7 @@ public final class DbHelper extends SQLiteOpenHelper implements BaseColumns {
     public ArrayList<DatabaseSchema> schemas = new ArrayList<>();
 
     //If you modify any file in the schemes package, you must increment the database version
-    public static final int DATABASE_VERSION = 15;
+    public static final int DATABASE_VERSION = 16;
 
     public static final String DATABASE_NAME = "conconi.db";
 
@@ -57,9 +57,14 @@ public final class DbHelper extends SQLiteOpenHelper implements BaseColumns {
                 db.execSQL(schema.getCreateViewSql());
         }
 
-        for(DatabaseSchema schema : schemas)
-            if(!schema.getInsertSql().equals(""))
+        for(DatabaseSchema schema : schemas) {
+            if (!schema.getInsertSql().equals(""))
                 db.execSQL(schema.getInsertSql());
+
+//only for testdata max 500 rows insert in one statement
+            if (!schema.getInsertSql2().equals(""))
+                db.execSQL(schema.getInsertSql2());
+        }
     }
 
     @Override

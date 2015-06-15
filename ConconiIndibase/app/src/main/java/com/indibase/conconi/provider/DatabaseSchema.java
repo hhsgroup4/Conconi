@@ -15,6 +15,8 @@ public abstract class DatabaseSchema {
     public abstract String getCreateTableSql();
 
     public String getInsertSql(){ return ""; }
+//only for testdata max 500 rows insert in one statement
+    public String getInsertSql2(){ return ""; }
 
     public HashMap<String, String> getViewsHashMap(){ return new HashMap<>(); }
 
