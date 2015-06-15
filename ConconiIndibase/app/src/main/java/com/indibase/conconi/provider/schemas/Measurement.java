@@ -980,22 +980,6 @@ public class Measurement extends DatabaseSchema implements BaseColumns{
         "UNION SELECT 10, 770, 173 " +
         "UNION SELECT 10, 780, 174 " +
         "UNION SELECT 10, 790, 174 " +
-        "UNION SELECT 10, 800, 175 " +
-        "UNION SELECT 10, 810, 176 " +
-        "UNION SELECT 10, 820, 176 " +
-        "UNION SELECT 10, 830, 177 " +
-        "UNION SELECT 10, 840, 177 " +
-        "UNION SELECT 10, 850, 177 " +
-        "UNION SELECT 10, 860, 178 " +
-        "UNION SELECT 10, 870, 179 " +
-        "UNION SELECT 10, 880, 179 " +
-        "UNION SELECT 10, 890, 180 " +
-        "UNION SELECT 10, 900, 181 " +
-        "UNION SELECT 10, 910, 182 " +
-        "UNION SELECT 10, 920, 182 " +
-        "UNION SELECT 10, 930, 183 " +
-        "UNION SELECT 10, 940, 184 " +
-        "UNION SELECT 10, 950, 185 " +
-        "UNION SELECT 10, 960, 186 ";
+        "UNION SELECT 10, 800, 175 ";
     }
 }
