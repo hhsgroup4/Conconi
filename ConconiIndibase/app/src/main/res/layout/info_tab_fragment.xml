@@ -8,7 +8,9 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listview_info" />
+        android:id="@+id/listview_info"
+        android:divider="@android:color/transparent"
+        android:layout_marginTop="10dp"/>
 
 
 </RelativeLayout>

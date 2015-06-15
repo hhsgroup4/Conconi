@@ -41,7 +41,7 @@ public class InfoListViewAdapter extends ArrayAdapter<InfoItem> {
         //TextView valueView = (TextView) rowView.findViewById(R.id.value);
 
         // 4. Set the text for textView
-        labelView.setText(itemsArrayList.get(position).getTime());
+        labelView.setText(itemsArrayList.get(position).getPositionID());
         //valueView.setText(itemsArrayList.get(position).getDescription());
 
         // 5. retrn rowView

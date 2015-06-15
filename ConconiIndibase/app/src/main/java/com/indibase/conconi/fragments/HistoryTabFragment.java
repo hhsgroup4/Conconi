@@ -19,7 +19,9 @@ import com.indibase.conconi.app.PresentationActivity;
 import com.indibase.conconi.models.DbTest;
 import com.indibase.conconi.models.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.indibase.conconi.R.layout.activity_history;
 
@@ -118,27 +120,42 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
             if (view == null) {
                 view = getActivity().getLayoutInflater().inflate(R.layout.listitem_test, null);
                 viewHolder = new ViewHolder();
-                viewHolder.testAddress = (TextView) view.findViewById(R.id.test_address);
-                viewHolder.testName = (TextView) view.findViewById(R.id.test_name);
+                viewHolder.testDate = (TextView) view.findViewById(R.id.lbl_histlist_date);
+                viewHolder.testTime = (TextView) view.findViewById(R.id.lbl_histlist_time);
+                viewHolder.testDp = (TextView) view.findViewById(R.id.lbl_histlist_dp);
                 view.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) view.getTag();
             }
 
             Test test = mTests.get(i);
-            final String testName = String.valueOf(test.getCreation());
-            if (testName != null && testName.length() > 0)
-                viewHolder.testName.setText(testName);
-            else
-                viewHolder.testName.setText("No test");
-            viewHolder.testAddress.setText(String.valueOf(test.getDeflection_point()));
+            final String test_date = String.valueOf(test.getCreation());
+            if (test_date != null && test_date.length() > 0) {
+
+                SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM, yyyy kk:mm");
+                Date fuckingDate = test.getCreation();
+                String date = format.format(fuckingDate);
+
+                viewHolder.testDate.setText(date);
+                viewHolder.testDp.setText(Integer.toString(test.getDeflection_point()));
+
+                //TODO fix population of textviews. returned values are NULL
+                //viewHolder.testTime.setText(test.getTime());
+
+            }
+            else {
+                viewHolder.testDate.setText("No test");
+                viewHolder.testDp.setText("No measurements");
+            }
+
 
             return view;
         }
     }
     static class ViewHolder {
-        TextView testName;
-        TextView testAddress;
+        TextView testDate;
+        TextView testTime;
+        TextView testDp;
     }
 
 }

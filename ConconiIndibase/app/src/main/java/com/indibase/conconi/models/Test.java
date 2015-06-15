@@ -7,10 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
-/**
- * Created by Vince on 1-6-2015.
- */
 public class Test {
     private int id;
     private Date creation;
@@ -47,6 +45,7 @@ public class Test {
 
         return df.format(date);
     }
+
     public int getLevel(){
         int seconds = measurements.get(measurements.size()-1).getSecond();
         int level = (seconds/60) + 4;
@@ -68,10 +67,6 @@ public class Test {
 
     public Date getCreation() {
         return creation;
-    }
-
-    public void setCreation(Date creation) {
-        this.creation = creation;
     }
 
     public int getDeflection_point() {

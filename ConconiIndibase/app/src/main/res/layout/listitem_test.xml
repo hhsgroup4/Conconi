@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The Android Open Source Project
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="0dp"
+    android:layout_margin="0dp">
 
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:background="@mipmap/listitem_bg_white"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
 
-          http://www.apache.org/licenses/LICENSE-2.0
+    <TextView android:id="@+id/lbl_histlist_date"
+        android:text="date"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue03"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-    <TextView android:id="@+id/test_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24dp"/>
-    <TextView android:id="@+id/test_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"/>
-</LinearLayout>
+    <TextView android:id="@+id/lbl_histlist_time"
+        android:text="time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/blue03"
+        android:layout_below="@+id/lbl_histlist_date"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:id="@+id/lbl_histlist_dp"
+        android:text="DP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue02"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</RelativeLayout>
