@@ -1,6 +1,9 @@
 package com.indibase.conconi.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -57,7 +60,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ShareDialog.canShow(ShareLinkContent.class)) {
+                if (ShareDialog.canShow(ShareLinkContent.class) && isNetworkAvailable()) {
                     ShareLinkContent linkContent = new ShareLinkContent.Builder()
                             .setContentTitle("Conconi")
                             .setContentDescription(
@@ -68,9 +71,10 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
 
                     shareDialog.show(linkContent);
                 }
+                else
+                    Toast.makeText(getActivity(), "No connection available for sharing this to Facebook.", Toast.LENGTH_SHORT).show();
             }
         });
-
 
         return view;
     }
@@ -124,5 +128,12 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
             Log.i("Manfredinator: ", "No bluetooth device paired!");
 
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
