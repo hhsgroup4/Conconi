@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.indibase.conconi.R;
+import com.indibase.conconi.models.DbTest;
 
 import org.w3c.dom.Text;
 
@@ -24,6 +25,7 @@ public class FinishedTestActivity extends Activity {
     private String time;
     private String level;
     private String deflectionPoint;
+    public String test_id;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -44,6 +46,7 @@ public class FinishedTestActivity extends Activity {
         deflectionPoint = intent.getStringExtra("DEFLECTION_POINT");
         level = intent.getStringExtra("LEVEL");
         time = intent.getStringExtra("TIME");
+        test_id = intent.getStringExtra("ID");
         drawTestData();
 
     }
@@ -51,6 +54,7 @@ public class FinishedTestActivity extends Activity {
     public void deleteTest(View view) {
 
         /* code for removing the finished test */
+        DbTest.deleteTest(this,test_id);
 
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);

@@ -348,6 +348,7 @@ public class CyclingActivity extends Activity{
         intent.putExtra("DEFLECTION_POINT", String.valueOf(deflectionPoint));
         intent.putExtra("LEVEL", String.valueOf(level));
         intent.putExtra("TIME", strTime);
+        intent.putExtra("ID", String.valueOf(testId));
         startActivity(intent);
         finish();
     }

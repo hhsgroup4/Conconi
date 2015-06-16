@@ -137,6 +137,7 @@
             android:id="@+id/imageButton2"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:src="@mipmap/btn_graph" />
+            android:src="@mipmap/btn_graph"
+            android:onClick="statisticsTest" />
     </RelativeLayout>
 </LinearLayout>
