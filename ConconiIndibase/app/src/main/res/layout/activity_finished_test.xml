@@ -127,6 +127,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:src="@mipmap/btn_delete"
+            android:visibility="invisible"
             android:onClick="deleteTest"/>
 
         <ImageButton

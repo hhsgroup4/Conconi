@@ -30,7 +30,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     private Intent intent;
     private ImageButton btnTest;
     private ImageButton btnBluetooth;
-    private Button shareBtn;
+    private ImageButton shareBtn;
     private String bluetoothAddress;
     private boolean play;
 
@@ -56,7 +56,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         // @Todo: change button in UI
         FacebookSdk.sdkInitialize(getActivity());
         shareDialog = new ShareDialog(this);
-        shareBtn = (Button) view.findViewById(R.id.sharebtn);
+        shareBtn = (ImageButton) view.findViewById(R.id.sharebtn);
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

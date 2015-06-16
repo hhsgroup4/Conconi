@@ -4,8 +4,8 @@ package com.indibase.conconi.tabbar;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -18,15 +18,17 @@ import com.indibase.conconi.adapters.TabsPagerAdapter;
 
 public class TabBar extends FragmentActivity implements ActionBar.TabListener{
 
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
     private TabsPagerAdapter adapter;
     private ActionBar actionBar;
-    private static final int TRANSPARENT_BACKGROUND = R.drawable.tab_bg_none;
 
-    public TabBar(View viewPager, ActionBar actionBar, android.support.v4.app.FragmentManager fragManager) {
-        this.viewPager = (ViewPager) viewPager;
+    public TabBar(View viewPager, final ActionBar actionBar, android.support.v4.app.FragmentManager fragManager) {
+        this.viewPager = (CustomViewPager) viewPager;
         this.actionBar = actionBar;
         this.adapter = new TabsPagerAdapter(fragManager);
+
+        // disables swiping in tab
+        this.viewPager.setPagingEnabled(false);
 
     }
 
@@ -54,7 +56,7 @@ public class TabBar extends FragmentActivity implements ActionBar.TabListener{
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         RelativeLayout tabLayout = (RelativeLayout) tab.getCustomView();
-        tabLayout.setBackgroundResource(TRANSPARENT_BACKGROUND);
+        tabLayout.setBackgroundResource(R.drawable.tab_bg_none);
         tab.setCustomView(tabLayout);
     }
 

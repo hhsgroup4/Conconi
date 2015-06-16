@@ -26,15 +26,19 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share on Facebook!"
+    <ImageButton
+        android:src="@mipmap/btn_fb"
+        android:padding="5dp"
+        android:background="@android:color/transparent"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/sharebtn"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick="share"/>
+        android:onClick="share"
+        android:scaleType="fitEnd"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="false" />
 
 
 </RelativeLayout>

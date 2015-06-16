@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_conconiindibase" default="compile.module.conconiindibase">
+  <dirname property="module.conconiindibase.basedir" file="${ant.file.module_conconiindibase}"/>
+  
+  <property name="module.jdk.home.conconiindibase" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.conconiindibase" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.conconiindibase" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.conconiindibase" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="conconiindibase.output.dir" value="${module.conconiindibase.basedir}/build/classes/production/ConconiIndibase"/>
+  <property name="conconiindibase.testoutput.dir" value="${module.conconiindibase.basedir}/build/classes/test/ConconiIndibase"/>
+  
+  <path id="conconiindibase.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="conconiindibase.module.production.classpath">
+    <path refid="${module.jdk.classpath.conconiindibase}"/>
+  </path>
+  
+  <path id="conconiindibase.runtime.production.module.classpath">
+    <pathelement location="${conconiindibase.output.dir}"/>
+  </path>
+  
+  <path id="conconiindibase.module.classpath">
+    <path refid="${module.jdk.classpath.conconiindibase}"/>
+    <pathelement location="${conconiindibase.output.dir}"/>
+  </path>
+  
+  <path id="conconiindibase.runtime.module.classpath">
+    <pathelement location="${conconiindibase.testoutput.dir}"/>
+    <pathelement location="${conconiindibase.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.conconiindibase">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.conconiindibase">
+    <patternset refid="excluded.from.module.conconiindibase"/>
+  </patternset>
+  
+  
+  <target name="compile.module.conconiindibase" depends="compile.module.conconiindibase.production,compile.module.conconiindibase.tests" description="Compile module ConconiIndibase"/>
+  
+  <target name="compile.module.conconiindibase.production" depends="register.custom.compilers" description="Compile module ConconiIndibase; production classes"/>
+  
+  <target name="compile.module.conconiindibase.tests" depends="register.custom.compilers,compile.module.conconiindibase.production" description="compile module ConconiIndibase; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.conconiindibase" description="cleanup module">
+    <delete dir="${conconiindibase.output.dir}"/>
+    <delete dir="${conconiindibase.testoutput.dir}"/>
+  </target>
+</project>
