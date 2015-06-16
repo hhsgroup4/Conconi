@@ -1,6 +1,7 @@
 package com.indibase.conconi.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.indibase.conconi.R;
 import com.indibase.conconi.app.CyclingActivity;
 import com.indibase.conconi.app.DeviceScanActivity;
@@ -23,9 +27,11 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     private Intent intent;
     private ImageButton btnTest;
     private ImageButton btnBluetooth;
+    private Button shareBtn;
     private String bluetoothAddress;
     private boolean play;
 
+    ShareDialog shareDialog;
 
     @Nullable
     @Override
@@ -44,8 +50,31 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         btnTest.setOnClickListener(this);
         btnBluetooth.setOnClickListener(this);
 
+        // @Todo: change button in UI
+        FacebookSdk.sdkInitialize(getActivity());
+        shareDialog = new ShareDialog(this);
+        shareBtn = (Button) view.findViewById(R.id.sharebtn);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ShareDialog.canShow(ShareLinkContent.class)) {
+                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                            .setContentTitle("Conconi")
+                            .setContentDescription(
+                                    "Maak gebruik van de 'Conconi' app om het beste uit je training te halen. " +
+                                    "Het maakt namelijk gebruik van je hartslag en berekent zo jouw persoonlijke trainingsschema's!")
+                            .setContentUrl(Uri.parse("http://conconi.indibase.com"))
+                            .build();
+
+                    shareDialog.show(linkContent);
+                }
+            }
+        });
+
+
         return view;
     }
+
 
     @Override
     public void onClick(View view) {

@@ -2,6 +2,7 @@ package com.indibase.conconi.fragments;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.indibase.conconi.R;
 import com.indibase.conconi.adapters.InfoListViewAdapter;
 import com.indibase.conconi.app.InfoDetailActivity;
