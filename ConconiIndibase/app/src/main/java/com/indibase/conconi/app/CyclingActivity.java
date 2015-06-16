@@ -10,12 +10,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,7 +38,6 @@ public class CyclingActivity extends Activity{
 
     private TextView lbl_test_level,lbl_test_heartbeat,lbl_test_time;
 
-    private TextView mDataField;
     private String mDeviceAddress;
     private BluetoothLeService mBluetoothLeService;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
@@ -50,6 +51,7 @@ public class CyclingActivity extends Activity{
     static int startCount = 5; // count down in seconds
     String strTime;
     private countTimer ct;
+    ImageButton btn_finish_test;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -88,10 +90,6 @@ public class CyclingActivity extends Activity{
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 //displays the heartbeat
                 if(start) {
-                    if (time == 0){
-                        ct = new countTimer();
-                        ct.execute();
-                    }
                     processData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 }
 
@@ -108,15 +106,19 @@ public class CyclingActivity extends Activity{
         lbl_test_heartbeat = (TextView) findViewById(R.id.lbl_test_heartbeat);
         lbl_test_time = (TextView) findViewById(R.id.lbl_test_time);
         lbl_test_level = (TextView) findViewById(R.id.lbl_test_level);
+        btn_finish_test = (ImageButton) findViewById(R.id.btn_finish_test);
 
         lbl_test_heartbeat.setText(String.valueOf(startCount));
         lbl_test_time.setText(String.valueOf(startCount));
         lbl_test_level.setText(String.valueOf(startCount));
+        btn_finish_test.setEnabled(false);
+
         creation = null;
         level = 4;
         time = 0;
         deflectionPoint = 0;
         start = false;
+        ct = null;
 
         final Intent intent = getIntent();
         mDeviceAddress = intent.getStringExtra("DEVICE_ADDRESS");
@@ -152,9 +154,17 @@ public class CyclingActivity extends Activity{
 
         @Override
         protected void onProgressUpdate(String... values) {
-            lbl_test_heartbeat.setText(values[0]);
-            lbl_test_level.setText(values[0]);
-            lbl_test_time.setText(values[0]);
+            if (Integer.valueOf(values[0]) > 0 ){
+                lbl_test_heartbeat.setText(values[0]);
+                lbl_test_level.setText(values[0]);
+                lbl_test_time.setText(values[0]);
+            }
+            else{
+                String initializing = "Initializing";
+                lbl_test_heartbeat.setText(initializing);
+                lbl_test_level.setText(initializing);
+                lbl_test_time.setText(initializing);
+            }
         }
     }
 
@@ -242,7 +252,12 @@ public class CyclingActivity extends Activity{
         if (data != null && Integer.valueOf(data) > 10) {
             if (creation == null){
                 creation = new Date();
+                if (time == 0){
+                    ct = new countTimer();
+                    ct.execute();
+                }
             }
+            btn_finish_test.setEnabled(true);
             addToMeasurements(data);
             displayData(data);
         }
@@ -338,7 +353,8 @@ public class CyclingActivity extends Activity{
     }
     public void endActions(){
         unregisterReceiver(mGattUpdateReceiver);
-        ct.cancel(true);
+        if (ct != null)
+            ct.cancel(true);
     }
 
     public void quitTest(View view) {
