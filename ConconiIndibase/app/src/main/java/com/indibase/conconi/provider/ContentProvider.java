@@ -161,6 +161,7 @@ public class ContentProvider extends android.content.ContentProvider
         db = dbHelper.getWritableDatabase();
         int count = db.delete(getTableName(uri), generateSelection(uri, selection), generateSelectionArgs(uri, selectionArgs));
         getContext().getContentResolver().notifyChange(uri, null);
+        Log.w("count", String.valueOf(count));
         return count;
     }
 

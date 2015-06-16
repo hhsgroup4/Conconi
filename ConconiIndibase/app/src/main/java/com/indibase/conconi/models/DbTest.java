@@ -50,7 +50,10 @@ public class DbTest {
 
         return test;
     }
-
+    public static void deleteTest(Activity activity, String id){
+        activity.getContentResolver().delete(Uri.parse("content://com.indibase.provider.conconi/measurement"), "test_id=?", new String[] {id});
+        activity.getContentResolver().delete(Uri.parse("content://com.indibase.provider.conconi/test"), "_id=?", new String[] {id});
+    }
     public static int saveTest(Activity activity, Test t){
         Uri turi = activity.getContentResolver().insert(
                 Uri.parse("content://com.indibase.provider.conconi/test"),

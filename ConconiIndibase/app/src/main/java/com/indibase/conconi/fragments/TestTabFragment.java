@@ -103,7 +103,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         getActivity();
-        if(requestCode == 1) {
+        if(requestCode == 1 && data!=null) {
             bluetoothAddress = data.getStringExtra("bAddress");
             this.play = true;
 
