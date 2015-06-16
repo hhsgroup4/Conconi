@@ -78,26 +78,12 @@ The duration of the training you can make very long journeys, up to 150 kilomete
     <string name="intensive_endurance_training_maxTime">120</string>
     <string name="intensive_endurance_training_minPercentBPM">85</string>
     <string name="intensive_endurance_training_maxPercentBPM">95</string>
-    <string name="intensive_endurance_training_goal">ontwikkelen van een hogere snelheid, die je langdurig kan volhouden</string>
-    <string name="intensive_endurance_training_usage">meestal in een intervaltraining, maar ook op zichzelf staand</string>
-    <string name="intensive_endurance_training_frequency">enkele keren per maand</string>
-    <string name="intensive_endurance_training_explanation">Dit is de zone waar veel fietsers onbewust in trainen. Je ademhaling in relatie tot je hartslag is namelijk het efficiëntst in deze zone. Hierdoor zal je gemiddelde het hoogst zijn, terwijl je gevoelsmatig dit goed kan volhouden.
-
-De training heeft echter een belangrijk nadeel: het herstel is vrij lang. Van 48 uur wanneer je de training doet in een interval, tot wel 72 uur (drie dagen) wanneer je de training op zichzelf staand uitvoert. Hierdoor duurt het dus lang voordat je weer kan beginnen met de volgende training, waardoor het effect uiteindelijk minder kan zijn dan bij een rustige duurtraining in D1.
-
-Toch kent de training ook voordelen: je leert te fietsen in een tempo die je veel zult gebruiken tijdens tochten. Bovendien win je door het doen van training in D2 aan snelheid, ook in een later stadium als je trainingen doet in D1.
-
-Als je slechts 2x per week kort kunt of wilt trainen, dan kun je het beste voor deze training kiezen. Let er dan wel op dat er tussen de trainingen minimaal 2 dagen rust zitten.  De verleiding is groot om als je de frequentie en/of duur van de trainingen uitbreidt, in D2 te blijven fietsen. Doe je dit, dan zal herstel nooit volledig zijn en dus de kans op blessures groot.</string>
-    <string name="intensive_endurance_training_howTo">De training kan zowel in interval als op zichzelf staand worden uitgevoerd:
-
-Interval
-
-Rij eerst een half uur warm in D1. Voer daarna de intervaltraining uit. Dit kan bijvoorbeeld een blok zijn van 30 minuten in D2, of 2x 20 minuten in D2 met 20 minuten rust tussen beide blokken. Daarna fiets je minimaal 30 minuten uit in D1.
-
-Op zichzelf staand
-
-In de eerste 5 minuten de hartslag rustig laten stijgen tot D1. In de daarop komende 5 tot 10 minuten laat je de hartslag stijgen naar D2. Vervolgens voer je D2-training uit (maximaal 120 minuten) en je eindigt met minimaal 10 minuten uitfietsen in D1.</string>
-    <string name="intensive_endurance_training_intensive_recoverTime">48 tot 72 uur</string>
+    <string name="intensive_endurance_training_goal"></string>
+    <string name="intensive_endurance_training_usage"></string>
+    <string name="intensive_endurance_training_frequency">several times a month</string>
+    <string name="intensive_endurance_training_explanation"></string>
+    <string name="intensive_endurance_training_howTo"></string>
+    <string name="intensive_endurance_training_intensive_recoverTime">48 - 72 hour</string>
 
     <!--
         MLss training
@@ -107,18 +93,12 @@ In de eerste 5 minuten de hartslag rustig laten stijgen tot D1. In de daarop kom
     <string name="Mlss_training_maxTime">120</string>
     <string name="Mlss_training_minPercentBPM">95</string>
     <string name="Mlss_training_maxPercentBPM">100</string>
-    <string name="Mlss_training_goal">leren fietsen op de hoogste frequentie die je langdurig vol kan houden</string>
-    <string name="Mlss_training_usage">uitsluitend in een intervaltraining</string>
-    <string name="Mlss_training_frequency">enkele keren per maand</string>
-    <string name="Mlss_training_explanation">MLSS staat voor Maximum Lactate Steady State, oftewel die hartslag waarbij de aangemaakte en afgevoerde afvalstoffen (Lactaat) nog net in evenwicht ("Steady") zijn.
-
-Tijdens een MLSS-training leer je je lichaam om te gaan met deze hoge hartslag: je zorgt dat je ademhaling onder controle blijft en dat je spieren voldoende aanvoer van voeding krijgen en houden. Je leert dus om het rijden net onder je Omslagpunt vol te kunnen houden.
-
-Deze training is erg belangrijk, omdat je deze hartslag tijdens tochten en/of wedstrijden regelmatig tegen zult komen. Denk hierbij aan een beklimming van een berg, of bijvoorbeeld wanneer je in een groep voorop rijdt. Door het doen van MLSS-trainingen creëer je bovendien een stuk snelheid, nog meer als door trainingen in D2.
-
-Omdat de training zeer intensief is, wordt deze uitsluitend in een interval uitgevoerd. Het herstel van de training zou anders erg lang duren en daardoor de kans op blessures groot. Een training dus die een verplicht onderdeel is, maar die wel met beleid moet worden uitgevoerd.</string>
-    <string name="Mlss_training_howTo">De MLSS-training wordt uitsluitend in interval uitgevoerd. Je begint altijd met een half uur warm rijden in D1. Daarna voer je de intervaltraining uit. Dit kunnen bijvoorbeeld 3 blokken zijn van 8 minuten in D3, elk met 8 minuten rust in D1 ertussen. Ook kan je er voor kiezen om bijvoorbeeld 1 blok van 20 minuten te rijden in D3. Dit laatste kan echter pas als je al wat beter getraind bent. Het beentempo is hoog, boven de 100 omwentelingen per minuut.</string>
-    <string name="Mlss_training_recoverTime">48 tot 72 uur</string>
+    <string name="Mlss_training_goal"></string>
+    <string name="Mlss_training_usage"></string>
+    <string name="Mlss_training_frequency">several times a month</string>
+    <string name="Mlss_training_explanation"></string>
+    <string name="Mlss_training_howTo"></string>
+    <string name="Mlss_training_recoverTime">48 - 72 hour</string>
 
     <!--
         resistance training
@@ -128,14 +108,12 @@ Omdat de training zeer intensief is, wordt deze uitsluitend in een interval uitg
     <string name="resistance_training_maxTime">120</string>
     <string name="resistance_training_minPercentBPM">100</string>
     <string name="resistance_training_maxPercentBPM">100+</string>
-    <string name="resistance_training_goal">pijntolerantie trainen</string>
-    <string name="resistance_training_usage">uitsluitend in korte intervaltraining</string>
-    <string name="resistance_training_frequency">afhankelijk van het doel, 3 tot 10 keer perjaar</string>
-    <string name="resistance_training_explanation">Tijdens een Weerstandstraining bevindt je hartslag zich boven het Omslagpunt. Dit betekent dat het lactaat in je spieren steeds toeneemt. Met deze training leer je om te gaan met het nare gevoel wat dit geeft in je spieren.
-
-Het doel van een Weerstandstraining is het maximale uit jezelf te halen. Je gebruikt deze hartslag tijdens een tocht of wedstrijd, als je bijvoorbeeld een korte klim doet, of na de klim of een bocht een gaatje probeert dicht te rijden.</string>
-    <string name="resistance_training_howTo">Het gaat er in deze training om, om in een zo kort mogelijke tijd zoveel mogelijk afstand af te leggen. Je begint met een half uur warm rijden in D1. Daarna voer je de intervaltraining uit. Je doet dit in blokken van 30 seconden tot een minuut, elk met minimaal 3 tot 5 keer de duur van het blok als herstel. Je kan bijvoorbeeld 3 blokken van 1 minuut doen, elk met 5 minuten herstel. Het beentempo is niet belangrijk.</string>
-    <string name="resistance_training_recoverTime">maximaal 48 uur</string>
+    <string name="resistance_training_goal">pain tollerance</string>
+    <string name="resistance_training_usage"></string>
+    <string name="resistance_training_frequency">depence on goal, 3 till 10 a year</string>
+    <string name="resistance_training_explanation"></string>
+    <string name="resistance_training_howTo"></string>
+    <string name="resistance_training_recoverTime">max 48 hour</string>
 
     <string name="title_activity_history">HistoryActivity</string>
 
