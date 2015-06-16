@@ -38,4 +38,10 @@
     <color name="red01" type="color">#f46a57</color>
     <color name="inactive_gray" type="color">#8e8e8e</color>
 
+    <color name="advice1" type="color">#CE5E5E</color>
+    <color name="advice2" type="color">#F69020</color>
+    <color name="advice3" type="color">#EACE00</color>
+    <color name="advice4" type="color">#C8DD00</color>
+    <color name="advice5" type="color">#73BF4C</color>
+
 </resources>

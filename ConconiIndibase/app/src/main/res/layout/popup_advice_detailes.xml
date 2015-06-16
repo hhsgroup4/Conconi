@@ -4,14 +4,20 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/adviceContainer"
-        android:padding="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@color/red01">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,6 +25,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Header"
             android:layout_gravity="center"
+            android:paddingBottom="5dp"
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -27,31 +34,284 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2"
+            android:orientation="vertical"
+            android:padding="5dp"
             android:background="@android:color/white">
 
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Min time"
-                android:textSize="16sp"
-                android:textColor="@color/red01"
-                android:textStyle="bold"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"/>
+                android:orientation="horizontal"
+                android:layout_weight="2">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Min time"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_mintime"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_mintime" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:textSize="16sp"
-                android:textColor="@color/red01"
-                android:layout_weight="1"
-                android:id="@+id/lbl_advice_mintime" />
+                android:orientation="horizontal"
+                android:layout_weight="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Max time"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_maxtime"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_maxtime" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Min percent"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_minpercent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_minpercent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Max percent"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_maxpercent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_maxpercent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Goal"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_goal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_goal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Usage"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_usage"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_usage" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Frequency"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_frequency"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_frequency" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Description"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_description"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_description" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Guide"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_header_advice_howto"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="16sp"
+                    android:textColor="@color/red01"
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_advice_howto" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <ImageButton
@@ -66,4 +326,6 @@
             android:src="@mipmap/btn_delete" />
 
     </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

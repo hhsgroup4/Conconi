@@ -6,12 +6,14 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -42,6 +44,31 @@ public class PresentationActivity extends Activity {
     private XYPlot plot;
     private int id;
 
+    // text content
+    private TextView lbl_advice_name;
+    private TextView lbl_advice_mintime;
+    private TextView lbl_advice_maxtime;
+    private TextView lbl_advice_minpercent;
+    private TextView lbl_advice_maxpercent;
+    private TextView lbl_advice_goal;
+    private TextView lbl_advice_usage;
+    private TextView lbl_advice_frequency;
+    private TextView lbl_advice_description;
+    private TextView lbl_advice_howto;
+
+    // Styling elements
+    private TextView lbl_header_advice_name;
+    private TextView lbl_header_advice_mintime;
+    private TextView lbl_header_advice_maxtime;
+    private TextView lbl_header_advice_minpercent;
+    private TextView lbl_header_advice_maxpercent;
+    private TextView lbl_header_advice_goal;
+    private TextView lbl_header_advice_usage;
+    private TextView lbl_header_advice_frequency;
+    private TextView lbl_header_advice_description;
+    private TextView lbl_header_advice_howto;
+    private LinearLayout advice_popup_background;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,38 +95,51 @@ public class PresentationActivity extends Activity {
         }
         drawGraphPlot(view);
 
+        if (PORTRAIT_ORIENTATION) {
+            final ImageView btn_advice_1 = (ImageView) findViewById(R.id.btn_advice_1);
+            final ImageView btn_advice_2 = (ImageView) findViewById(R.id.btn_advice_2);
+            final ImageView btn_advice_3 = (ImageView) findViewById(R.id.btn_advice_3);
+            final ImageView btn_advice_4 = (ImageView) findViewById(R.id.btn_advice_4);
+            final ImageView btn_advice_5 = (ImageView) findViewById(R.id.btn_advice_5);
 
-        final ImageView btnOpenPopup = (ImageView) findViewById(R.id.btn_advice_1);
-        btnOpenPopup.setOnClickListener(new Button.OnClickListener() {
+            setupAdviceBtnListeners(view, btn_advice_1);
+            setupAdviceBtnListeners(view, btn_advice_2);
+            setupAdviceBtnListeners(view, btn_advice_3);
+            setupAdviceBtnListeners(view, btn_advice_4);
+            setupAdviceBtnListeners(view, btn_advice_5);
+        }
+    }
+
+    private void setupAdviceBtnListeners(View view, final ImageView imageView) {
+
+        imageView.setOnClickListener(new Button.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 LayoutInflater layoutInflater
                         = (LayoutInflater) getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
+
                 View popupView = layoutInflater.inflate(R.layout.popup_advice_detailes, null);
                 final PopupWindow popupWindow = new PopupWindow(
                         popupView,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
 
+                launchPopup(popupView, arg0.getId());
+
                 ImageButton btnDismiss = (ImageButton) popupView.findViewById(R.id.dismiss_popup);
                 btnDismiss.setOnClickListener(new Button.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        // TODO Auto-generated method stub
                         popupWindow.dismiss();
                     }
                 });
 
-                popupWindow.showAsDropDown(btnOpenPopup, 50, -30);
-
+                popupWindow.showAtLocation(imageView, Gravity.TOP | Gravity.CENTER, 0, 100);
             }
         });
-
-
-
     }
 
     @Override
@@ -299,28 +339,140 @@ public class PresentationActivity extends Activity {
         System.out.println(series);
         return series;
     }
-    private void drawAdvice(int id){
-        switch (id) {
-            case 1:
+
+    private void launchPopup(View popupView, int selection) {
+        // text content
+        this.lbl_advice_name = (TextView) popupView.findViewById(R.id.lbl_advice_name);
+        this.lbl_advice_mintime = (TextView) popupView.findViewById(R.id.lbl_advice_mintime);
+        this.lbl_advice_maxtime = (TextView) popupView.findViewById(R.id.lbl_advice_maxtime);
+        this.lbl_advice_minpercent = (TextView) popupView.findViewById(R.id.lbl_advice_minpercent);
+        this.lbl_advice_maxpercent = (TextView) popupView.findViewById(R.id.lbl_advice_maxpercent);
+        this.lbl_advice_goal = (TextView) popupView.findViewById(R.id.lbl_advice_goal);
+        this.lbl_advice_usage = (TextView) popupView.findViewById(R.id.lbl_advice_usage);
+        this.lbl_advice_frequency = (TextView) popupView.findViewById(R.id.lbl_advice_frequency);
+        this.lbl_advice_description = (TextView) popupView.findViewById(R.id.lbl_advice_description);
+        this.lbl_advice_howto = (TextView) popupView.findViewById(R.id.lbl_advice_howto);
+
+        switch (selection) {
+            case R.id.btn_advice_1:
+                // populate with data
+                lbl_advice_name.setText(R.string.recover_training_name);
+                lbl_advice_mintime.setText(R.string.recover_training_minTime);
+                lbl_advice_maxtime.setText(R.string.recover_training_maxTime);
+                lbl_advice_minpercent.setText(R.string.recover_training_minPercentBPM);
+                lbl_advice_maxpercent.setText(R.string.recover_training_maxPercentBPM);
+                lbl_advice_goal.setText(R.string.recover_training_goal);
+                lbl_advice_usage.setText(R.string.recover_training_usage);
+                lbl_advice_frequency.setText(R.string.recover_training_frequency);
+                lbl_advice_description.setText(R.string.recover_training_explanation);
+                lbl_advice_howto.setText(R.string.recover_training_howTo);
+
+                // Style elements
+                styleAdviceContainer(popupView, getResources().getColor(R.color.advice1));
 
                 break;
-            case 2:
+            case R.id.btn_advice_2:
+                lbl_advice_name.setText(R.string.slow_endurance_training_name);
+                lbl_advice_mintime.setText(R.string.slow_endurance_training_minTime);
+                lbl_advice_maxtime.setText(R.string.slow_endurance_training_maxTime);
+                lbl_advice_minpercent.setText(R.string.slow_endurance_training_minPercentBPM);
+                lbl_advice_maxpercent.setText(R.string.slow_endurance_training_maxPercentBPM);
+                lbl_advice_goal.setText(R.string.slow_endurance_training_goal);
+                lbl_advice_usage.setText(R.string.slow_endurance_training_usage);
+                lbl_advice_frequency.setText(R.string.slow_endurance_training_frequency);
+                lbl_advice_description.setText(R.string.slow_endurance_training_explanation);
+                lbl_advice_howto.setText(R.string.slow_endurance_training_howTo);
+
+                // Style elements
+                styleAdviceContainer(popupView, getResources().getColor(R.color.advice2));
 
                 break;
-            case 3:
+            case R.id.btn_advice_3:
+                lbl_advice_name.setText(R.string.intensive_endurance_training_name);
+                lbl_advice_mintime.setText(R.string.intensive_endurance_training_minTime);
+                lbl_advice_maxtime.setText(R.string.intensive_endurance_training_maxTime);
+                lbl_advice_minpercent.setText(R.string.intensive_endurance_training_minPercentBPM);
+                lbl_advice_maxpercent.setText(R.string.intensive_endurance_training_maxPercentBPM);
+                lbl_advice_goal.setText(R.string.intensive_endurance_training_goal);
+                lbl_advice_usage.setText(R.string.intensive_endurance_training_usage);
+                lbl_advice_frequency.setText(R.string.intensive_endurance_training_frequency);
+                lbl_advice_description.setText(R.string.intensive_endurance_training_explanation);
+                lbl_advice_howto.setText(R.string.intensive_endurance_training_howTo);
+
+                // Style elements
+                styleAdviceContainer(popupView, getResources().getColor(R.color.advice3));
 
                 break;
-            case 4:
+            case R.id.btn_advice_4:
+                lbl_advice_name.setText(R.string.Mlss_training_name);
+                lbl_advice_mintime.setText(R.string.Mlss_training_minTime);
+                lbl_advice_maxtime.setText(R.string.Mlss_training_maxTime);
+                lbl_advice_minpercent.setText(R.string.Mlss_training_minPercentBPM);
+                lbl_advice_maxpercent.setText(R.string.Mlss_training_maxPercentBPM);
+                lbl_advice_goal.setText(R.string.Mlss_training_goal);
+                lbl_advice_usage.setText(R.string.Mlss_training_usage);
+                lbl_advice_frequency.setText(R.string.Mlss_training_frequency);
+                lbl_advice_description.setText(R.string.Mlss_training_explanation);
+                lbl_advice_howto.setText(R.string.Mlss_training_howTo);
+
+                // Style elements
+                styleAdviceContainer(popupView, getResources().getColor(R.color.advice4));
 
                 break;
-            case 5:
+            case R.id.btn_advice_5:
+                lbl_advice_name.setText(R.string.resistance_training_name);
+                lbl_advice_mintime.setText(R.string.resistance_training_minTime);
+                lbl_advice_maxtime.setText(R.string.resistance_training_maxTime);
+                lbl_advice_minpercent.setText(R.string.resistance_training_minPercentBPM);
+                lbl_advice_maxpercent.setText(R.string.resistance_training_maxPercentBPM);
+                lbl_advice_goal.setText(R.string.resistance_training_goal);
+                lbl_advice_usage.setText(R.string.resistance_training_usage);
+                lbl_advice_frequency.setText(R.string.resistance_training_frequency);
+                lbl_advice_description.setText(R.string.resistance_training_explanation);
+                lbl_advice_howto.setText(R.string.resistance_training_howTo);
 
-                break;
-            default:
+                // Style elements
+                styleAdviceContainer(popupView, getResources().getColor(R.color.advice5));
 
                 break;
         }
+    }
 
+    private void styleAdviceContainer(View popupView, int color) {
+
+        // get styling elements
+        this.lbl_header_advice_name = (TextView) popupView.findViewById(R.id.lbl_advice_name);
+        this.lbl_header_advice_mintime = (TextView) popupView.findViewById(R.id.lbl_header_advice_mintime);
+        this.lbl_header_advice_maxtime = (TextView) popupView.findViewById(R.id.lbl_header_advice_maxtime);
+        this.lbl_header_advice_minpercent = (TextView) popupView.findViewById(R.id.lbl_header_advice_minpercent);
+        this.lbl_header_advice_maxpercent = (TextView) popupView.findViewById(R.id.lbl_header_advice_maxpercent);
+        this.lbl_header_advice_goal = (TextView) popupView.findViewById(R.id.lbl_header_advice_goal);
+        this.lbl_header_advice_usage = (TextView) popupView.findViewById(R.id.lbl_header_advice_usage);
+        this.lbl_header_advice_frequency = (TextView) popupView.findViewById(R.id.lbl_header_advice_frequency);
+        this.lbl_header_advice_description = (TextView) popupView.findViewById(R.id.lbl_header_advice_description);
+        this.lbl_header_advice_howto = (TextView) popupView.findViewById(R.id.lbl_header_advice_howto);
+        this.advice_popup_background = (LinearLayout) popupView.findViewById(R.id.adviceContainer);
+
+        // set styling elements
+        lbl_advice_mintime.setTextColor(color);
+        lbl_header_advice_mintime.setTextColor(color);
+        lbl_advice_maxtime.setTextColor(color);
+        lbl_header_advice_maxtime.setTextColor(color);
+        lbl_advice_minpercent.setTextColor(color);
+        lbl_header_advice_minpercent.setTextColor(color);
+        lbl_advice_maxpercent.setTextColor(color);
+        lbl_header_advice_maxpercent.setTextColor(color);
+        lbl_advice_goal.setTextColor(color);
+        lbl_header_advice_goal.setTextColor(color);
+        lbl_advice_usage.setTextColor(color);
+        lbl_header_advice_usage.setTextColor(color);
+        lbl_advice_frequency.setTextColor(color);
+        lbl_header_advice_frequency.setTextColor(color);
+        lbl_advice_description.setTextColor(color);
+        lbl_header_advice_description.setTextColor(color);
+        lbl_advice_howto.setTextColor(color);
+        lbl_header_advice_howto.setTextColor(color);
+        advice_popup_background.setBackgroundColor(color);
 
     }
 

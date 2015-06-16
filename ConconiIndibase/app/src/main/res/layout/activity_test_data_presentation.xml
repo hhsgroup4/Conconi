@@ -166,7 +166,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="70dp"
-                        android:id="@+id/imageView2"
+                        android:id="@+id/btn_advice_2"
                         android:scaleType="centerInside"
                         android:padding="2dp"
                         android:layout_weight="1"
@@ -181,7 +181,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="70dp"
-                        android:id="@+id/imageView3"
+                        android:id="@+id/btn_advice_3"
                         android:scaleType="centerInside"
                         android:padding="2dp"
                         android:layout_weight="1"
@@ -196,7 +196,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="70dp"
-                        android:id="@+id/imageView4"
+                        android:id="@+id/btn_advice_4"
                         android:scaleType="centerInside"
                         android:padding="2dp"
                         android:layout_weight="1"
@@ -211,7 +211,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="70dp"
-                        android:id="@+id/imageView5"
+                        android:id="@+id/btn_advice_5"
                         android:scaleType="centerInside"
                         android:padding="2dp"
                         android:layout_weight="1"
