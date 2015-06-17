@@ -39,7 +39,7 @@
     <string name="recover_training_maxTime">90</string>
     <string name="recover_training_minPercentBPM">60</string>
     <string name="recover_training_maxPercentBPM">75</string>
-    <string name="recover_training_goal">Promoting recovery ("off cycle")</string>
+    <string name="recover_training_goal">Promoting recovery (\"off cycle\")</string>
     <string name="recover_training_usage">To round off a hard training period or cycle</string>
     <string name="recover_training_frequency">Sometimes</string>
     <string name="recover_training_explanation">If you are weary from a workout, you can do two things: take rest or do recovery training. The first method is usually sufficient, but sometimes it is better to promote recovery by doing a recovery training. With a recovery training you promote the excretion of waste from your muscles and blood flow to your muscles.
@@ -131,5 +131,204 @@ The duration of the training you can make very long journeys, up to 150 kilomete
     <string name="title_activity_test_data_presentation">TestDataPresentationActivity</string>
     <string name="title_activity_splash_screen">Conconi by Indibase</string>
     <string name="title_activity_info_detail">InfoDetailActivity</string>
+
+
+    <string name="info_userguide">User Guide</string>
+    <string name="info_team">Development Team</string>
+    <string name="info_about">About the Conconi Test</string>
+
+    <!--
+        User guide
+    -->
+
+    <string name="guide_htmlmarkup_content">
+<![CDATA[
+        <p>
+            <h3>Getting Ready</h3>
+            Congratulations! You have acquired the Conconi test app developed for Android-based devices. Before using the app you have to verify that:
+        </p>
+        <p>
+            <b>1.</b> You possess one compatible Bluetooth heartbeat sensor.
+            <br/>
+            <b>2.</b> Your Android device has Bluetooth connection.
+            <br/>
+            <b>3.</b> Your Android OS version is compatible with the App.
+            <br/>
+            <b>4.</b> The Conconi test app is installed in your device.
+        </p>
+        <p>
+           If all the conditions mentioned above are fulfilled then the user can proceed into initializing the Conconi test app.
+        </p>
+        <p>
+            <h3>Guide</h3>
+            To navigate through the app and tabs the user just needs to click on the tabs on the top section of the screen. In order to go back he can click the device “Back” button.
+        </p>
+        <p>
+            <h3>Starting</h3>
+            <b>1.</b> Once the app is initialized and the user is in the main tab the first thing to do is click on the connect button to establish the connection with the Bluetooth heartbeat sensor. Keep in mind that to do this the Bluetooth receiver of your device must be on.
+            <br/>
+            <b>2.</b> When the sensor is connected proceed to click on the Play button to start the training session.
+            <br/>
+            <b>3.</b> Once you have finished your training session press on the Stop button to proceed to see the graph with the deflection point and the Conconi test information from the training. If you wish to delete the training click on the Cancel button. Please be aware that if you do this the training session will not be shown nor will it be stored in the database.
+        </p>
+        <p>
+            <h3>Training sessions history</h3>
+            <b>1. </b>To see your previous stored training sessions you just need to go to the history tab and click on the training session you wish to check.
+            <br/>
+            <b>2. </b>The app will display the stored sessions by date.
+            <br/>
+            <b>3. </b>The stored information will show the deflection point as well as the graph with the Conconi test information.
+        </p>
+        <p>
+            <h3>Advice Section</h3>
+            One of the premises for Group 4 before developing the Conconi test app was to be able to not only calculate the Deflection point and conduct the Conconi test, but to give advice to the user to help his/her improvement and overall health status. Thus in the advice section you can find the different advices sorted by training sessions.
+            <br/>
+            <b>1. </b>Once you are in the Advice tab click on the training session you want to see.
+            <br/>
+            <b>2. </b>The advice will be shown for that concrete session.
+
+        </p>
+        <br/><br/>
+]]>
+
+
+
+    </string>
+
+    <string name="getting_ready_header">Getting Ready</string>
+    <string name="getting_ready_01">Congratulations! You have acquired the Conconi test app developed for Android-based devices. Before using the app you have to verify that:</string>
+    <string name="getting_ready_02_listitem01">You possess one compatible Bluetooth heartbeat sensor</string>
+    <string name="getting_ready_02_listitem02">Your Android device has Bluetooth connection</string>
+    <string name="getting_ready_02_listitem03">Your Android OS version is compatible with the App</string>
+    <string name="getting_ready_02_listitem04">The Conconi test app is installed in your device</string>
+    <string name="getting_ready_03">If all the conditions mentioned above are fulfilled then the user can proceed into initializing the Conconi test app.</string>
+
+    <string name="guide_header">Guide</string>
+    <string name="guide_text">To navigate through the app and tabs the user just needs to click on the tabs on the top section of the screen. In order to go back he can click the device “Back” button.</string>
+    <string name="guide_starting_header">Starting</string>
+    <string name="guide_starting_listitem01">Once the app is initialized and the user is in the main tab the first thing to do is click on the connect button to establish the connection with the Bluetooth heartbeat sensor. Keep in mind that to do this the Bluetooth receiver of your device must be on.</string>
+    <string name="guide_starting_listitem02">When the sensor is connected proceed to click on the Play button to start the training session.</string>
+    <string name="guide_starting_listitem03">Once you have finished your training session press on the Stop button to proceed to see the graph with the deflection point and the Conconi test information from the training. If you wish to delete the training click on the Cancel button. Please be aware that if you do this the training session will not be shown nor will it be stored in the database.</string>
+    <string name="guide_traninghistory_header">Training sessions history</string>
+    <string name="guide_traninghistory_listitem01">To see your previous stored training sessions you just need to go to the history tab and click on the training session you wish to check.</string>
+    <string name="guide_traninghistory_listitem02">The app will display the stored sessions by date.</string>
+    <string name="guide_traninghistory_listitem03">The stored information will show the deflection point as well as the graph with the Conconi test information.</string>
+    <string name="guide_advice_header">Advice Section</string>
+    <string name="guide_advice_text">One of the premises for Group 4 before developing the Conconi test app was to be able to not only calculate the Deflection point and conduct the Conconi test, but to give advice to the user to help his/her improvement and overall health status. Thus in the advice section you can find the different advices sorted by training sessions.</string>
+    <string name="guide_advice_listitem01">Once you are in the Advice tab click on the training session you want to see</string>
+    <string name="guide_advice_listitem02">The advice will be shown for that concrete session</string>
+
+
+    <!--
+        Team
+    -->
+    
+    <string name="team_htmlmarkup_content">
+
+        <![CDATA[
+
+        <p>
+            <b>Vince Boekestijn</b>
+            <br/>
+            My name is Vince Boekestijn. I\'m from the Netherlands, live in a small town under the Hague called \'s-Gravenzande. I\'m studying for software engineering at the Hague university of applied sciences.
+            <br/>
+            <b>Role: </b>
+            <br/>
+            back-end development and Conconi-test expert
+        </p>
+        <p>
+            <b>David Manfred Johansson</b>
+            <br/>
+            \“Jack of all trades\” with professional experience from construction, sales, kitchen manager, interaction design and art projects. Non professional experience involves: Editorial work for student paper, logo design and web development. Studies web development in Sweden since August 2013.
+            <br/>
+            <b>Role: </b>
+            <br/>
+            Design and UI development
+        </p>
+        <p>
+            <b>Fernando Martinez-Jorcano</b>
+            <br/>
+            Hi, I\'m Fernando Martínez-Jorcano from Madrid, Spain. Studing the last year of Computing Engineering at Universidad Francisco de Vitoria
+            <br/>
+            <b>Role: </b>
+            <br/>
+            Back-end development and algorithm implementation expert
+        </p>
+        <p>
+            <b>Ralph Freeke</b>
+            <br/>
+            Hi, my name is Ralph. I almost finished the first year of my study Software Engineering at The Hage university. Hoping to have a great time for the years comming.
+            <br/>
+            <b>Role: </b>
+            <br/>
+            Back-end development and social media expert
+        </p>
+
+        ]]>
+
+    </string>
+
+    <string name="name_david">David Manfred Johansson</string>
+    <string name="about_david">\“Jack of all trades\” with professional experience from construction, sales, kitchen manager, interaction design and art projects. Non professional experience involves: Editorial work for student paper, logo design and web development. Studies web development in Sweden since August 2013.</string>
+    <string name="role_david">Design and UI development</string>
+
+    <string name="name_fernando">Fernando Martinez-Jorcano</string>
+    <string name="about_fernando">Hi, I\'m Fernando Martínez-Jorcano from Madrid, Spain. Studing the last year of Computing Engineering at Universidad Francisco de Vitoria</string>
+    <string name="role_fernando">Back-end development and algorithm implementation expert</string>
+
+    <string name="name_ralph">Ralph Freeke</string>
+    <string name="about_ralph"></string>
+    <string name="role_ralph">Back-end development and social media expert</string>
+
+    <string name="name_vince">Vince Boekestijn</string>
+    <string name="about_vince">My name is Vince Boekestijn. I\'m from the Netherlands, live in a small town under the Hague called \'s-Gravenzande. I\'m studying for software engineering at the Hague university of applied sciences.</string>
+    <string name="role_vince">back-end development and Conconi-test expert</string>
+
+
+    <!--
+        About Conconi-test
+    -->
+
+    <string name="about_header">Conconi Test</string>
+
+    <string name="about_htmlmarkup_content"><![CDATA[
+        <p>
+            The test was first described by Italian Sport Scientist Francesco Conconi in 1982. It is a relatively simple field test which measures the heart rate at different predefined intensity levels, which can be used to estimate Anaerobic Threshold, a point at which the body predominately uses the anaerobic energy system. It is also known as the ramp test.
+        </p>
+        <p>
+            <b>Purpose: </b>To determine the heart rate at the anaerobic threshold for setting training zones.
+            <br/><br/>
+            <b>Equipment Required: </b>stopwatch, heart rate monitor (with recording and recall function), running track or exercise equipment.
+            <br/><br/>
+            <b>Procedure: </b>This test can be conducted on any equipment or during any exercise mode. Start at an easy pace, then at pre-determined intervals increase the workload. Record your heart rate at the end of each speed/workload level. Continue exercising until exhaustion.
+            <br/><br/>
+            <b>Scoring: </b>Plot the heart rate over speed/workload as a graph. Connect the points with a line. Initially the heart rate and workload graph should be linear. At a high intensity, the point where the line bends corresponds to your anaerobic threshold. Record your heart rate and workload at this point on the graph.
+            <br/><br/>
+            <b>Accuracy: </b>This test assumes that the anaerobic threshold is related to a deflection point on the heart rate/intensity graph. Subsequent studies have found that the deflection point in heart rate only occurs in a certain individuals and that when it does, it significantly overestimates directly measured lactate threshold.
+            <br/><br/>
+            <b>Target Population: </b>Endurance athletes (middle/long distance runners, cyclists, triathletes, rowers)
+            <br/><br/>
+            <b>Comments: </b>Even if the anaerobic threshold level is not an accurate measure, you can use this test to look at improvements in fitness as your heart rate at each workload should decrease as you get fitter. You can also get a measure of your maximum heart rate from this test.
+        </p>
+        <p>
+            <i>Source: Topendsports.com</i>
+        </p>
+
+    ]]>
+    </string>
+
+    <string name="about_text">The test was first described by Italian Sport Scientist Francesco Conconi in 1982. It is a relatively simple field test which measures the heart rate at different predefined intensity levels, which can be used to estimate Anaerobic Threshold, a point at which the body predominately uses the anaerobic energy system. It is also known as the ramp test.</string>
+    <string name="about_item01_header">Purpose</string>
+    <string name="about_item02_header">Procedure</string>
+    <string name="about_item03_header">Scoring</string>
+    <string name="about_item04_header">Accuracy</string>
+    <string name="about_item05_header">Target Population</string>
+    <string name="about_item06_header">Comments</string>
+    <string name="about_item01_text">To determine the heart rate at the anaerobic threshold for setting training zones. Equipment required: stopwatch, heart rate monitor (with recording and recall function), running track or exercise equipment.</string>
+    <string name="about_item02_text">This test can be conducted on any equipment or during any exercise mode. Start at an easy pace, then at pre-determined intervals increase the workload. Record your heart rate at the end of each speed/workload level. Continue exercising until exhaustion.</string>
+    <string name="about_item03_text">Plot the heart rate over speed/workload as a graph. Connect the points with a line. Initially the heart rate and workload graph should be linear. At a high intensity, the point where the line bends corresponds to your anaerobic threshold. Record your heart rate and workload at this point on the graph.</string>
+    <string name="about_item04_text">This test assumes that the anaerobic threshold is related to a deflection point on the heart rate/intensity graph. Subsequent studies have found that the deflection point in heart rate only occurs in a certain individuals and that when it does, it significantly overestimates directly measured lactate threshold.</string>
+    <string name="about_item05_text">Endurance athletes (middle/long distance runners, cyclists, triathletes, rowers)</string>
+    <string name="about_item06_text">Even if the anaerobic threshold level is not an accurate measure, you can use this test to look at improvements in fitness as your heart rate at each workload should decrease as you get fitter. You can also get a measure of your maximum heart rate from this test.</string>
 
 </resources>

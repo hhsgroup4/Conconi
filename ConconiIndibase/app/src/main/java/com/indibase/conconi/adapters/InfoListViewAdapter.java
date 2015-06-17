@@ -36,12 +36,12 @@ public class InfoListViewAdapter extends ArrayAdapter<InfoItem> {
         // 2. Get rowView from inflater
         View rowView = inflater.inflate(R.layout.list_item_row, parent, false);
 
-        // 3. Get the two text view from the rowView
+        // 3. Get the text view/s from the rowView
         TextView labelView = (TextView) rowView.findViewById(R.id.lbl_listrow_title);
-        //TextView valueView = (TextView) rowView.findViewById(R.id.value);
+        //TextView valueView = (TextView) rowView.findViewById(R.id.lbl);
 
         // 4. Set the text for textView
-        labelView.setText(itemsArrayList.get(position).getPositionID());
+        labelView.setText(itemsArrayList.get(position).getTitle());
         //valueView.setText(itemsArrayList.get(position).getDescription());
 
         // 5. retrn rowView

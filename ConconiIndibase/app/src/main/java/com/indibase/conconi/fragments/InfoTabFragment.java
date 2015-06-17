@@ -65,9 +65,9 @@ public class InfoTabFragment extends Fragment {
 
     private ArrayList<InfoItem> generateData(){
         ArrayList<InfoItem> items = new ArrayList<InfoItem>();
-        items.add(new InfoItem("1","About", "Text: About"));
-        items.add(new InfoItem("2","Team", "Text: Team"));
-        items.add(new InfoItem("3", "Science", "Text: Science"));
+        items.add(new InfoItem("1", getResources().getString(R.string.info_userguide), ""));
+        items.add(new InfoItem("2",getResources().getString(R.string.info_team), ""));
+        items.add(new InfoItem("3", getResources().getString(R.string.info_about), ""));
 
         return items;
     }
