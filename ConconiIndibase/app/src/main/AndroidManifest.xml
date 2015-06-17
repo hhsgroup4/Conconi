@@ -27,7 +27,9 @@
 
         <activity
             android:name=".app.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
         <provider
@@ -35,23 +37,18 @@
             android:authorities="com.indibase.provider.conconi"
             android:exported="false" >
         </provider>
-
-        <activity
-            android:name=".app.AdvicesActivity"
-            android:label="@string/title_activity_advices" >
-        </activity>
-        <activity
-            android:name=".app.HistoryActivity"
-            android:label="@string/title_activity_history" >
-        </activity>
         <activity
             android:name=".app.CyclingActivity"
-            android:label="@string/title_activity_cycling" >
+            android:label="@string/title_activity_cycling"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".app.DeviceScanActivity"
             android:label="@string/title_activity_device_scan"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.Dialog"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
         <service
@@ -64,7 +61,9 @@
         </activity>
         <activity
             android:name=".app.FinishedTestActivity"
-            android:label="@string/title_activity_finished_test" >
+            android:label="@string/title_activity_finished_test"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".app.PresentationActivity"

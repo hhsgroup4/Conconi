@@ -50,7 +50,11 @@ public class FinishedTestActivity extends Activity {
         drawTestData();
 
     }
-
+    public void statisticsTest(View view){
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void deleteTest(View view) {
 
         /* code for removing the finished test */

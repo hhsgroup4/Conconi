@@ -294,7 +294,7 @@ public class PresentationActivity extends Activity {
 
     public void deleteTest(View view) {
 
-        /* TODO code for removing the finished test */
+        DbTest.deleteTest(this,String.valueOf(id));
 
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
