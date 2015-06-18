@@ -4,10 +4,8 @@ package com.indibase.conconi.tabbar;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -16,7 +14,7 @@ import com.indibase.conconi.R;
 import com.indibase.conconi.adapters.TabsPagerAdapter;
 
 
-public class TabBar extends FragmentActivity implements ActionBar.TabListener{
+public class TabBar extends FragmentActivity implements ActionBar.TabListener {
 
     private CustomViewPager viewPager;
     private TabsPagerAdapter adapter;
@@ -38,7 +36,7 @@ public class TabBar extends FragmentActivity implements ActionBar.TabListener{
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
     }
 
-    public void setupTabListeners(LayoutInflater inflater, int layoutID ){
+    public void setupTabListeners(LayoutInflater inflater, int layoutID) {
         actionBar.addTab(actionBar.newTab()
                 .setCustomView(inflater.inflate(layoutID, null))
                 .setTabListener(this));

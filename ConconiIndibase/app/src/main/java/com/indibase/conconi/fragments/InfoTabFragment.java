@@ -1,33 +1,19 @@
 package com.indibase.conconi.fragments;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.facebook.FacebookSdk;
-import com.facebook.share.model.ShareContent;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 import com.indibase.conconi.R;
 import com.indibase.conconi.adapters.InfoListViewAdapter;
 import com.indibase.conconi.app.InfoDetailActivity;
-import com.indibase.conconi.app.PresentationActivity;
-import com.indibase.conconi.models.DbTest;
 import com.indibase.conconi.models.InfoItem;
-import com.indibase.conconi.models.Test;
 
 import java.util.ArrayList;
 
@@ -63,10 +49,10 @@ public class InfoTabFragment extends Fragment {
         return view;
     }
 
-    private ArrayList<InfoItem> generateData(){
+    private ArrayList<InfoItem> generateData() {
         ArrayList<InfoItem> items = new ArrayList<InfoItem>();
         items.add(new InfoItem("1", getResources().getString(R.string.info_userguide), ""));
-        items.add(new InfoItem("2",getResources().getString(R.string.info_team), ""));
+        items.add(new InfoItem("2", getResources().getString(R.string.info_team), ""));
         items.add(new InfoItem("3", getResources().getString(R.string.info_about), ""));
 
         return items;

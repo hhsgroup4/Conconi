@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-
 import com.androidplot.Plot;
 import com.androidplot.ui.SizeLayoutType;
 import com.androidplot.ui.SizeMetrics;
@@ -90,7 +89,7 @@ public class PresentationActivity extends Activity {
 
         Log.w("id", String.valueOf(id));
 
-        if(PORTRAIT_ORIENTATION) {
+        if (PORTRAIT_ORIENTATION) {
             updateDataLabels();
         }
         drawGraphPlot(view);
@@ -157,10 +156,10 @@ public class PresentationActivity extends Activity {
         lblLvl.setText(String.valueOf(test.getLevel()));
     }
 
-    private void drawGraphPlot(View view ) {
+    private void drawGraphPlot(View view) {
         initGraphPlot();
         insertValues(view);
-        if (PORTRAIT_ORIENTATION){
+        if (PORTRAIT_ORIENTATION) {
             styleGraphPlot();
         } else {
             styleGraphPlotLandscape();
@@ -279,7 +278,7 @@ public class PresentationActivity extends Activity {
         plot.getLegendWidget().getTextPaint().setAlpha(0);
         // Hide legend icon
         SizeLayoutType plot_layouttype = plot.getLegendWidget().getHeightMetric().getLayoutType();
-        plot.getLegendWidget().setIconSizeMetrics(new SizeMetrics(0, plot_layouttype , 0, plot_layouttype));
+        plot.getLegendWidget().setIconSizeMetrics(new SizeMetrics(0, plot_layouttype, 0, plot_layouttype));
         // plot.setTicksPerRangeLabel(10); // Did nothing
         plot.getGraphWidget().getRangeLabelPaint().setTextSize(0); //removes vertical ruler labels
         plot.getGraphWidget().getDomainLabelPaint().setTextSize(0); //removes horizontal ruler labels
@@ -294,7 +293,7 @@ public class PresentationActivity extends Activity {
 
     public void deleteTest(View view) {
 
-        DbTest.deleteTest(this,String.valueOf(id));
+        DbTest.deleteTest(this, String.valueOf(id));
 
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
@@ -315,18 +314,18 @@ public class PresentationActivity extends Activity {
 
         double linear_increase = Deflection.getAngle(first, last, count);
 
-        Log.w("linear",String.valueOf(linear_increase));
+        Log.w("linear", String.valueOf(linear_increase));
 
-        for (int i = 0; i < count ; i++) {
-            series.add( first+(linear_increase*i));
+        for (int i = 0; i < count; i++) {
+            series.add(first + (linear_increase * i));
         }
         System.out.println(series);
         return series;
     }
 
-    private List<Integer> getMeasurementToInt(ArrayList<Measurement> measurements){
+    private List<Integer> getMeasurementToInt(ArrayList<Measurement> measurements) {
         List values = new ArrayList();
-        for (Measurement m : measurements){
+        for (Measurement m : measurements) {
             values.add(m.getBpm());
         }
         return values;

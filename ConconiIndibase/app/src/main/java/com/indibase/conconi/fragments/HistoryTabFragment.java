@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +21,6 @@ import com.indibase.conconi.models.Test;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import static com.indibase.conconi.R.layout.activity_history;
 
 public class HistoryTabFragment extends Fragment implements View.OnClickListener {
 
@@ -46,7 +43,7 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
                 Intent intent = new Intent(view.getContext(), PresentationActivity.class);
                 Test t = historyItems.get(position);
                 String id = String.valueOf(t.getId());
-                intent.putExtra("ITEM_ID",id);
+                intent.putExtra("ITEM_ID", id);
                 startActivity(intent);
             }
         });
@@ -64,7 +61,7 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
         //startActivity(intent);
     }
 
-    private void fillListView(ArrayList<Test> historyItems){
+    private void fillListView(ArrayList<Test> historyItems) {
 
         LeHistoryListAdapter mLeHistoryListAdapter = new LeHistoryListAdapter();
         mLeHistoryListAdapter.setTests(historyItems);
@@ -81,11 +78,13 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
             super();
             mTests = new ArrayList<>();
         }
-        public void setTests(ArrayList<Test> tests){
+
+        public void setTests(ArrayList<Test> tests) {
             mTests = new ArrayList<>(tests);
         }
+
         public void addTest(Test test) {
-            if(!mTests.contains(test)) {
+            if (!mTests.contains(test)) {
                 mTests.add(test);
             }
         }
@@ -142,8 +141,7 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
                 //TODO fix population of textviews. returned values are NULL
                 //viewHolder.testTime.setText(test.getTime());
 
-            }
-            else {
+            } else {
                 viewHolder.testDate.setText("No test");
                 viewHolder.testDp.setText("No measurements");
             }
@@ -152,6 +150,7 @@ public class HistoryTabFragment extends Fragment implements View.OnClickListener
             return view;
         }
     }
+
     static class ViewHolder {
         TextView testDate;
         TextView testTime;

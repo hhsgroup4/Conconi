@@ -59,6 +59,7 @@ public class DeviceScanActivity extends Activity {
             return;
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -82,7 +83,7 @@ public class DeviceScanActivity extends Activity {
                 final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
                 if (device == null) return;
                 String s = device.getAddress();
-                Intent i =  getIntent();
+                Intent i = getIntent();
                 i.putExtra("bAddress", s);
                 setResult(RESULT_OK, i);
                 finish();
@@ -147,7 +148,7 @@ public class DeviceScanActivity extends Activity {
         }
 
         public void addDevice(BluetoothDevice device) {
-            if(!mLeDevices.contains(device)) {
+            if (!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
         }

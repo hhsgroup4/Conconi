@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,13 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.TimeUnit;
+
 import com.indibase.conconi.R;
 import com.indibase.conconi.bluetooth.BluetoothLeService;
 import com.indibase.conconi.bluetooth.SampleGattAttributes;
@@ -33,10 +26,18 @@ import com.indibase.conconi.models.Deflection;
 import com.indibase.conconi.models.Measurement;
 import com.indibase.conconi.models.Test;
 
-// TODO make 10-0 countdown before the test starts
-public class CyclingActivity extends Activity{
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
-    private TextView lbl_test_level,lbl_test_heartbeat,lbl_test_time;
+// TODO make 10-0 countdown before the test starts
+public class CyclingActivity extends Activity {
+
+    private TextView lbl_test_level, lbl_test_heartbeat, lbl_test_time;
 
     private String mDeviceAddress;
     private BluetoothLeService mBluetoothLeService;
@@ -89,7 +90,7 @@ public class CyclingActivity extends Activity{
                 startHeartBeatService(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 //displays the heartbeat
-                if(start) {
+                if (start) {
                     processData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 }
 
@@ -133,6 +134,7 @@ public class CyclingActivity extends Activity{
 
     private class startTimer extends AsyncTask<Integer, String, String> {
         int counter = 5;
+
         @Override
         protected String doInBackground(Integer... params) {
             for (int i = 0; i < params[0]; i++) {
@@ -154,12 +156,11 @@ public class CyclingActivity extends Activity{
 
         @Override
         protected void onProgressUpdate(String... values) {
-            if (Integer.valueOf(values[0]) > 0 ){
+            if (Integer.valueOf(values[0]) > 0) {
                 lbl_test_heartbeat.setText(values[0]);
                 lbl_test_level.setText(values[0]);
                 lbl_test_time.setText(values[0]);
-            }
-            else{
+            } else {
                 String initializing = "Initializing";
                 lbl_test_heartbeat.setText(initializing);
                 lbl_test_level.setText(initializing);
@@ -170,6 +171,7 @@ public class CyclingActivity extends Activity{
 
     private class countTimer extends AsyncTask<Integer, String, String> {
         int counter = 0;
+
         @Override
         protected String doInBackground(Integer... params) {
             while (start && !isCancelled()) {
@@ -199,7 +201,7 @@ public class CyclingActivity extends Activity{
         if (gattServices == null) return;
         // Loops through available GATT Services.
         for (BluetoothGattService gattService : gattServices) {
-            if(gattService.getUuid().toString().equals(SampleGattAttributes.HEART_RATE_SERVICE)) {
+            if (gattService.getUuid().toString().equals(SampleGattAttributes.HEART_RATE_SERVICE)) {
                 List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
                 // Loops through available Characteristics.
                 for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
@@ -209,7 +211,7 @@ public class CyclingActivity extends Activity{
                 }
             }
         }
-        if (mNotifyCharacteristic == null ) return;
+        if (mNotifyCharacteristic == null) return;
         mBluetoothLeService.connect(mDeviceAddress);
         mBluetoothLeService.readCharacteristic(mNotifyCharacteristic);
         mBluetoothLeService.setCharacteristicNotification(mNotifyCharacteristic, true);
@@ -223,7 +225,6 @@ public class CyclingActivity extends Activity{
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
     }
-
 
 
     @Override
@@ -248,11 +249,11 @@ public class CyclingActivity extends Activity{
         mBluetoothLeService = null;
     }
 
-    private void processData(String data){
+    private void processData(String data) {
         if (data != null && Integer.valueOf(data) > 10) {
-            if (creation == null){
+            if (creation == null) {
                 creation = new Date();
-                if (time == 0){
+                if (time == 0) {
                     ct = new countTimer();
                     ct.execute();
                 }
@@ -262,37 +263,41 @@ public class CyclingActivity extends Activity{
             displayData(data);
         }
     }
+
     private void displayData(String data) {
         lbl_test_heartbeat.setText(data);
         updateLevelLabel();
     }
-    public int calculateDeflectionPoint(Queue<Measurement> dbMeasurementsCopy){
+
+    public int calculateDeflectionPoint(Queue<Measurement> dbMeasurementsCopy) {
         ArrayList<Integer> points = new ArrayList<>();
-        while (dbMeasurementsCopy.size() != 0)
-        {
+        while (dbMeasurementsCopy.size() != 0) {
             points.add(dbMeasurementsCopy.poll().getBpm());
         }
-        int deflectionPoint =  Deflection.getDeflectionPoint(points);
+        int deflectionPoint = Deflection.getDeflectionPoint(points);
 
         return deflectionPoint;
     }
-    public int storeTest(Test t){
+
+    public int storeTest(Test t) {
         Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/test"), new ContentValues(t.getContentValues()));
         return Integer.valueOf(uri.getLastPathSegment());
     }
 
-    public void storeMeasurements(Queue<Measurement> dbMeasurements, int testId){
-        while (dbMeasurements.size() != 0){
+    public void storeMeasurements(Queue<Measurement> dbMeasurements, int testId) {
+        while (dbMeasurements.size() != 0) {
             Measurement m = dbMeasurements.poll();
             m.setTestId(testId);
             storeMeasurement(m);
         }
     }
-    public void storeMeasurement(Measurement m){
-        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"),new ContentValues(m.getContentValues()));
+
+    public void storeMeasurement(Measurement m) {
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.indibase.provider.conconi/measurement"), new ContentValues(m.getContentValues()));
         Log.w("uri", String.valueOf(uri));
     }
-    public Queue<Measurement> getDbMeasurements(Queue<Measurement> Measurements){
+
+    public Queue<Measurement> getDbMeasurements(Queue<Measurement> Measurements) {
         int i = 0;
         int counter = 0;
         int bpmTotal = 0;
@@ -302,20 +307,20 @@ public class CyclingActivity extends Activity{
 
         while (Measurements.size() != 0) {
             second = Measurements.peek().getSecond();
-            if (second > i){
-                average = bpmTotal/counter;
-                Measurement mm = new Measurement(i,average);
+            if (second > i) {
+                average = bpmTotal / counter;
+                Measurement mm = new Measurement(i, average);
                 Log.w("Measurement between", mm.toString());
                 dbMeasurements.add(mm);
                 bpmTotal = 0;
                 counter = 0;
-                i=i+10;
+                i = i + 10;
             }
             counter++;
             bpmTotal = bpmTotal + Measurements.poll().getBpm();
         }
-        average = bpmTotal/counter;
-        Log.w("Measurement end", new Measurement(second,average).toString());
+        average = bpmTotal / counter;
+        Log.w("Measurement end", new Measurement(second, average).toString());
         dbMeasurements.add(new Measurement(second, average));
 
         return dbMeasurements;
@@ -328,10 +333,11 @@ public class CyclingActivity extends Activity{
         }
         return (int) l;
     }
-    private void addToMeasurements(String bpm){
-        long s =  TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
+
+    private void addToMeasurements(String bpm) {
+        long s = TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
         int second = safeLongToInt(s);
-        Measurement m = new Measurement(second,Integer.valueOf(bpm));
+        Measurement m = new Measurement(second, Integer.valueOf(bpm));
         Log.w(CyclingActivity.class.getSimpleName(), m.toString());
         Measurements.add(m);
     }
@@ -352,7 +358,8 @@ public class CyclingActivity extends Activity{
         startActivity(intent);
         finish();
     }
-    public void endActions(){
+
+    public void endActions() {
         unregisterReceiver(mGattUpdateReceiver);
         if (ct != null)
             ct.cancel(true);
@@ -368,17 +375,18 @@ public class CyclingActivity extends Activity{
     private void updateTimeLabel(int counter) {
         time = counter;
         SimpleDateFormat df = new SimpleDateFormat("mm:ss");
-        Date date = new Date(new Date().getTime()+(counter*1000) - new Date().getTime());
-        strTime= df.format(date);
+        Date date = new Date(new Date().getTime() + (counter * 1000) - new Date().getTime());
+        strTime = df.format(date);
         lbl_test_time.setText(strTime);
     }
+
     private void updateLevelLabel() {
-        long s =  TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
+        long s = TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - creation.getTime());
         int second = safeLongToInt(s);
-        int tmpLevel = second/60;
+        int tmpLevel = second / 60;
         Log.w("tmplevel", String.valueOf(tmpLevel));
         level = 4 + tmpLevel;
-        if (level >= 20){
+        if (level >= 20) {
             level = 20;
         }
         lbl_test_level.setText(String.valueOf(level));

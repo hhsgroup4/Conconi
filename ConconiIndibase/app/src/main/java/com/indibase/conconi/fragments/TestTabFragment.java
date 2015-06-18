@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -22,7 +21,6 @@ import com.facebook.share.widget.ShareDialog;
 import com.indibase.conconi.R;
 import com.indibase.conconi.app.CyclingActivity;
 import com.indibase.conconi.app.DeviceScanActivity;
-import com.indibase.conconi.bluetooth.BluetoothLeService;
 
 public class TestTabFragment extends Fragment implements View.OnClickListener {
 
@@ -42,7 +40,7 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
         this.view = inflater.inflate(R.layout.test_tab_fragment, container, false);
         play = false;
         btnTest = (ImageButton) view.findViewById(R.id.btn_start_test);
-        btnBluetooth= (ImageButton) view.findViewById(R.id.btn_bluetooth);
+        btnBluetooth = (ImageButton) view.findViewById(R.id.btn_bluetooth);
         btnBluetooth.setEnabled(true);
 
         btnTest.setImageResource(R.mipmap.btn_start_test_red);
@@ -65,13 +63,12 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
                             .setContentTitle("Conconi")
                             .setContentDescription(
                                     "Maak gebruik van de 'Conconi' app om het beste uit je training te halen. " +
-                                    "Het maakt namelijk gebruik van je hartslag en berekent zo jouw persoonlijke trainingsschema's!")
+                                            "Het maakt namelijk gebruik van je hartslag en berekent zo jouw persoonlijke trainingsschema's!")
                             .setContentUrl(Uri.parse("http://conconi.indibase.com"))
                             .build();
 
                     shareDialog.show(linkContent);
-                }
-                else
+                } else
                     Toast.makeText(getActivity(), "No connection available for sharing this to Facebook.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -103,16 +100,17 @@ public class TestTabFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         getActivity();
-        if(requestCode == 1 && data!=null) {
+        if (requestCode == 1 && data != null) {
             bluetoothAddress = data.getStringExtra("bAddress");
             this.play = true;
 
         }
-        if(play) {
+        if (play) {
             btnTest.setImageResource(R.mipmap.btn_start_test_green);
             btnBluetooth.setImageResource(R.mipmap.btn_bluetooth_green);
 

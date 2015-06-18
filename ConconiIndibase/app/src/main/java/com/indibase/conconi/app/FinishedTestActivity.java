@@ -2,19 +2,13 @@ package com.indibase.conconi.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.indibase.conconi.R;
 import com.indibase.conconi.models.DbTest;
-
-import org.w3c.dom.Text;
 
 // TODO Add homebutton to FinishedTestActivity
 public class FinishedTestActivity extends Activity {
@@ -50,15 +44,17 @@ public class FinishedTestActivity extends Activity {
         drawTestData();
 
     }
-    public void statisticsTest(View view){
+
+    public void statisticsTest(View view) {
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
+
     public void deleteTest(View view) {
 
         /* code for removing the finished test */
-        DbTest.deleteTest(this,test_id);
+        DbTest.deleteTest(this, test_id);
 
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);

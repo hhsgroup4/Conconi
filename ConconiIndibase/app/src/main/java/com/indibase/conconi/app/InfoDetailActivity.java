@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.indibase.conconi.R;
-import com.indibase.conconi.models.InfoItem;
 
 public class InfoDetailActivity extends Activity {
 
@@ -22,7 +20,7 @@ public class InfoDetailActivity extends Activity {
 
         Intent infoIntent = getIntent();
         //InfoItem infoItem = (InfoItem)
-        int infoID= Integer.valueOf(infoIntent.getStringExtra("ITEM_ID"));
+        int infoID = Integer.valueOf(infoIntent.getStringExtra("ITEM_ID"));
 
         switch (infoID) {
             case 1:
@@ -41,7 +39,6 @@ public class InfoDetailActivity extends Activity {
                 header = "Header placeholder";
                 text = "Text placeholder";
         }
-
 
 
         TextView lbl_header = (TextView) findViewById(R.id.lbl_detailedinfo_header);

@@ -15,11 +15,11 @@ public class DatabaseActivity extends Activity {
         setContentView(R.layout.activity_database);
     }
 
-    public Test getTest(int id){
+    public Test getTest(int id) {
         return DbTest.getTest(this, id, false);
     }
 
-    public int insertTest(Test test){
+    public int insertTest(Test test) {
         return DbTest.saveTest(this, test);
     }
 }

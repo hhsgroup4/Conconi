@@ -1,7 +1,6 @@
 package com.indibase.conconi.models;
-import android.content.ContentValues;
 
-import java.util.Date;
+import android.content.ContentValues;
 
 /**
  * Created by Vince on 1-6-2015.
@@ -46,15 +45,16 @@ public class Measurement {
         this.bpm = bpm;
     }
 
-    public ContentValues getContentValues(){
+    public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
         values.put("test_id", this.getTestId());
-        values.put("second",this.getSecond());
-        values.put("bpm",this.getBpm());
+        values.put("second", this.getSecond());
+        values.put("bpm", this.getBpm());
         return values;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Test ID " + getTestId() + "; BPM " + getBpm() + "; Second " + getSecond();
     }
 }

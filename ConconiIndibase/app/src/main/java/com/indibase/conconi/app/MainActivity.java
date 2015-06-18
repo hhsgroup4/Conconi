@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity {
         tabBar.setupTabListeners(inflater, R.layout.bottombar_tab3);
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.w("in main", "inmain");

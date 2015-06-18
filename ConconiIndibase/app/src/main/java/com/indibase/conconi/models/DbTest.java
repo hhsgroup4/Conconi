@@ -2,24 +2,22 @@ package com.indibase.conconi.models;
 
 import android.app.Activity;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.util.Log;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class DbTest {
-    public static Test getTest(Activity activity, int identifier, boolean include_measurements){
+    public static Test getTest(Activity activity, int identifier, boolean include_measurements) {
 
-        Uri oneTest = Uri.parse("content://com.indibase.provider.conconi/test/"+identifier);
+        Uri oneTest = Uri.parse("content://com.indibase.provider.conconi/test/" + identifier);
         Cursor c;
-        CursorLoader cursorLoader = new CursorLoader(activity,oneTest,null,null,null,null);
+        CursorLoader cursorLoader = new CursorLoader(activity, oneTest, null, null, null, null);
         c = cursorLoader.loadInBackground();
 
         Log.d("dump", DatabaseUtils.dumpCursorToString(c));
@@ -43,25 +41,27 @@ public class DbTest {
         }
         c.close();
 
-        if(include_measurements) {
+        if (include_measurements) {
             ArrayList<Measurement> measurements = getMeasurements(activity, test.getId());
             test.setMeasurements(measurements);
         }
 
         return test;
     }
-    public static void deleteTest(Activity activity, String id){
-        activity.getContentResolver().delete(Uri.parse("content://com.indibase.provider.conconi/measurement"), "test_id=?", new String[] {id});
-        activity.getContentResolver().delete(Uri.parse("content://com.indibase.provider.conconi/test"), "_id=?", new String[] {id});
+
+    public static void deleteTest(Activity activity, String id) {
+        activity.getContentResolver().delete(Uri.parse("content://com.indibase.provider.conconi/measurement"), "test_id=?", new String[]{id});
+        activity.getContentResolver().delete(Uri.parse("content://com.indibase.provider.conconi/test"), "_id=?", new String[]{id});
     }
-    public static int saveTest(Activity activity, Test t){
+
+    public static int saveTest(Activity activity, Test t) {
         Uri turi = activity.getContentResolver().insert(
                 Uri.parse("content://com.indibase.provider.conconi/test"),
                 t.getContentValues());
 
         int insertId = Integer.parseInt(turi.getLastPathSegment());
 
-        for(Measurement m : t.getMeasurements()){
+        for (Measurement m : t.getMeasurements()) {
             Uri muri = activity.getContentResolver().insert(
                     Uri.parse("content://com.indibase.provider.conconi/measurement"),
                     m.getContentValues());
@@ -70,20 +70,20 @@ public class DbTest {
         return insertId;
     }
 
-    private static ArrayList<Measurement> getMeasurements(Activity activity, int identifier){
+    private static ArrayList<Measurement> getMeasurements(Activity activity, int identifier) {
         ArrayList<Measurement> measurements = new ArrayList<>();
 
         Uri m = Uri.parse("content://com.indibase.provider.conconi/measurement");
         Cursor c;
-        String[] projection=new String[]{"test_id", "second", "bpm"};
-        String selection= "test_id = ?";
-        String[] selectionArgs=new String[]{String.valueOf(identifier)};
-        CursorLoader cursorLoader = new CursorLoader(activity,m,projection,selection,selectionArgs,null);
+        String[] projection = new String[]{"test_id", "second", "bpm"};
+        String selection = "test_id = ?";
+        String[] selectionArgs = new String[]{String.valueOf(identifier)};
+        CursorLoader cursorLoader = new CursorLoader(activity, m, projection, selection, selectionArgs, null);
 
         c = cursorLoader.loadInBackground();
 
         while (c.moveToNext()) {
-            Measurement mm = new Measurement(Integer.valueOf(c.getString(0)),Integer.valueOf(c.getString(1)),Integer.valueOf(c.getString(2)));
+            Measurement mm = new Measurement(Integer.valueOf(c.getString(0)), Integer.valueOf(c.getString(1)), Integer.valueOf(c.getString(2)));
             Log.w("measurements", mm.toString());
             measurements.add(mm);
         }
@@ -92,12 +92,12 @@ public class DbTest {
         return measurements;
     }
 
-    public static ArrayList<Test> getAllTests(Activity activity, boolean include_measurements){
+    public static ArrayList<Test> getAllTests(Activity activity, boolean include_measurements) {
         ArrayList<Test> tests = new ArrayList<>();
 
         Uri m = Uri.parse("content://com.indibase.provider.conconi/test");
 
-        CursorLoader cursorLoader = new CursorLoader(activity,m,null,null,null,null);
+        CursorLoader cursorLoader = new CursorLoader(activity, m, null, null, null, null);
 
         Cursor c = cursorLoader.loadInBackground();
 
@@ -114,7 +114,7 @@ public class DbTest {
             int deflection = Integer.valueOf(c.getString(2));
             Test t = new Test(id, date, deflection);
 
-            if(include_measurements) {
+            if (include_measurements) {
                 ArrayList<Measurement> measurements = getMeasurements(activity, t.getId());
                 t.setMeasurements(measurements);
             }
